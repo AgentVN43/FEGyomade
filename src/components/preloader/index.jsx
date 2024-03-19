@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 export default function Preloader() {
+  const [showPreloader, setShowPreloader] = useState(true);
+
+  useEffect(() => {
+    const hidePreloader = () => {
+      setShowPreloader(false);
+    };
+
+    const timeout = setTimeout(hidePreloader, 1500); // Adjust the delay as needed
+
+    return () => clearTimeout(timeout);
+  }, []);
+
+  // You can use CSS transitions or animations to control the fade out effect
+  const preloaderStyle = {
+    opacity: showPreloader ? 1 : 0,
+    transition: "opacity 0.5s ease",
+    display: showPreloader ? "flex" : "none",
+  };
+
   return (
-    <div className="cs_perloader">
-      <div className="cs_perloader_in">
+    <div className="cs_perloader" style={preloaderStyle}>
+      <div className="cs_perloader_in" style={preloaderStyle}>
         <svg
           className="cs_cart_animation"
           role="img"
