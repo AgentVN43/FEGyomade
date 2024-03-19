@@ -1,6 +1,5 @@
 import React from "react";
 import Slider from "react-slick";
-import heroimg from "../../assets/img/hero1.jpg";
 
 export default function SimpleSlider() {
   const settings = {
