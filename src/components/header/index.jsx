@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AnimationHeader from "./components/animationheader";
+import Cart from "./components/cart";
 import Logo from "./components/logo";
 import Menu from "./components/menu";
-import Cart from "./components/cart";
 
 export default function Header() {
+  useEffect(() => {
+    const stickyHeader = () => {
+      const $window = window;
+      let lastScrollTop = 0;
+      const $header = document.querySelector(".cs_sticky_header");
+      const headerHeight = $header.offsetHeight + 30;
+
+      $window.addEventListener("scroll", function () {
+        const windowTop = $window.pageYOffset || $window.scrollTop;
+        if (windowTop >= headerHeight) {
+          $header.classList.add("cs_gescout_sticky");
+        } else {
+          $header.classList.remove("cs_gescout_sticky");
+          $header.classList.remove("cs_gescout_show");
+        }
+        if ($header.classList.contains("cs_gescout_sticky")) {
+          if (windowTop < lastScrollTop) {
+            $header.classList.add("cs_gescout_show");
+          } else {
+            $header.classList.remove("cs_gescout_show");
+          }
+        }
+        lastScrollTop = windowTop;
+      });
+    };
+
+    stickyHeader();
+
+    // Cleanup function
+    return () => {
+      window.removeEventListener("scroll", stickyHeader);
+    };
+  }, []);
+
   return (
     <>
       <header className="cs_site_header cs_style_1 cs_color_1 cs_primary_bg cs_site_header_full_width cs_sticky_header">
