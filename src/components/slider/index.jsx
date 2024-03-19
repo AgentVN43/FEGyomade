@@ -39,7 +39,6 @@ export default function SimpleSlider() {
                       Shop Now
                     </a>
                   </div>
-                  {/* <div className="cs_hero_thumb cs_bg_filed" data-src="assets/img/hero3.jpg"/> */}
                   <img
                     className="cs_hero_thumb cs_bg_filed"
                     src="assets/img/hero1.jpg"
@@ -70,9 +69,10 @@ export default function SimpleSlider() {
                       Shop Now
                     </a>
                   </div>
-                  <div
+                  <img
                     className="cs_hero_thumb cs_bg_filed"
-                    data-src="assets/img/hero3.jpg"
+                    src="assets/img/hero3.jpg"
+                    alt="Hero"
                   />
                 </div>
               </div>
@@ -99,10 +99,11 @@ export default function SimpleSlider() {
                       Shop Now
                     </a>
                   </div>
-                  <div
+                  <img
                     className="cs_hero_thumb cs_bg_filed"
-                    data-src="assets/img/hero4.jpg"
-                  ></div>
+                    src="assets/img/hero4.jpg"
+                    alt="Hero"
+                  />
                 </div>
               </div>
             </div>
