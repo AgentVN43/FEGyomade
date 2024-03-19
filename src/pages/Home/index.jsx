@@ -16,6 +16,7 @@ export default function Home() {
       <IconBox />
       <Category />
       <FeaturedItem />
+      
       <Footer />
     </>
   );
