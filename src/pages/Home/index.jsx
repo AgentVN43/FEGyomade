@@ -4,15 +4,19 @@ import SimpleSlider from "../../components/slider";
 import IconBox from "../../components/iconbox";
 import Footer from "../../components/footer";
 import Preloader from "../../components/preloader";
+import Category from "../../components/category";
+import FeaturedItem from "../../components/featuredItem";
 
 export default function Home() {
   return (
     <>
-      <Preloader/>
+      <Preloader />
       <Header />
       <SimpleSlider />
-      <IconBox/>
-      <Footer/>
+      <IconBox />
+      <Category />
+      <FeaturedItem />
+      <Footer />
     </>
   );
 }
