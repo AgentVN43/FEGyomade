@@ -6,7 +6,7 @@ export default function Logo() {
   return (
     <>
       <div className="cs_main_header_left">
-        <a className="cs_site_branding" href="index.html">
+        <a className="cs_site_branding" href="/">
           <img src={logoimg} alt="Logo3" />
         </a>
       </div>
