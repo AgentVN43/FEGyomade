@@ -6,6 +6,8 @@ import Footer from "../../components/footer";
 import Preloader from "../../components/preloader";
 import Category from "../../components/category";
 import FeaturedItem from "../../components/featuredItem";
+import MovingSlider from "../../components/movingSlider";
+import Collection from "../../components/collection";
 
 export default function Home() {
   return (
@@ -16,7 +18,8 @@ export default function Home() {
       <IconBox />
       <Category />
       <FeaturedItem />
-      
+      <MovingSlider />
+      <Collection />
       <Footer />
     </>
   );
