@@ -7,7 +7,7 @@ export default function Home() {
     <>
       {/* <Preloader/> */}
       <Header />
-      {/* <SimpleSlider /> */}
+      <SimpleSlider />
     </>
   );
 }

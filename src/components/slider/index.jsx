@@ -1,6 +1,6 @@
 import React from "react";
 import Slider from "react-slick";
-
+import heroimg from "../../assets/img/hero1.jpg";
 
 export default function SimpleSlider() {
   const settings = {
@@ -40,9 +40,11 @@ export default function SimpleSlider() {
                       Shop Now
                     </a>
                   </div>
-                  <div
+                  {/* <div className="cs_hero_thumb cs_bg_filed" data-src="assets/img/hero3.jpg"/> */}
+                  <img
                     className="cs_hero_thumb cs_bg_filed"
-                    data-src="/assets/img/hero1.jpg"
+                    src="assets/img/hero1.jpg"
+                    alt="Hero"
                   />
                 </div>
               </div>
