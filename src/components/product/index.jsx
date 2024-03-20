@@ -38,7 +38,7 @@ export default function Product({
             </a>
           </div> */}
           <a
-            href="cart.html"
+            href="/gio-hang"
             className="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"
           >
             Add To Cart

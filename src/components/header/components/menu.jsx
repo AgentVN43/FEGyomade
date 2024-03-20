@@ -49,7 +49,7 @@ export default function Menu() {
                 <a href="cart.html">Cart</a>
               </li>
               <li>
-                <a href="checkout.html">Checkout</a>
+                <a href="/thanh-toan">Checkout</a>
               </li>
               <li>
                 <a href="success.html">Success</a>

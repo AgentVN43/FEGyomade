@@ -7,6 +7,9 @@ import DetailProduct from "../pages/DetailProduct";
 import Home from "../pages/Home";
 import Product from "../pages/Product";
 import SlideDetailProduct from "../components/productDetail/components/slideProducts";
+import Cart from "../pages/Cart";
+import Checkout from "../pages/Checkout"
+import OrderSuccess from "../pages/OrderSuccess"
 
 const Router = () => (
   <BrowserRouter>
@@ -19,6 +22,9 @@ const Router = () => (
       <Route path="/danh-muc/:slug" element={<Product />} />
       <Route path="/san-pham/:slug" element={<DetailProduct />} />
       <Route path="/slide" element={<SlideDetailProduct />} />
+      <Route path="/gio-hang" element={<Cart />} />
+      <Route path="/thanh-toan" element={<Checkout />} />
+      <Route path="/thanh-toan-thanh-cong" element={<OrderSuccess />} />
     </Routes>
     <Footer />
   </BrowserRouter>
