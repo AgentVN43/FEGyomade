@@ -6,8 +6,6 @@ import { useParams } from "react-router-dom";
 export default function ListProduct() {
   const { slug } = useParams();
 
-  console.log("This is slug:", slug);
-
   const [showFilter, setShowFilter] = useState(false);
 
   const [listProduct, setlistProduct] = useState([]);

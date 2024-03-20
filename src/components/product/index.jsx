@@ -1,5 +1,5 @@
 import React from "react";
-import './index.scss'
+import "./index.scss";
 export default function Product({
   id,
   imageUrl,
@@ -14,14 +14,16 @@ export default function Product({
       <div className="cs_product cs_style_1">
         <div className="cs_product_thumb position-relative">
           <div className="product-image-container">
-            <img className="product-image" src={imageUrl} alt="Product" />
+            <a href={`/san-pham/${slug}`}>
+              <img className="product-image" src={imageUrl} alt="Product" />
+            </a>
           </div>{" "}
           {custom_id && (
             <div className="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute">
               {custom_id}
             </div>
           )}
-          <div className="cs_cart_badge position-absolute">
+          {/* <div className="cs_cart_badge position-absolute">
             <a
               href="wishlist.html"
               className="cs_cart_icon cs_accent_bg cs_white_color"
@@ -34,7 +36,7 @@ export default function Product({
             >
               <i className="fa-regular fa-eye" />
             </a>
-          </div>
+          </div> */}
           <a
             href="cart.html"
             className="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"

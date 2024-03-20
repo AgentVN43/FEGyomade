@@ -15,27 +15,7 @@ export default function SlideProduct({ categoryId }) {
       });
   }, [categoryId]);
 
-  const products = [
-    {
-      imageUrl: "assets/img/product1.png",
-      discount: "-25%",
-      title: "Pure black cotton men T-shirt",
-      price: "$250.00",
-    },
-    {
-      imageUrl: "assets/img/product2.png",
-      discount: "-8%",
-      title: "Gray color cotton men T-shirt",
-      price: "$220.00",
-    },
-    {
-      imageUrl: "assets/img/product3.png",
-      discount: "-12%",
-      title: "Pure black cotton men T-shirt",
-      price: "$250.00",
-    },
-  ];
-
+ 
   const settings = {
     dots: false, // Show pagination by default
     infinite: true,
@@ -62,8 +42,6 @@ export default function SlideProduct({ categoryId }) {
       },
     ],
   };
-
-  console.log(productCategory);
 
   return (
     <>

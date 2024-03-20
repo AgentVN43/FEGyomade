@@ -14,8 +14,8 @@ const Router = () => (
     <Header />
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/product" element={<Product />} />
-      <Route path="/product_detail" element={<DetailProduct />} />
+      {/* <Route path="/product" element={<Product />} />
+      <Route path="/product_detail" element={<DetailProduct />} /> */}
       <Route path="/danh-muc/:slug" element={<Product />} />
       <Route path="/san-pham/:slug" element={<DetailProduct />} />
       <Route path="/slide" element={<SlideDetailProduct />} />

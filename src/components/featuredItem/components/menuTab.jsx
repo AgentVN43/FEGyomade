@@ -44,6 +44,7 @@ export default function MenuTab() {
         ))}
       </ul>
       <SlideProduct categoryId={selectedTab} />
+      
     </>
   );
 }
