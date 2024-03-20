@@ -1,0 +1,15 @@
+.cs_grid_list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr) !important;
+    -webkit-column-gap: 1.5% !important;
+       -moz-column-gap: 1.5% !important;
+            column-gap: 1.5% !important;
+  }
+ 
+  @media (max-width: 767px) {
+    .cs_grid_list {
+      grid-template-columns: repeat(1, 1fr) !important;
+      gap: 30px;
+    }
+  }
+  

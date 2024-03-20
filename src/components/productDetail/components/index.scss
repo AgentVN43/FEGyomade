@@ -1,0 +1,17 @@
+/* styles.css */
+.product-image-container {
+    width: 100%;
+    height: 0; /* Set initial height to 0 */
+    padding-top: 100%; /* Maintain 1:1 aspect ratio */
+    position: relative;
+  }
+  
+  .product-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Fill the container */
+    object-fit: scale-down !important; /* Ensure the image covers the entire container */
+  }
+ 

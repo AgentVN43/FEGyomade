@@ -1,14 +1,24 @@
 import React from "react";
-
-export default function Product({ imageUrl, discount, title, price }) {
+import './index.scss'
+export default function Product({
+  id,
+  imageUrl,
+  price,
+  name,
+  slug,
+  inventory,
+  custom_id,
+}) {
   return (
     <div className="slick_slide_in">
       <div className="cs_product cs_style_1">
         <div className="cs_product_thumb position-relative">
-          <img src={imageUrl} alt="Product Image" />
-          {discount && (
+          <div className="product-image-container">
+            <img className="product-image" src={imageUrl} alt="Product" />
+          </div>{" "}
+          {custom_id && (
             <div className="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute">
-              {discount}
+              {custom_id}
             </div>
           )}
           <div className="cs_cart_badge position-absolute">
@@ -34,7 +44,7 @@ export default function Product({ imageUrl, discount, title, price }) {
         </div>
         <div className="cs_product_info text-center">
           <h3 className="cs_product_title cs_fs_21 cs_medium">
-            <a href="product_details.html">{title}</a>
+            <a href="product_details.html">{name}</a>
           </h3>
           <p className="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">
             {price}

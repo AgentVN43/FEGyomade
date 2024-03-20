@@ -1,26 +1,20 @@
 import React from "react";
-import Header from "../../components/header";
-import SimpleSlider from "../../components/slider";
-import IconBox from "../../components/iconbox";
-import Footer from "../../components/footer";
-import Preloader from "../../components/preloader";
 import Category from "../../components/category";
-import FeaturedItem from "../../components/featuredItem";
-import MovingSlider from "../../components/movingSlider";
 import Collection from "../../components/collection";
+import FeaturedItem from "../../components/featuredItem";
+import IconBox from "../../components/iconbox";
+import MovingSlider from "../../components/movingSlider";
+import SimpleSlider from "../../components/slider";
 
 export default function Home() {
   return (
     <>
-      <Preloader />
-      <Header />
       <SimpleSlider />
       <IconBox />
       <Category />
       <FeaturedItem />
       <MovingSlider />
       <Collection />
-      <Footer />
     </>
   );
 }

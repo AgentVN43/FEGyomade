@@ -1,5 +1,4 @@
 import React from "react";
-import logoimg from "../../../assets/img/logogyomade.png";
 
 
 export default function Logo() {
@@ -7,7 +6,7 @@ export default function Logo() {
     <>
       <div className="cs_main_header_left">
         <a className="cs_site_branding" href="/">
-          <img src={logoimg} alt="Logo3" />
+          <img src="../assets/img/logogyomade.png" alt="Logo3" />
         </a>
       </div>
     </>

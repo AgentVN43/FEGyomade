@@ -6225,7 +6225,7 @@ Tab content design
 }
 
 .cs_single_product_nav {
-  margin-top: -11px;
+  margin-top: 0;
 }
 .cs_single_product_nav .cs_single_product_thumb_mini {
   padding: 11px 0px;
