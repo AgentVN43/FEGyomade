@@ -7,6 +7,7 @@ export default function OrderSuccess() {
         <>
             <HeadingCart title={"Order Success"} currentPage={"Success"} />
             <MainOrderSuccess />
+            <p>test</p>
         </>
     )
 }
