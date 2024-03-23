@@ -6828,11 +6828,13 @@ Pavigation styling
   cursor: pointer;
   opacity: 0;
 }
-.cs_size_filter_list input:checked + span {
+/* .cs_size_filter_list input:checked + span {
   border-color: #fc5f49;
   background-color: #fc5f49;
   color: #fff;
-}
+} */
+
+
 
 .cs_brand_filter_list {
   display: -webkit-box;

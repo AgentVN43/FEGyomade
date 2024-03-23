@@ -1,12 +1,40 @@
-import React from 'react'
+import React from "react";
+import { useParams } from "react-router-dom";
 
 export default function HeadingPage() {
-    return (
-        <section class="cs_page_heading text-center position-relative cs_bg_filed" style={{ backgroundImage: "url('assets/img/shop_bg.jpg')" }}>
-            <div class="cs_hero_overlay position-absolute"></div>
-            <div class="container position-relative">
-                <h2 class="cs_fs_50 cs_bold cs_white_color mb-0">Shop</h2>
-            </div>
-        </section>
-    )
+  const { slug } = useParams();
+  function convertToVietnamese(slug) {
+    let slug1 = slug;
+
+    switch (slug) {
+      case "ao":
+        slug1 = "ÁO";
+        break;
+      case "quan":
+        slug1 = "QUẦN";
+        break;
+      case "vay":
+        slug1 = "VÁY";
+        break;
+      case "phu-kien":
+        slug1 = "PHỤ KIỆN";
+        break;
+      default:
+        break;
+    }
+    return slug1;
+  }
+  const slug1 = convertToVietnamese(slug);
+
+  return (
+    <section
+      class="cs_page_heading text-center position-relative cs_bg_filed"
+      style={{ backgroundImage: "url('../assets/img/shop_bg.jpg')" }}
+    >
+      <div class="cs_hero_overlay position-absolute"></div>
+      <div class="container position-relative">
+        <h2 class="cs_fs_50 cs_bold cs_white_color mb-0">DANH MỤC {slug1}</h2>
+      </div>
+    </section>
+  );
 }

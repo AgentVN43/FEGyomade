@@ -8,7 +8,10 @@ export default function Product({
   slug,
   inventory,
   custom_id,
+  product_id,
 }) {
+ 
+  
   return (
     <div className="slick_slide_in">
       <div className="cs_product cs_style_1">
@@ -37,12 +40,16 @@ export default function Product({
               <i className="fa-regular fa-eye" />
             </a>
           </div> */}
-          <a
-            href="/gio-hang"
+          {/* <a
+            href="#"
             className="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"
+            onClick={(e) => {
+              e.preventDefault();
+              handleAddToCart(product_id, name, custom_id, id);
+            }}
           >
             Add To Cart
-          </a>
+          </a> */}
         </div>
         <div className="cs_product_info text-center">
           <h3 className="cs_product_title cs_fs_21 cs_medium">

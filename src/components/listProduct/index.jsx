@@ -16,7 +16,7 @@ export default function ListProduct() {
       .then((data) => {
         setlistProduct(data);
       });
-  }, []);
+  }, [slug]);
 
   return (
     <section>

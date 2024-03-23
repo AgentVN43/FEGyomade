@@ -9,11 +9,11 @@ export default function TopFooter() {
           <div className="row">
             <div className="col-xxl-3 col-lg-3">
               <div className="cs_footer_widget cs_text_widget">
-                <img src="../assets/img/logogyomade_dark.png" alt="Logo" />
+                <img src="../../../../assets/img/logogyomade_dark.png" alt="Logo" />
                 <p>
                   BE YOURSELF & BE HAPPY
                 </p>
-                <img src="../assets/img/payment_method.svg" alt="Payment" />
+                <img src="../../../../assets/img/payment_method.svg" alt="Payment" />
               </div>
             </div>
             <div className="col-xxl-7 offset-xxl-2 offset-lg-1 col-lg-8">

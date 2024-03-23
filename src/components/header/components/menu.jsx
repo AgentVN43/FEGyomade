@@ -1,13 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function Menu() {
   return (
     <div className="cs_main_header_center">
       <div className="cs_nav cs_medium">
         <ul className="cs_nav_list">
-          <li className="menu-item-has-children">
-            <a href="index.html">Home</a>
-            <ul>
+          <li>
+            <Link to="/">Home</Link>
+            {/* <ul>
               <li>
                 <a href="index.html">Fashion V1</a>
               </li>
@@ -17,26 +18,30 @@ export default function Menu() {
               <li>
                 <a href="home-v3.html">Jewelry</a>
               </li>
-            </ul>
+            </ul> */}
           </li>
-          <li className="menu-item-has-children">
-            <a href="shop.html">Product</a>
+          {/* <li className="menu-item-has-children"> */}
+          <li>
+            <Link to="#">Sản phẩm</Link>
             <ul>
               <li>
-                <a href="shop.html">All Product</a>
+                <Link to="/danh-muc/quan/">Quần</Link>
               </li>
               <li>
-                <a href="shop_sidebar.html">Shop Sidebar</a>
+                <Link to="/danh-muc/ao/">Áo</Link>
               </li>
               <li>
-                <a href="product_details.html">Product Details</a>
+                <Link to="/danh-muc/vay">Váy</Link>
+              </li>
+              <li>
+                <Link to="/danh-muc/phu-kien">Phụ kiện</Link>
               </li>
             </ul>
           </li>
           <li>
-            <a href="blog.html">Blog</a>
+            <a href="/blog">Blog</a>
           </li>
-          <li className="menu-item-has-children">
+          {/* <li className="menu-item-has-children">
             <a href="">Pages</a>
             <ul>
               <li>
@@ -143,9 +148,9 @@ export default function Menu() {
                 </ul>
               </li>
             </ul>
-          </li>
+          </li> */}
           <li>
-            <a href="contact.html">Contact</a>
+            <a href="/contact">Contact</a>
           </li>
         </ul>
       </div>

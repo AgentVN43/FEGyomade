@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import SlideProduct from "./sliderproduct";
 
 export default function MenuTab() {
-  const [selectedTab, setSelectedTab] = useState(null);
+  const [selectedTab, setSelectedTab] = useState(1231641);
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
@@ -11,7 +11,7 @@ export default function MenuTab() {
       .then((data) => {
         setCategories(data);
       });
-      handleTabClick("1231641")
+      
   }, []);
 
   const handleTabClick = (categoryId) => {

@@ -1,16 +1,18 @@
 import React from "react";
+import "./countsCart.scss";
+import CountsCart from "./countsCart";
 
 export default function Cart() {
   return (
     <div className="cs_main_header_right">
       <div className="cs_header_action">
-        <button type="button" className="cs_action_icon cs_header_search_btn">
+        {/* <button type="button" className="cs_action_icon cs_header_search_btn">
           <i className="fa-solid fa-magnifying-glass" />
         </button>
         <a href="#" className="cs_action_icon cs_modal_btn">
           <i className="fa-regular fa-circle-user" />
-        </a>
-        <a href="shop.html" className="cs_action_icon">
+        </a> */}
+        <a href="gio-hang" className="cs_action_icon">
           <span>
             <svg
               width={18}
@@ -41,6 +43,7 @@ export default function Cart() {
             </svg>
           </span>
         </a>
+        <CountsCart/>
       </div>
     </div>
   );

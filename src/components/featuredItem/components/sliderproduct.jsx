@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 export default function SlideProduct({ categoryId }) {
   const [productCategory, setproductCategory] = useState([]);
-
   useEffect(() => {
     fetch(`https://gyomade.vn/mvc/products/category/${categoryId}`)
       .then((response) => response.json())
@@ -15,7 +14,7 @@ export default function SlideProduct({ categoryId }) {
       });
   }, [categoryId]);
 
- 
+  // console.log(productCategory)
   const settings = {
     dots: false, // Show pagination by default
     infinite: true,
@@ -63,6 +62,7 @@ export default function SlideProduct({ categoryId }) {
                           slug={product.slug}
                           inventory={product.inventory}
                           custom_id={product.custom_id}
+                          product_id={product.id}
                         />
                       ))}
                     </Slider>
