@@ -1,10 +1,10 @@
-import React from "react";
-import CountsCart from "./countsCart";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import CartContext from "../../../context/CartContext";
 import "./countsCart.scss";
 
-export default function Cart({countItems} ) {
-  
-  console.log("Cart", countItems);
+export default function Cart() {
+  const { totalItems } = useContext(CartContext);
 
   return (
     <div className="cs_main_header_right">
@@ -15,7 +15,7 @@ export default function Cart({countItems} ) {
         <a href="#" className="cs_action_icon cs_modal_btn">
           <i className="fa-regular fa-circle-user" />
         </a> */}
-        <a href="gio-hang" className="cs_action_icon">
+        <Link to="/gio-hang" className="cs_action_icon">
           <span>
             <svg
               width={18}
@@ -45,8 +45,9 @@ export default function Cart({countItems} ) {
               </defs>
             </svg>
           </span>
-        </a>
-        <CountsCart countItem={countItems} />
+        </Link>
+
+        <span className="counts">{totalItems}</span>
       </div>
     </div>
   );

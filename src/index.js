@@ -7,10 +7,14 @@ import "./assets/css/fontawesome.min.css";
 import "./assets/css/style.css";
 import "./assets/sass/style.scss";
 import "./index.css";
+import { CartProvider } from "./context/CartContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  //   <App />
+  // </React.StrictMode>
+  <CartProvider>
     <App />
-  </React.StrictMode>
+  </CartProvider>
 );

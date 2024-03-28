@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function TopFooter() {
   return (
@@ -25,19 +26,19 @@ export default function TopFooter() {
                     </h3>
                     <ul>
                       <li>
-                        <a href="about.html">About Us</a>
+                        <Link to="about.html">About Us</Link>
                       </li>
                       <li>
-                        <a href="shop.html">Product</a>
+                        <Link to="shop.html">Product</Link>
                       </li>
                       <li>
-                        <a href="blog_details.html">Press</a>
+                        <Link to="blog_details.html">Press</Link>
                       </li>
                       <li>
-                        <a href="blog.html">Blog</a>
+                        <Link to="blog.html">Blog</Link>
                       </li>
                       <li>
-                        <a href="contact.html">Contact Us</a>
+                        <Link to="contact.html">Contact Us</Link>
                       </li>
                     </ul>
                   </div>
@@ -49,16 +50,16 @@ export default function TopFooter() {
                     </h3>
                     <ul>
                       <li>
-                        <a href="#">Help Center</a>
+                        <Link to="#">Help Center</Link>
                       </li>
                       <li>
-                        <a href="#">Shipping &amp; Delivery</a>
+                        <Link to="#">Shipping &amp; Delivery</Link>
                       </li>
                       <li>
-                        <a href="#">Exchange &amp; Return</a>
+                        <Link to="#">Exchange &amp; Return</Link>
                       </li>
                       <li>
-                        <a href="#">Payment Method</a>
+                        <Link to="#">Payment Method</Link>
                       </li>
                     </ul>
                   </div>

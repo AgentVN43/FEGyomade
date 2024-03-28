@@ -4,7 +4,7 @@ import Cart from "./components/cart";
 import Logo from "./components/logo";
 import Menu from "./components/menu";
 
-export default function Header({ countItems }) {
+export default function Header() {
   useEffect(() => {
     const stickyHeader = () => {
       const $window = window;
@@ -67,12 +67,12 @@ export default function Header({ countItems }) {
             <div className="cs_main_header_in">
               <Logo />
               <Menu />
-              <Cart countItems={countItems}/>
+              <Cart/>
             </div>
           </div>
         </div>
 
-        <div className="cs_header_search_wrap">
+        {/* <div className="cs_header_search_wrap">
           <div className="container">
             <div className="cs_header_search_in">
               <div className="cs_hero_search_heading">
@@ -89,7 +89,7 @@ export default function Header({ countItems }) {
               </form>
             </div>
           </div>
-        </div>
+        </div> */}
       </header>
       <div class="cs_height_140 cs_height_lg_80"></div>
     </>

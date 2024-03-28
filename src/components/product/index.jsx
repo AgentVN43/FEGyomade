@@ -1,5 +1,6 @@
 import React from "react";
 import "./index.scss";
+import { Link } from "react-router-dom";
 export default function Product({
   id,
   imageUrl,
@@ -56,7 +57,7 @@ export default function Product({
         </div>
         <div className="cs_product_info text-center">
           <h3 className="cs_product_title cs_fs_21 cs_medium">
-            <a href="product_details.html">{name}</a>
+            <Link to="product_details.html">{name}</Link>
           </h3>
           <p className="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">
             {formattedPrice} - {color} - {size}

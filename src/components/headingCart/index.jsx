@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function HeadingCart({ title, currentPage }) {
     return (
@@ -8,7 +9,7 @@ export default function HeadingCart({ title, currentPage }) {
                 <div className="cs_shop_page_heading text-center">
                     <h1 className="cs_fs_50 cs_bold">{title}</h1>
                     <div className="cs_shop_breadcamp cs_medium">
-                        <a href="index.html">Home</a>
+                        <Link to="index.html">Home</Link>
                         <svg
                             width={17}
                             height={8}

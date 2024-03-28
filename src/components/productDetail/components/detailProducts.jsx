@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import SizeTutor from "../../sizetutor";
 import CountsCart from "../../header/components/countsCart";
 import Cart from "../../header/components/cart";
+import CartContext from "../../../context/CartContext";
 
-export default function DetailProduct({onAddToCart}) {
+export default function DetailProduct({ onAddToCart }) {
   const { slug } = useParams();
   const [productDetail, setproductDetal] = useState([]);
   const [productVariants, setproductVariants] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [countItem, setcountItem] = useState(0);
+
+  const { addToCart } = useContext(CartContext);
+
   useEffect(() => {
     fetch(`https://gyomade.vn/mvc/products/slug/${slug}`)
       .then((response) => response.json())
@@ -41,7 +45,6 @@ export default function DetailProduct({onAddToCart}) {
   const clickSize = (size) => {
     setSelectedSize((prevSize) => (prevSize === size ? null : size));
   };
-
 
   //console.log(productVariants);
 
@@ -188,6 +191,7 @@ export default function DetailProduct({onAddToCart}) {
         // Store the updated order in localStorage
         localStorage.setItem("order", JSON.stringify(order));
         setcountItem((prevCount) => prevCount + 1);
+        addToCart(order);
 
         console.log("Order:", order);
         // Here you can proceed to handle the order, such as sending it to the backend or updating the state

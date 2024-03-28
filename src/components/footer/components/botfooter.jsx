@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export default function BotFooter() {
   return (
@@ -12,30 +13,30 @@ export default function BotFooter() {
         <div>
           <ul className="cs_footer_menu_widget_2">
             <li>
-              <a href="#">Privacy Policy</a>
+              <Link to="#">Privacy Policy</Link>
             </li>
             <li>
-              <a href="#">Terms of Use</a>
+            <Link to="#">Terms of Use</Link>
             </li>
             <li>
-              <a href="#">Legal</a>
+            <Link to="#">Legal</Link>
             </li>
           </ul>
         </div>
         <div>
           <div className="cs_social_links">
-            <a href="https://www.instagram.com/" target="_blank">
+            <Link to="https://www.instagram.com/" target="_blank">
               <i className="fa-brands fa-instagram" />
-            </a>
-            <a href="https://www.facebook.com/" target="_blank">
+            </Link>
+            <Link to="https://www.facebook.com/" target="_blank">
               <i className="fa-brands fa-facebook" />
-            </a>
-            <a href="https://twitter.com/" target="_blank">
+            </Link>
+            <Link to="https://twitter.com/" target="_blank">
               <i className="fa-brands fa-x-twitter" />
-            </a>
-            <a href="https://www.youtube.com/" target="_blank">
+            </Link>
+            <Link to="https://www.youtube.com/" target="_blank">
               <i className="fa-brands fa-youtube" />
-            </a>
+            </Link>
           </div>
         </div>
       </div>

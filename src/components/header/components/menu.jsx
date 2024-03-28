@@ -39,65 +39,65 @@ export default function Menu() {
             </ul>
           </li>
           <li>
-            <a href="/blog">Blog</a>
+            <Link to="/blog">Blog</Link>
           </li>
           {/* <li className="menu-item-has-children">
-            <a href="">Pages</a>
+            <Link to="">Pages</a>
             <ul>
               <li>
-                <a href="about.html">About</a>
+                <Link to="about.html">About</a>
               </li>
               <li>
-                <a href="blog_details.html">Blog Details</a>
+                <Link to="blog_details.html">Blog Details</a>
               </li>
               <li>
-                <a href="cart.html">Cart</a>
+                <Link to="cart.html">Cart</a>
               </li>
               <li>
-                <a href="/thanh-toan">Checkout</a>
+                <Link to="/thanh-toan">Checkout</a>
               </li>
               <li>
-                <a href="success.html">Success</a>
+                <Link to="success.html">Success</a>
               </li>
               <li>
-                <a href="wishlist.html">Wishlist</a>
+                <Link to="wishlist.html">Wishlist</a>
               </li>
             </ul>
           </li>
           <li className="menu-item-has-children cs_mega_menu">
-            <a href="">MegaMenu</a>
+            <Link to="">MegaMenu</a>
             <ul className="cs_mega_wrapper">
               <li className="menu-item-has-children">
-                <a href="">Category One</a>
+                <Link to="">Category One</a>
                 <ul>
                   <li>
-                    <a href="shop.html">Women's Clothing</a>
+                    <Link to="shop.html">Women's Clothing</a>
                   </li>
                   <li>
-                    <a href="shop.html">Men's Clothing</a>
+                    <Link to="shop.html">Men's Clothing</a>
                   </li>
                   <li>
-                    <a href="shop.html">Kids' Clothing</a>
+                    <Link to="shop.html">Kids' Clothing</a>
                   </li>
                   <li>
-                    <a href="shop.html">Shoes (Men, Women, Kids)</a>
+                    <Link to="shop.html">Shoes (Men, Women, Kids)</a>
                   </li>
                   <li>
-                    <a href="shop.html">Accessories (e.g., hats, scarves)</a>
+                    <Link to="shop.html">Accessories (e.g., hats, scarves)</a>
                   </li>
                 </ul>
               </li>
               <li className="menu-item-has-children">
-                <a href="">Category Two</a>
+                <Link to="">Category Two</a>
                 <ul>
                   <li>
-                    <a href="shop.html">Activewear</a>
+                    <Link to="shop.html">Activewear</a>
                   </li>
                   <li>
-                    <a href="shop.html">Formal Wear</a>
+                    <Link to="shop.html">Formal Wear</a>
                   </li>
                   <li>
-                    <a href="shop.html">Casual Wear</a>
+                    <Link to="shop.html">Casual Wear</a>
                   </li>
                   <li>
                     <a href="shop.html">Outerwear (Jackets, Coats)</a>
@@ -150,7 +150,7 @@ export default function Menu() {
             </ul>
           </li> */}
           <li>
-            <a href="/contact">Contact</a>
+            <Link to="/contact">Contact</Link>
           </li>
         </ul>
       </div>
