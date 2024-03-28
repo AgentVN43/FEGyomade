@@ -14,7 +14,7 @@ export default function SlideProduct({ categoryId }) {
       });
   }, [categoryId]);
 
-  // console.log(productCategory)
+  //console.log(productCategory)
   const settings = {
     dots: false, // Show pagination by default
     infinite: true,
@@ -56,13 +56,15 @@ export default function SlideProduct({ categoryId }) {
                         <Product
                           key={index}
                           id={product.id}
-                          imageUrl={product.image}
+                          imageUrl={product.images}
                           price={product.price}
                           name={product.name}
                           slug={product.slug}
                           inventory={product.inventory}
-                          custom_id={product.custom_id}
+                          display_id={product.display_id}
                           product_id={product.id}
+                          color={product.color}
+                          size={product.size}
                         />
                       ))}
                     </Slider>
