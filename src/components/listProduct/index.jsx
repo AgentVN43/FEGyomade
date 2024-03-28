@@ -1,22 +1,70 @@
 import React, { useEffect, useState } from "react";
-import Product from "./components/product";
 import Filter from "./components/filter";
 import { useParams } from "react-router-dom";
+import Product from "../product";
+import Pagination from "../pagination";
 
 export default function ListProduct() {
   const { slug } = useParams();
 
   const [showFilter, setShowFilter] = useState(false);
-
+  const [listCategory, setlistCategory] = useState([]);
   const [listProduct, setlistProduct] = useState([]);
-
+  const [sortBy, setSortBy] = useState("latest");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageSize, setPageSize] = useState(12); // Set the number of items per page
+  const [totalItems, setTotalItems] = useState(0); // Total number of items
+  const [totalPages, setTotalPages] = useState(0); // Total number of pages
+  const [listOrderProduct, setlistOrderProduct] = useState([]);
   useEffect(() => {
-    fetch(`https://gyomade.vn/mvc/category/product/${slug}`)
+    if (!slug) return; // Prevent fetching if slug is undefined
+
+    fetch(`https://gyomade.vn/mvc/category/`)
       .then((response) => response.json())
       .then((data) => {
-        setlistProduct(data);
+        const category = data.find((item) => item.slug === slug);
+        setlistCategory(category);
       });
   }, [slug]);
+
+  useEffect(() => {
+    fetchData();
+  }, [listCategory.id, currentPage, sortBy]);
+
+  const fetchData = () => {
+    if (!listCategory.id) return;
+
+    fetch(
+      `https://gyomade.vn/mvc/products/category/${listCategory.id}?page_number=${currentPage}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+
+        setlistProduct(data.products);
+        setPageSize(data.page_size);
+        setTotalPages(data.total_pages);
+        setTotalItems(data.total_entries);
+      });
+  };
+
+  const handleSortChange = (e) => {
+    setSortBy(e.target.value);
+  };
+
+  const sortedProducts = () => {
+    if (sortBy === 'lowPrice') {
+      return listOrderProduct.slice().sort((a, b) => a.price - b.price);
+    } else if (sortBy === 'highPrice') {
+      return listOrderProduct.slice().sort((a, b) => b.price - a.price);
+    } else {
+      return listProduct;
+    }
+  };
+
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
     <section>
@@ -71,17 +119,23 @@ export default function ListProduct() {
           </div>
           <div className="cs_sort_section">
             <div className="cs_sort_number">
-              <p className="cs_medium mb-0">Showing 1–12 of 15 results</p>
+              {/* <p className="cs_medium mb-0">Showing 1–12 of {totalItems} results</p> */}
+              <p className="cs_medium mb-0">
+                {" "}
+                Showing {currentPage > 1 ? (currentPage - 1) * pageSize + 1 : 1}
+                -{Math.min(currentPage * pageSize, totalItems)} of {totalItems}{" "}
+                results
+              </p>
             </div>
             <div className="cs_sort_wrap">
               <div className="cs_sort">
-                <select>
-                  <option selected="">Sort By Latest</option>
-                  <option value={1}>Sort By Low Price</option>
-                  <option value={2}>Sort By High Price</option>
+                <select value={sortBy} onChange={handleSortChange}>
+                  <option value="latest">Sort By Latest</option>
+                  <option value="lowPrice">Sort By Low Price</option>
+                  <option value="highPrice">Sort By High Price</option>
                 </select>
               </div>
-              <div className="cs_view">
+              {/* <div className="cs_view">
                 <span className="cs_viev_icon cs_grid_btn active">
                   <svg
                     width={16}
@@ -142,26 +196,34 @@ export default function ListProduct() {
                     />
                   </svg>
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
         <div className="cs_product_grid cs_product_grid_4 cs_grid_view">
-          {listProduct.map((product, index) => (
+          {sortedProducts().map((product, index) => (
             <Product
               key={index}
               id={product.id}
-              imageUrl={product.image}
+              imageUrl={product.images}
               price={product.price}
               name={product.name}
               slug={product.slug}
               inventory={product.inventory}
-              custom_id={product.custom_id}
+              display_id={product.display_id}
+              product_id={product.id}
+              color={product.color}
+              size={product.size}
             />
           ))}
         </div>
         <div className="cs_height_75 cs_height_lg_50" />
-        <ul className="cs_pagination cs_fs_21 cs_semibold cs_mp0">
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+        {/* <ul className="cs_pagination cs_fs_21 cs_semibold cs_mp0">
           <li className="cs_page_item active">
             <a className="cs_page_link" href="#">
               01
@@ -182,7 +244,7 @@ export default function ListProduct() {
               <i className="fa-solid fa-arrow-right" />
             </a>
           </li>
-        </ul>
+        </ul> */}
       </div>
       <div className="cs_height_140 cs_height_lg_80" />
       <hr />

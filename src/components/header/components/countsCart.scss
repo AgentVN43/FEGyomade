@@ -12,12 +12,14 @@
     color: #000;
     font-size: 10px;
     font-weight: 700;
-    pointer-events: none
+    pointer-events: none;
+    text-align: center; /* Ensure text is centered */
+    padding: 2px; /* Add padding to prevent text from touching edges */
 }
 
 @media(max-width: 991px) {
     .counts {
-        right:45px;
+        right: 45px;
         bottom: 20px;
     }
 }

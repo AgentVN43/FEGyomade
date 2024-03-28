@@ -1,8 +1,11 @@
 import React from "react";
-import "./countsCart.scss";
 import CountsCart from "./countsCart";
+import "./countsCart.scss";
 
-export default function Cart() {
+export default function Cart({countItems} ) {
+  
+  console.log("Cart", countItems);
+
   return (
     <div className="cs_main_header_right">
       <div className="cs_header_action">
@@ -43,7 +46,7 @@ export default function Cart() {
             </svg>
           </span>
         </a>
-        <CountsCart/>
+        <CountsCart countItem={countItems} />
       </div>
     </div>
   );

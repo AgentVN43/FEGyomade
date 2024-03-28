@@ -7,11 +7,14 @@ export default function Product({
   name,
   slug,
   inventory,
-  custom_id,
+  display_id,
   product_id,
+  color,
+  size,
 }) {
  
-  
+  const formattedPrice = price.toLocaleString();
+
   return (
     <div className="slick_slide_in">
       <div className="cs_product cs_style_1">
@@ -21,9 +24,9 @@ export default function Product({
               <img className="product-image" src={imageUrl} alt="Product" />
             </a>
           </div>{" "}
-          {custom_id && (
+          {display_id && (
             <div className="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute">
-              {custom_id}
+              {display_id}
             </div>
           )}
           {/* <div className="cs_cart_badge position-absolute">
@@ -56,7 +59,7 @@ export default function Product({
             <a href="product_details.html">{name}</a>
           </h3>
           <p className="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">
-            {price}
+            {formattedPrice} - {color} - {size}
           </p>
         </div>
       </div>
