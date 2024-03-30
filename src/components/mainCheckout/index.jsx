@@ -9,9 +9,9 @@ function MaincheckOut() {
   const [districts, setDistricts] = useState([]);
   const [communes, setCommunes] = useState([]);
 
-  const [selectedProvince, setSelectedProvince] = useState("");
-  const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [selectedCommune, setSelectedCommune] = useState("");
+  // const [selectedProvince, setSelectedProvince] = useState("");
+  // const [selectedDistrict, setSelectedDistrict] = useState("");
+  // const [selectedCommune, setSelectedCommune] = useState("");
   const [orderData, setOrderData] = useState({
     bill_full_name: "",
     bill_phone_number: "",
@@ -37,7 +37,6 @@ function MaincheckOut() {
     0
   );
 
-  // Memoized fetchGeoData function
   const fetchGeoData = useCallback((url, setter) => {
     fetch(url)
       .then((response) => response.json())
@@ -49,7 +48,6 @@ function MaincheckOut() {
       });
   }, []);
 
-  // Fetch provinces data
   const fetchProvinces = useCallback(() => {
     fetch(`https://pos.pages.fm/api/v1/geo/provinces?country_code=84`)
       .then((response) => response.json())
@@ -65,7 +63,6 @@ function MaincheckOut() {
     fetchProvinces();
   }, [fetchProvinces]);
 
-  // Handle selection of city
   const handleSelectCity = useCallback(
     (province_id) => {
       const selectedProvince = city.find(
@@ -90,7 +87,6 @@ function MaincheckOut() {
     [city, setOrderData, setDistricts, fetchGeoData]
   );
 
-  // Handle selection of district
   const handleSelectDistrict = useCallback(
     (district_id) => {
       const selectedDistrict = districts.find(
@@ -115,7 +111,6 @@ function MaincheckOut() {
     [districts, setOrderData, fetchGeoData]
   );
 
-  // Handle selection of province
   const ChangesProvince = useCallback(
     (provinces_id) => {
       setSelectedProvince(provinces_id);
@@ -124,7 +119,6 @@ function MaincheckOut() {
     [setSelectedProvince, handleSelectCity]
   );
 
-  // Handle selection of district
   const ChangesDistrict = useCallback(
     (district_id) => {
       setSelectedDistrict(district_id);
@@ -133,7 +127,6 @@ function MaincheckOut() {
     [setSelectedDistrict, handleSelectDistrict]
   );
 
-  // Handle selection of commune
   const ChangesCommune = useCallback(
     (commune_id) => {
       setSelectedCommune(commune_id);
@@ -156,23 +149,45 @@ function MaincheckOut() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setOrderData((prevOrderData) => ({
-      ...prevOrderData,
-      shipping_address: {
-        ...prevOrderData.shipping_address,
+    if (name === "bill_full_name" || name === "bill_phone_number") {
+      setOrderData((prevOrderData) => ({
+        ...prevOrderData,
         [name]: value,
-      },
-    }));
+      }));
+    } else {
+      setOrderData((prevOrderData) => ({
+        ...prevOrderData,
+        shipping_address: {
+          ...prevOrderData.shipping_address,
+          [name]: value,
+        },
+      }));
+      updateOrder({
+        ...orderData,
+        shipping_address: { ...orderData.shipping_address, [name]: value },
+      });
+    }
   };
 
-  // const updateOrder = (orderData) => {
-  //   const { address, commune_name, district_name, province_name } = orderData.shipping_address;
-  //   if (address != null) {
-  //     const full_address = `${address}, ${commune_name}, ${district_name}, ${province_name}`;
-  //     console.log(full_address); // Output the full address for testing
-  //   }
-  // };
-  
+  const updateOrder = (orderData) => {
+    const { address, commune_name, district_name, province_name } =
+      orderData.shipping_address;
+    let updatedOrderData = { ...orderData };
+
+    if (address != null) {
+      const full_address = `${address}, ${commune_name}, ${district_name}, ${province_name}`;
+      updatedOrderData = {
+        ...orderData,
+        shipping_address: {
+          ...orderData.shipping_address,
+          full_address: full_address,
+          full_name: orderData.bill_full_name,
+          phone_number: orderData.bill_phone_number,
+        },
+      };
+    }
+    setOrderData(updatedOrderData);
+  };
 
   console.log(orderData);
 
@@ -262,8 +277,8 @@ function MaincheckOut() {
                 <Form.Control
                   type="text"
                   placeholder="Enter first name"
-                  name="full_name"
-                  value={orderData.full_name || ""}
+                  name="bill_full_name"
+                  // value={orderData.full_name || ""}
                   onChange={handleInputChange}
                 />
               </Form.Group>
@@ -274,8 +289,8 @@ function MaincheckOut() {
               <Form.Control
                 type="number"
                 placeholder="Enter phone number"
-                name="phone_number"
-                value={orderData.phone_number || ""}
+                name="bill_phone_number"
+                // value={orderData.phone_number || ""}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -394,7 +409,7 @@ function MaincheckOut() {
                 type="text"
                 placeholder="Enter street address"
                 name="address"
-                value={orderData.full_address || ""}
+                // value={orderData.full_address || ""}
                 onChange={handleInputChange}
               />
             </Form.Group>
