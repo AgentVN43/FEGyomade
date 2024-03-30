@@ -1,12 +1,12 @@
 import React from 'react'
-import MainCheckout from '../../components/mainCheckout'
 import HeadingCart from '../../components/headingCart'
+import MaincheckOut from '../../components/mainCheckout'
 
-export default function Checkout() {
+export default function Order() {
     return (
         <div>
             <HeadingCart title={"Checkout"} currentPage={"Checkout"} />
-            <MainCheckout />
+            <MaincheckOut/>
         </div>
     )
 }

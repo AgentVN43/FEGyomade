@@ -4,11 +4,11 @@ import Footer from "../components/footer";
 import Header from "../components/header";
 import Preloader from "../components/preloader";
 import Cart from "../pages/Cart";
-import Checkout from "../pages/Checkout";
+import Order from "../pages/Checkout";
 import DetailProduct from "../pages/DetailProduct";
 import Home from "../pages/Home";
-import OrderSuccess from "../pages/OrderSuccess";
 import Product from "../pages/Product";
+import Checkout from "../components/mainCheckout/test";
 
 const Router = () => (
   <>
@@ -20,8 +20,9 @@ const Router = () => (
         <Route path="/danh-muc/:slug" element={<Product />} />
         <Route path="/san-pham/:slug" element={<DetailProduct />} />
         <Route path="/gio-hang" element={<Cart />} />
-        <Route path="/thanh-toan" element={<Checkout />} />
-        <Route path="/thanh-toan-thanh-cong" element={<OrderSuccess />} />
+         <Route path="/don-hang" element={<Order />} />
+        {/*<Route path="/xac-nhan" element={<MainCheckout />} />
+        <Route path="/thanh-toan-thanh-cong" element={<OrderSuccess />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>

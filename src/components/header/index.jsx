@@ -91,7 +91,7 @@ export default function Header() {
           </div>
         </div> */}
       </header>
-      <div class="cs_height_140 cs_height_lg_80"></div>
+      <div className="cs_height_140 cs_height_lg_80"></div>
     </>
   );
 }

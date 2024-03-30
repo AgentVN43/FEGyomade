@@ -9,7 +9,7 @@ export default function HeadingCart({ title, currentPage }) {
                 <div className="cs_shop_page_heading text-center">
                     <h1 className="cs_fs_50 cs_bold">{title}</h1>
                     <div className="cs_shop_breadcamp cs_medium">
-                        <Link to="index.html">Home</Link>
+                        <Link to="/">Home</Link>
                         <svg
                             width={17}
                             height={8}

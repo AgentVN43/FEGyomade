@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import CartContext, { useCart } from "../../../context/CartContext";
 import SizeTutor from "../../sizetutor";
-import CountsCart from "../../header/components/countsCart";
-import Cart from "../../header/components/cart";
-import CartContext from "../../../context/CartContext";
 
 export default function DetailProduct({ onAddToCart }) {
   const { slug } = useParams();
@@ -12,8 +10,11 @@ export default function DetailProduct({ onAddToCart }) {
   const [selectedSize, setSelectedSize] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [countItem, setcountItem] = useState(0);
+  const [hoveredSize, setHoveredSize] = useState(null);
 
   const { addToCart } = useContext(CartContext);
+  const { incrementQuantity, decrementQuantity, quantity } = useCart();
+
 
   useEffect(() => {
     fetch(`https://gyomade.vn/mvc/products/slug/${slug}`)
@@ -28,6 +29,7 @@ export default function DetailProduct({ onAddToCart }) {
         setproductVariants(data);
       });
   }, [slug]);
+
 
   const name = productDetail.name;
   const product_category = productDetail.product_category;
@@ -44,116 +46,44 @@ export default function DetailProduct({ onAddToCart }) {
 
   const clickSize = (size) => {
     setSelectedSize((prevSize) => (prevSize === size ? null : size));
+    //setQuantity(1);
+    setErrorMessage("");
   };
 
-  //console.log(productVariants);
-
-  // const handleSizeClick = (id, product_id) => {
-  //   setSelectedSize(selectedSize === size ? null : size);
-
-  //   const index = selectedSize.findIndex((item) => item.size === size);
-  //   if (index !== -1) {
-  //     // If size is already selected, remove it
-  //     const updatedSelectedSizes = [...selectedSize];
-  //     updatedSelectedSizes.splice(index, 1);
-  //     setSelectedSize(updatedSelectedSizes);
-  //   } else {
-  //     // If size is not selected, add it to the list
-  //     setSelectedSize([...selectedSize, { size, id, product_id }]);
-  //   }
-
-  //   console.log("Click to id:", id);
-
-  //   let order = JSON.parse(localStorage.getItem("order"));
-
-  //   if (!order) {
-  // order = {
-  //   bill_full_name: "AnNK",
-  //   bill_phone_number: "0767531990",
-  //   items: [],
-  //   warehouse_id: "0dc07b57-6115-42c3-ad2d-2cae523f687a",
-  //   shipping_address: "shipping_address",
-  //   shop_id: 4426911,
-  // };
-  //   }
-
-  //   // Check if the selected size is already in the order
-  //   const existingIndex = order.items.findIndex(
-  //     (item) => item.product_id === product_id && item.variation_id === id
-  //   );
-
-  //   if (existingIndex !== -1) {
-  //     // If the selected size is already in the order, remove it
-  //     order.items.splice(existingIndex, 1);
-  //   } else {
-  //     // If the selected size is not in the order, add it
-  //     const newItem = {
-  //       product_id: product_id,
-  //       variation_id: id,
-  //     };
-  //     order.items.push(newItem);
-  //   }
-
-  //   localStorage.setItem("order", JSON.stringify(order));
-  // };
-
-  // const handleSizeClick = (id, product_id) => {
-  //   // Check if the clicked size is already selected
-  //   const index = selectedSize.findIndex(
-  //     (variant) => variant.product_id === product_id
-  //   );
-
-  //   // If the clicked size is already selected, return
-  //   if (index !== -1) return;
-
-  //   // If not selected, add the clicked size to selectedVariants
-  //   const updatedSelectedVariants = [{ id, product_id }];
-  //   setSelectedVariants(updatedSelectedVariants);
-
-  //   console.log("Clicked ID:", id);
-
-  //   // Retrieve or initialize the order object from localStorage
-  //   let order = JSON.parse(localStorage.getItem("order")) || {
-  //     bill_full_name: "AnNK",
-  //     bill_phone_number: "0767531990",
-  //     items: [],
-  //     warehouse_id: "0dc07b57-6115-42c3-ad2d-2cae523f687a",
-  //     shipping_address: "shipping_address",
-  //     shop_id: 4426911,
-  //   };
-
-  //   // Update the order object with the selected size
-  //   order.items = [{ product_id, id }];
-
-  //   // Save the updated order object to localStorage
-  //   localStorage.setItem("order", JSON.stringify(order));
-  // };
-
-  // const handleAddToCart = () => {
+  // const handleIncrement = () => {
   //   if (!selectedSize) {
   //     setErrorMessage("Please select a size");
   //   } else {
   //     setErrorMessage("");
-  //     const order = {
-  //       bill_full_name: "AnNK",
-  //       bill_phone_number: "0767531990",
-  //       items: [],
-  //       warehouse_id: "0dc07b57-6115-42c3-ad2d-2cae523f687a",
-  //       shipping_address: "shipping_address",
-  //       shop_id: 4426911,
-  //     };
-  //     const selectedItem = productVariants.find(
-  //       (item) => item.size === selectedSize
+  //     const selectedVariant = productVariants.find(
+  //       (variant) => variant.size === selectedSize
   //     );
-  //     if (selectedItem) {
-  //       const newItem = {
-  //         product_id: selectedItem.product_id,
-  //         variation_id: selectedItem.id,
-  //       };
-  //       order.items.push(newItem);
-  //       localStorage.setItem('order', JSON.stringify(order));
-  //       console.log("Order:", order);
-  //       // Here you can proceed to handle the order, such as sending it to the backend or updating the state
+
+  //     if (selectedVariant) {
+  //       if (quantity < selectedVariant.remain_quantity) {
+  //         setQuantity(quantity + 1);
+  //         setErrorMessage("");
+  //       } else {
+  //         setErrorMessage(
+  //           "Sorry, we only have " +
+  //             selectedVariant.remain_quantity +
+  //             " item(s) available for size " +
+  //             selectedSize +
+  //             "."
+  //         );
+  //       }
+  //     }
+  //   }
+  // };
+
+  // const handleDecrement = () => {
+  //   if (!selectedSize) {
+  //     setErrorMessage("Please select a size");
+  //   } else {
+  //     setErrorMessage("");
+  //     if (quantity > 1) {
+  //       setQuantity(quantity - 1);
+  //       setErrorMessage("");
   //     }
   //   }
   // };
@@ -170,33 +100,23 @@ export default function DetailProduct({ onAddToCart }) {
         const newItem = {
           product_id: selectedItem.product_id,
           variation_id: selectedItem.id,
+          price: selectedItem.price,
+          images: selectedItem.images,
+          size: selectedItem.size,
+          name: productDetail.name,
         };
 
-        // Check if the order exists in localStorage
-        let order = JSON.parse(localStorage.getItem("order"));
-        if (!order) {
-          // If the order doesn't exist, create a new order object
-          order = {
-            bill_full_name: "AnNK",
-            bill_phone_number: "0767531990",
-            items: [],
-            warehouse_id: "0dc07b57-6115-42c3-ad2d-2cae523f687a",
-            shipping_address: "shipping_address",
-            shop_id: 4426911,
-          };
-        }
-
-        // Add the new item to the order
-        order.items.push(newItem);
-        // Store the updated order in localStorage
-        localStorage.setItem("order", JSON.stringify(order));
-        setcountItem((prevCount) => prevCount + 1);
-        addToCart(order);
-
-        console.log("Order:", order);
-        // Here you can proceed to handle the order, such as sending it to the backend or updating the state
+        addToCart(newItem, quantity);
       }
     }
+  };
+
+  const handleMouseEnter = (size) => {
+    setHoveredSize(size);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredSize(null);
   };
 
   return (
@@ -237,9 +157,12 @@ export default function DetailProduct({ onAddToCart }) {
         </div>
         <div className="cs_single_product_size">
           <h4 className="cs_fs_16 cs_medium">Size</h4>
-          <ul className="cs_size_filter_list cs_mp0">
+          <ul
+            className="cs_size_filter_list cs_mp0"
+            onMouseLeave={handleMouseLeave}
+          >
             {productVariants.map((item, index) => (
-              <li key={index}>
+              <li key={index} onMouseEnter={() => handleMouseEnter(item.size)}>
                 <input
                   type="radio"
                   name="size"
@@ -261,9 +184,17 @@ export default function DetailProduct({ onAddToCart }) {
                 </span>{" "}
               </li>
             ))}
-            {errorMessage && <p>{errorMessage}</p>}
           </ul>
-
+          {hoveredSize && (
+            <p>
+              Remaining Quantity for {hoveredSize}:{" "}
+              {
+                productVariants.find((item) => item.size === hoveredSize)
+                  ?.remain_quantity
+              }
+            </p>
+          )}
+          {errorMessage && <span>{errorMessage}</span>}
           <SizeTutor />
         </div>
         <div className="cs_single_product_color ">
@@ -282,11 +213,17 @@ export default function DetailProduct({ onAddToCart }) {
         </div>
         <div className="cs_action_btns">
           <div className="cs_quantity">
-            <button className="cs_quantity_btn cs_increment">
+            <button
+              className="cs_quantity_btn cs_increment"
+              onClick={() => incrementQuantity()}
+            >
               <i className="fa-solid fa-angle-up" />
             </button>
-            <span className="cs_quantity_input">1</span>
-            <button className="cs_quantity_btn cs_decrement">
+            <span className="cs_quantity_input">{quantity}</span>
+            <button
+              className="cs_quantity_btn cs_decrement"
+              onClick={() => decrementQuantity()}
+            >
               <i className="fa-solid fa-angle-down" />
             </button>
           </div>
