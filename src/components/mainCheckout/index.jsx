@@ -1,7 +1,13 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import CartContext from "../../context/CartContext";
 import Form from "react-bootstrap/Form";
-import { Col, FloatingLabel, FormFloating, Row } from "react-bootstrap";
+import { Button, Col, FloatingLabel, FormFloating, Row } from "react-bootstrap";
 
 function MaincheckOut() {
   const { cartItems } = useContext(CartContext);
@@ -9,13 +15,14 @@ function MaincheckOut() {
   const [districts, setDistricts] = useState([]);
   const [communes, setCommunes] = useState([]);
 
-  // const [selectedProvince, setSelectedProvince] = useState("");
-  // const [selectedDistrict, setSelectedDistrict] = useState("");
-  // const [selectedCommune, setSelectedCommune] = useState("");
+  const [selectedProvince, setSelectedProvince] = useState("");
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [selectedCommune, setSelectedCommune] = useState("");
   const [orderData, setOrderData] = useState({
     bill_full_name: "",
     bill_phone_number: "",
     warehouse_id: "0dc07b57-6115-42c3-ad2d-2cae523f687a",
+    items: cartItems,
     shipping_address: {
       address: "",
       commune_name: "",
@@ -153,6 +160,10 @@ function MaincheckOut() {
       setOrderData((prevOrderData) => ({
         ...prevOrderData,
         [name]: value,
+        shipping_address: {
+          ...prevOrderData.shipping_address,
+          [name.replace("bill_", "")]: value,
+        },
       }));
     } else {
       setOrderData((prevOrderData) => ({
@@ -162,34 +173,77 @@ function MaincheckOut() {
           [name]: value,
         },
       }));
-      updateOrder({
-        ...orderData,
-        shipping_address: { ...orderData.shipping_address, [name]: value },
-      });
     }
   };
 
-  const updateOrder = (orderData) => {
-    const { address, commune_name, district_name, province_name } =
-      orderData.shipping_address;
-    let updatedOrderData = { ...orderData };
-
-    if (address != null) {
-      const full_address = `${address}, ${commune_name}, ${district_name}, ${province_name}`;
-      updatedOrderData = {
-        ...orderData,
+  useEffect(() => {
+    const {
+      address,
+      commune_name,
+      district_name,
+      province_name,
+      full_address,
+    } = orderData.shipping_address;
+    if (
+      address != null &&
+      full_address !==
+        `${address}, ${commune_name}, ${district_name}, ${province_name}`
+    ) {
+      const new_full_address = `${address}, ${commune_name}, ${district_name}, ${province_name}`;
+      setOrderData((prevOrderData) => ({
+        ...prevOrderData,
         shipping_address: {
-          ...orderData.shipping_address,
-          full_address: full_address,
-          full_name: orderData.bill_full_name,
-          phone_number: orderData.bill_phone_number,
+          ...prevOrderData.shipping_address,
+          full_address: new_full_address,
         },
-      };
+      }));
     }
-    setOrderData(updatedOrderData);
-  };
+  }, [orderData.shipping_address]);
 
-  console.log(orderData);
+  const PostData = useCallback((orderData) => {
+    if (!orderData) {
+      console.error("Error: orderData is null");
+      return; // Exit the function early if orderData is null
+    }
+    fetch(
+      `https://pos.pages.fm/api/v1/shops/4426911/orders?api_key=d14a7f33728c43f7b5cb51957bdebb07`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(orderData),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        console.error("Posting order data ok");
+      })
+      .catch((error) => {
+        console.error("Error posting order data:", error);
+      });
+    console.log(orderData);
+  }, []);
+
+  // const updateLocalStorage = (data) => {
+  //   localStorage.setItem("order", JSON.stringify(data));
+  // };
+
+  // useEffect(() => {
+  //   updateLocalStorage(orderData);
+  // }, [orderData]);
+
+  const [validated, setValidated] = useState(false);
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+  };
 
   return (
     <>
@@ -202,220 +256,107 @@ function MaincheckOut() {
             <div className="cs_height_40 cs_height_lg_40" />
             <h2 className="cs_checkout-title">Billing Details</h2>
             <div className="cs_height_45 cs_height_lg_40" />
-            {/* <div className="row">
-              <div className="col-lg-6">
-                <label className="cs_shop-label">First Name *</label>
-                <input type="text" className="cs_shop-input" />
-                <div
-                  data-lastpass-icon-root="true"
-                  style={{
-                    position: "relative !important",
-                    height: "0px !important",
-                    width: "0px !important",
-                    float: "left !important",
-                  }}
-                />
-              </div>
-              <div className="col-lg-6">
-                <label className="cs_shop-label">Last Name *</label>
-                <input type="text" className="cs_shop-input" />
-              </div>
-              <div className="col-lg-12">
-                <label className="cs_shop-label">Company name (optional)</label>
-                <input type="text" className="cs_shop-input" />
-              </div>
-              <div className="col-lg-12">
-                <label className="cs_shop-label">Country / Region *</label>
-                <select className="cs_shop-input">
-                  <option value="States">United States (US)</option>
-                  <option value="Kingdom">United Kingdom</option>
-                  <option value="Kanada">Kanada</option>
-                </select>
-              </div>
-              <div className="col-lg-12">
-                <label className="cs_shop-label">Street address *</label>
-                <input
-                  type="text"
-                  className="cs_shop-input"
-                  placeholder="House number and street name"
-                />
-                <input
-                  type="text"
-                  className="cs_shop-input"
-                  placeholder="Apartment, suite, unit, etc (optional) "
-                />
-              </div>
-              <div className="col-lg-12">
-                <label className="cs_shop-label">Town / City *</label>
-                <input type="text" className="cs_shop-input" />
-              </div>
-              <div className="col-lg-12">
-                <label className="cs_shop-label">State *</label>
-                <select className="cs_shop-input">
-                  <option value="California">California</option>
-                  <option value="Gercy">New Gercy</option>
-                  <option value="Daiking">Daiking</option>
-                </select>
-              </div>
-              <div className="col-lg-12">
-                <label className="cs_shop-label">ZIP Code *</label>
-                <input type="text" className="cs_shop-input" />
-              </div>
-              <div className="col-lg-12">
-                <label className="cs_shop-label">Phone *</label>
-                <input type="text" className="cs_shop-input" />
-              </div>
-              <div className="col-lg-12">
-                <label className="cs_shop-label">Email address *</label>
-                <input type="text" className="cs_shop-input" />
-              </div>          
-            </div> */}
-
-            <Form>
-              <Form.Group className="mb-3">
-                <Form.Label>Họ và tên</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder="Enter first name"
-                  name="bill_full_name"
-                  // value={orderData.full_name || ""}
-                  onChange={handleInputChange}
-                />
-              </Form.Group>
-            </Form>
-
-            <Form.Group className="mb-3">
-              <Form.Label>Số điện thoại *</Form.Label>
-              <Form.Control
-                type="number"
-                placeholder="Enter phone number"
-                name="bill_phone_number"
-                // value={orderData.phone_number || ""}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
-
-            {/* Begin người nhận */}
-
-            {/* <Form.Group>
-              <Form.Label>Bạn là người nhận hàng?</Form.Label>
-              <Form.Check
-                type="radio"
-                label="Yes"
-                name="receiver"
-                id="receiver-yes"
-                onChange={handleInputChange}
-              />
-              <Form.Check
-                type="radio"
-                label="No"
-                name="receiver"
-                id="receiver-no"
-                checked={orderData.receiver === "no"} // Check if receiver is set to "no"
-                onChange={() => {
-                  setOrderData((prevOrderData) => ({
-                    ...prevOrderData,
-                    full_name: "",
-                    phone_number: "",
-                  }));
-                }}
-              />
-            </Form.Group> */}
-
-            {/* End người nhận */}
-
-            <div className="cs_height_45 cs_height_lg_45" />
-            <h2 className="cs_checkout-title">Shipping information</h2>
-            <div className="cs_height_25 cs_height_lg_25" />
-            {/* 
-            {orderData.receiver === "no" && ( // Show additional inputs only if receiver is set to "yes"
-              <>
+            <div className="row">
+              <Form noValidate validated={validated} onSubmit={handleSubmit}>
                 <Form.Group className="mb-3">
-                  <Form.Label>Họ và tên</Form.Label>
+                  <Form.Label>Họ và tên *</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter full name"
-                    value={orderData.full_name || ""}
-                    onChange={(e) => {
-                      setOrderData((prevOrderData) => ({
-                        ...prevOrderData,
-                        full_name: e.target.value, // Update full_name
-                      }));
-                    }}
+                    placeholder="Enter first name"
+                    name="bill_full_name"
+                    // value={orderData.full_name || ""}
+                    required
+                    onChange={handleInputChange}
                   />
                 </Form.Group>
+
                 <Form.Group className="mb-3">
-                  <Form.Label>Số điện thoại</Form.Label>
+                  <Form.Label>Số điện thoại *</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="number"
                     placeholder="Enter phone number"
-                    value={orderData.phone_number || ""}
-                    onChange={(e) => {
-                      setOrderData((prevOrderData) => ({
-                        ...prevOrderData,
-                        phone_number: e.target.value, // Update phone_number
-                      }));
-                    }}
+                    name="bill_phone_number"
+                    // value={orderData.phone_number || ""}
+                    required
+                    onChange={handleInputChange}
                   />
                 </Form.Group>
-              </>
-            )} */}
 
-            <Form.Group className="mb-3">
-              <Form.Label>Tỉnh / Thành Phố *</Form.Label>
-              <Form.Control
-                as="select"
-                onChange={(e) => ChangesProvince(e.target.value)}
-              >
-                {city.map((item, index) => (
-                  <option key={index} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
+                <div className="cs_height_45 cs_height_lg_45" />
+                <h2 className="cs_checkout-title">Shipping information</h2>
+                <div className="cs_height_25 cs_height_lg_25" />
 
-            <Form.Group className="mb-3">
-              <Form.Label>Quận/huyện *</Form.Label>
-              <Form.Control
-                as="select"
-                onChange={(e) => ChangesDistrict(e.target.value)}
-              >
-                {districts.map((item, index) => (
-                  <option key={index} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Tỉnh / Thành Phố *</Form.Label>
+                  <Form.Control
+                    as="select"
+                    required
+                    defaultValue="Chọn tỉnh"
+                    onChange={(e) => ChangesProvince(e.target.value)}
+                  >
+                   
+                    {/* Initial "Select city" option */}
+                    {[{ id: "", name: "Select city" }, ...city].map(
+                      (item, index) => (
+                        <option key={index} value={item.id}>
+                          {item.name}
+                        </option>
+                      )
+                    )}
+                  </Form.Control>
+                </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Phường/xã *</Form.Label>
-              <Form.Control
-                as="select"
-                onChange={(e) => ChangesCommune(e.target.value)}
-              >
-                {communes.map((item, index) => (
-                  <option key={item.id} value={item.id}>
-                    {item.name}
-                  </option>
-                ))}
-              </Form.Control>
-            </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Quận/huyện *</Form.Label>
+                  <Form.Control
+                    as="select"
+                    required
+                    onChange={(e) => ChangesDistrict(e.target.value)}
+                  >
+                    {[{ id: "", name: "Select city" }, ...districts].map((item, index) => (
+                      <option key={index} value={item.id}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Số nhà, tên đường *</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="Enter street address"
-                name="address"
-                // value={orderData.full_address || ""}
-                onChange={handleInputChange}
-              />
-            </Form.Group>
+                <Form.Group className="mb-3">
+                  <Form.Label>Phường/xã *</Form.Label>
+                  <Form.Control
+                    as="select"
+                    required
+                    onChange={(e) => ChangesCommune(e.target.value)}
+                  >
+                    {[{ id: "", name: "Select city" }, ...communes].map((item, index) => (
+                      <option key={item.id} value={item.id}>
+                        {item.name}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Form.Group>
 
+                <Form.Group className="mb-3">
+                  <Form.Label>Số nhà, tên đường *</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="Enter street address"
+                    name="address"
+                    // value={orderData.full_address || ""}
+                    required
+                    onChange={handleInputChange}
+                  />
+                </Form.Group>
+                <Button
+                  className="cs_btn cs_style_1 cs_fs_16 cs_medium w-100"
+                  type="submit"
+                >
+                  Place Order
+                </Button>
+              </Form>
+            </div>
             <div className="cs_height_45 cs_height_lg_45" />
-            <h2 className="cs_checkout-title">Additional information</h2>
+            {/* <h2 className="cs_checkout-title">Additional information</h2>
             <div className="cs_height_25 cs_height_lg_25" />
             <label className="cs_shop-label">Order notes (optional)</label>
             <textarea
@@ -423,7 +364,7 @@ function MaincheckOut() {
               rows={6}
               className="cs_shop-input"
               defaultValue={""}
-            />
+            /> */}
             <div className="cs_height_30 cs_height_lg_30" />
           </div>
           <div className="col-xl-5">
@@ -456,12 +397,19 @@ function MaincheckOut() {
                   </tbody>
                 </table>
                 <div className="cs_height_30 cs_height_lg_30" />
-                <a
-                  href="/thanh-toan-thanh-cong"
+                {/* <a
+                  href="#"
                   className="cs_btn cs_style_1 cs_fs_16 cs_medium w-100"
+                  onClick={() => PostData(orderData)}
                 >
                   Place Order
-                </a>
+                </a> */}
+                {/* <Button
+                  className="cs_btn cs_style_1 cs_fs_16 cs_medium w-100"
+                  onClick={handleClick}
+                >
+                  Place Order
+                </Button> */}
               </div>
               <div className="cs_height_50 cs_height_lg_30" />
               <div className="cs_shop-card">
