@@ -5,19 +5,23 @@ import React, {
   useRef,
   useState,
 } from "react";
-import CartContext from "../../context/CartContext";
+import { Button } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
-import { Button, Col, FloatingLabel, FormFloating, Row } from "react-bootstrap";
-
+import CartContext from "../../context/CartContext";
+import "./index.scss";
+import Modals from "../modals";
 function MaincheckOut() {
   const { cartItems } = useContext(CartContext);
   const [city, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [communes, setCommunes] = useState([]);
-
+  const formRef = useRef(null);
   const [selectedProvince, setSelectedProvince] = useState("");
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [selectedCommune, setSelectedCommune] = useState("");
+  const [showModal, setShowModal] = useState(false);
+  const [showModalSuccess, setShowModalSuccess] = useState(false);
+
   const [orderData, setOrderData] = useState({
     bill_full_name: "",
     bill_phone_number: "",
@@ -91,7 +95,7 @@ function MaincheckOut() {
         setDistricts
       );
     },
-    [city, setOrderData, setDistricts, fetchGeoData]
+    [city, setOrderData, fetchGeoData]
   );
 
   const handleSelectDistrict = useCallback(
@@ -215,9 +219,15 @@ function MaincheckOut() {
         body: JSON.stringify(orderData),
       }
     )
-      .then((response) => response.json())
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
       .then((data) => {
-        console.error("Posting order data ok");
+        setShowModalSuccess(true);
+        console.log("Posting order data ok");
       })
       .catch((error) => {
         console.error("Error posting order data:", error);
@@ -235,14 +245,50 @@ function MaincheckOut() {
 
   const [validated, setValidated] = useState(false);
 
+  // const handleSubmit = (event) => {
+  //   const form = event.currentTarget;
+  //   if (form.checkValidity() === false) {
+  //     event.preventDefault();
+  //     event.stopPropagation();
+  //   } else {
+  //     event.preventDefault();
+  //     setValidated(true);
+  //   }
+  //   if (orderData.items && orderData.items.length > 0) {
+  //     PostData(orderData);
+  //   } else {
+  //     setShowModal(true);
+  //   }
+  // };
+
   const handleSubmit = (event) => {
     const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+    event.preventDefault();
+    event.stopPropagation();
+
+    const isValid = form.checkValidity();
+    setValidated(true);
+
+    if (!isValid) {
+      return; // Exit the function if the form is invalid
     }
 
-    setValidated(true);
+    if (orderData.items && orderData.items.length > 0) {
+      PostData(orderData);
+    } else {
+      setShowModal(true);
+    }
+    formRef.current.reset();
+  };
+
+  const copyToClipboard = (content) => {
+    // Create a temporary textarea element to copy the content
+    const textarea = document.createElement("textarea");
+    textarea.value = content;
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textarea);
   };
 
   return (
@@ -257,7 +303,12 @@ function MaincheckOut() {
             <h2 className="cs_checkout-title">Billing Details</h2>
             <div className="cs_height_45 cs_height_lg_40" />
             <div className="row">
-              <Form noValidate validated={validated} onSubmit={handleSubmit}>
+              <Form
+                noValidate
+                validated={validated}
+                onSubmit={handleSubmit}
+                ref={formRef}
+              >
                 <Form.Group className="mb-3">
                   <Form.Label>Họ và tên *</Form.Label>
                   <Form.Control
@@ -294,7 +345,6 @@ function MaincheckOut() {
                     defaultValue="Chọn tỉnh"
                     onChange={(e) => ChangesProvince(e.target.value)}
                   >
-                   
                     {/* Initial "Select city" option */}
                     {[{ id: "", name: "Select city" }, ...city].map(
                       (item, index) => (
@@ -313,11 +363,13 @@ function MaincheckOut() {
                     required
                     onChange={(e) => ChangesDistrict(e.target.value)}
                   >
-                    {[{ id: "", name: "Select city" }, ...districts].map((item, index) => (
-                      <option key={index} value={item.id}>
-                        {item.name}
-                      </option>
-                    ))}
+                    {[{ id: "", name: "Select city" }, ...districts].map(
+                      (item, index) => (
+                        <option key={index} value={item.id}>
+                          {item.name}
+                        </option>
+                      )
+                    )}
                   </Form.Control>
                 </Form.Group>
 
@@ -328,11 +380,13 @@ function MaincheckOut() {
                     required
                     onChange={(e) => ChangesCommune(e.target.value)}
                   >
-                    {[{ id: "", name: "Select city" }, ...communes].map((item, index) => (
-                      <option key={item.id} value={item.id}>
-                        {item.name}
-                      </option>
-                    ))}
+                    {[{ id: "", name: "Select city" }, ...communes].map(
+                      (item, index) => (
+                        <option key={item.id} value={item.id}>
+                          {item.name}
+                        </option>
+                      )
+                    )}
                   </Form.Control>
                 </Form.Group>
 
@@ -354,6 +408,16 @@ function MaincheckOut() {
                   Place Order
                 </Button>
               </Form>
+              <Modals
+                showModal={showModal}
+                setShowModal={setShowModal}
+                content="Please add item to cart"
+              />
+              <Modals
+                showModalSuccess={showModalSuccess}
+                setShowModalSuccess={setShowModalSuccess}
+                contentSuccess="Your order is successful, we will contact you to confirm the order. Thank you!"
+              />
             </div>
             <div className="cs_height_45 cs_height_lg_45" />
             {/* <h2 className="cs_checkout-title">Additional information</h2>
@@ -381,7 +445,8 @@ function MaincheckOut() {
                     {cartItems.map((item, index) => (
                       <tr key={index}>
                         <td>
-                          {item.name} x {item.quantity.toLocaleString()}
+                          {item.name} | Màu: {item.color} | Size: {item.size} x{" "}
+                          {item.quantity.toLocaleString()}
                         </td>
                         <td className="text-end">
                           {(item.price * item.quantity).toLocaleString()}
@@ -419,37 +484,122 @@ function MaincheckOut() {
                     <tr>
                       <td>
                         <div className="form-check cs_fs_16">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            defaultValue=""
-                            id="flexCheckDefault"
-                            defaultChecked=""
-                          />
-                          <label
-                            className="form-check-label m-0 cs_semi_bold"
-                            htmlFor="flexCheckDefault"
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
                           >
-                            Cash on delivery
-                          </label>
+                            <div>
+                              <img
+                                className="image-size"
+                                src="https://order.pke.gg/TCB.svg"
+                              />
+                            </div>
+                            <div style={{ marginLeft: 10 }}>
+                              <div className="font-size-12 font-weight-500">
+                                Techcombank (MS04T01693203016588)
+                              </div>
+                              <div className="font-size-12">
+                                Ngân hàng TMCP Kỹ thương Việt Nam
+                              </div>
+                            </div>
+                          </div>
                         </div>
-                        <p className="m-0 cs_payment_text">
-                          Pay with cash upon delivery.
-                        </p>
+                        <div className="form-check cs_fs_16">
+                          <div className="qr-center">
+                            <div className="qr-image">
+                              <img src="/assets/img/qr.png" alt="QR Code" />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="form-check cs_fs_16">
+                          <div className="payment">
+                            <div className="item-info">
+                              <div>Chủ tài khoản:</div>
+                              <div>NGUYEN THI TRANG</div>
+                            </div>
+                            <div className="item-info">
+                              <div>Số tài khoản:</div>
+                              {/* <div>MS04T01693203016588</div> */}
+                              <span
+                                className="link"
+                                style={{
+                                  whiteSpace: "pre-wrap",
+                                  cursor: "pointer",
+                                }}
+                                onClick={() =>
+                                  copyToClipboard("MS04T01693203016588")
+                                }
+                                title="Click to copy"
+                              >
+                                <span>MS04T01693203016588</span>
+                                <span
+                                  role="img"
+                                  aria-label="copy"
+                                  className="anticon anticon-copy"
+                                  style={{ marginLeft: 5 }}
+                                >
+                                  <svg
+                                    viewBox="64 64 896 896"
+                                    focusable="false"
+                                    data-icon="copy"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                  >
+                                    <path d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z" />
+                                  </svg>
+                                </span>
+                              </span>
+                            </div>
+                            <div className="item-info">
+                              <div>Nội dung:</div>
+                              {/* <div>{orderData.bill_phone_number}</div> */}
+                              <span
+                                className="link"
+                                style={{
+                                  whiteSpace: "pre-wrap",
+                                  cursor: "pointer",
+                                }}
+                                onClick={() =>
+                                  copyToClipboard(orderData.bill_phone_number)
+                                }
+                                title="Click to copy"
+                              >
+                                <span>{orderData.bill_phone_number}</span>
+                                <span
+                                  role="img"
+                                  aria-label="copy"
+                                  className="anticon anticon-copy"
+                                  style={{ marginLeft: 5 }}
+                                >
+                                  <svg
+                                    viewBox="64 64 896 896"
+                                    focusable="false"
+                                    data-icon="copy"
+                                    width="1em"
+                                    height="1em"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                  >
+                                    <path d="M832 64H296c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h496v688c0 4.4 3.6 8 8 8h56c4.4 0 8-3.6 8-8V96c0-17.7-14.3-32-32-32zM704 192H192c-17.7 0-32 14.3-32 32v530.7c0 8.5 3.4 16.6 9.4 22.6l173.3 173.3c2.2 2.2 4.7 4 7.4 5.5v1.9h4.2c3.5 1.3 7.2 2 11 2H704c17.7 0 32-14.3 32-32V224c0-17.7-14.3-32-32-32zM350 856.2L263.9 770H350v86.2zM664 888H414V746c0-22.1-17.9-40-40-40H232V264h432v624z" />
+                                  </svg>
+                                </span>
+                              </span>
+                            </div>
+                          </div>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
                 </table>
                 <div className="cs_height_20 cs_height_lg_20" />
                 <p className="m-0 cs_payment_text">
-                  Your personal data will be used to process your order, support
-                  your experience throughout this website, and for other
-                  purposes described in our <a href="">privacy policy</a>.
+                  * Bỏ qua nếu thanh toán khi nhận hàng.
                 </p>
                 <div className="cs_height_20 cs_height_lg_20" />
-                <button className="cs_btn cs_style_1 cs_fs_16 cs_medium w-100">
+                {/* <button className="cs_btn cs_style_1 cs_fs_16 cs_medium w-100">
                   Pay Now
-                </button>
+                </button> */}
               </div>
               <div className="cs_height_30 cs_height_lg_30" />
             </div>

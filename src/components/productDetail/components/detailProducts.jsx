@@ -15,7 +15,6 @@ export default function DetailProduct({ onAddToCart }) {
   const { addToCart } = useContext(CartContext);
   const { incrementQuantity, decrementQuantity, quantity } = useCart();
 
-
   useEffect(() => {
     fetch(`https://gyomade.vn/mvc/products/slug/${slug}`)
       .then((response) => response.json())
@@ -30,7 +29,6 @@ export default function DetailProduct({ onAddToCart }) {
       });
   }, [slug]);
 
-
   const name = productDetail.name;
   const product_category = productDetail.product_category;
   const inventory = productDetail.inventory;
@@ -44,49 +42,14 @@ export default function DetailProduct({ onAddToCart }) {
     );
   };
 
+  const stringColor = color[0];
+
+
   const clickSize = (size) => {
     setSelectedSize((prevSize) => (prevSize === size ? null : size));
     //setQuantity(1);
     setErrorMessage("");
   };
-
-  // const handleIncrement = () => {
-  //   if (!selectedSize) {
-  //     setErrorMessage("Please select a size");
-  //   } else {
-  //     setErrorMessage("");
-  //     const selectedVariant = productVariants.find(
-  //       (variant) => variant.size === selectedSize
-  //     );
-
-  //     if (selectedVariant) {
-  //       if (quantity < selectedVariant.remain_quantity) {
-  //         setQuantity(quantity + 1);
-  //         setErrorMessage("");
-  //       } else {
-  //         setErrorMessage(
-  //           "Sorry, we only have " +
-  //             selectedVariant.remain_quantity +
-  //             " item(s) available for size " +
-  //             selectedSize +
-  //             "."
-  //         );
-  //       }
-  //     }
-  //   }
-  // };
-
-  // const handleDecrement = () => {
-  //   if (!selectedSize) {
-  //     setErrorMessage("Please select a size");
-  //   } else {
-  //     setErrorMessage("");
-  //     if (quantity > 1) {
-  //       setQuantity(quantity - 1);
-  //       setErrorMessage("");
-  //     }
-  //   }
-  // };
 
   const handleAddToCart = () => {
     if (!selectedSize) {
@@ -104,6 +67,7 @@ export default function DetailProduct({ onAddToCart }) {
           images: selectedItem.images,
           size: selectedItem.size,
           name: productDetail.name,
+          color: stringColor,
         };
 
         addToCart(newItem, quantity);
