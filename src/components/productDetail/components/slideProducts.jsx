@@ -44,7 +44,7 @@ export default function SlideImageProduct() {
             vertical={true}
           >
             {images.map((item, index) => (
-              <div className="cs_single_product_thumb_mini product-image-container">
+              <div key={index} className="cs_single_product_thumb_mini product-image-container">
                 <img src={item} alt="fuck" className="product-image" />
               </div>
             ))}
@@ -59,7 +59,7 @@ export default function SlideImageProduct() {
             ref={(slider) => (sliderRef1 = slider)}
           >
             {images.map((item, index) => (
-              <div className="cs_single_product_thumb_item">
+              <div key={index} className="cs_single_product_thumb_item">
                 <img
                   src={item}
                   alt="fuck"

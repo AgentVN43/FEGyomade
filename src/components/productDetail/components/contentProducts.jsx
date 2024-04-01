@@ -1,7 +1,33 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import CartContext from "../../../context/CartContext";
+import { useParams } from "react-router-dom";
+import HTMLReactParser from "html-react-parser";
 
 export default function ContentProducts() {
+  const { slug } = useParams();
+  const [productDetail, setproductDetail] = useState([]);
+
   const [activeTab, setActiveTab] = useState(0);
+
+  useEffect(() => {
+    fetch(`https://gyomade.vn/mvc/products/slug/${slug}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setproductDetail(data);
+      });
+  }, [slug]);
+
+  const checkContent = () => {
+    if (productDetail.content === null || productDetail.content === undefined) {
+      return "Content updating";
+    }
+  
+    const contentString = productDetail.content.toString();
+  
+    return contentString;
+  };
+  
+  console.log(checkContent());
 
   const handleTabClick = (index) => {
     setActiveTab(index);
@@ -14,10 +40,11 @@ export default function ContentProducts() {
     "Review",
   ];
 
+  console.log(slug);
   return (
     <>
-      <ul className="cs_tab_links cs_style_2 cs_product_tab cs_fs_21 cs_primary_color cs_semibold cs_mp0">
-        {/* <li className="active">
+      {/* <ul className="cs_tab_links cs_style_2 cs_product_tab cs_fs_21 cs_primary_color cs_semibold cs_mp0">
+         <li className="active">
           <a href="#tab_1">Description</a>
         </li>
         <li>
@@ -28,36 +55,30 @@ export default function ContentProducts() {
         </li>
         <li>
           <a href="#tab_4">Review (1)</a>
-        </li> */}
+        </li> 
         {tabContents.map((tab, index) => (
           <li key={index} className={activeTab === index ? "active" : ""}>
             <a onClick={() => handleTabClick(index)}>{tab}</a>
           </li>
         ))}
-      </ul>
-      {/* <div className="cs_height_20 cs_height_lg_60" /> */}
+      </ul>*/}
+      <div className="cs_height_20 cs_height_lg_60" />
       <div className="cs_tabs">
-        {tabContents.map((tabContent, index) => (
+        {/* {tabContents.map((tabContent, index) => (
           <div
             key={index}
             className={`cs_tab ${activeTab === index ? "active" : ""}`}
             id={`tab_${index + 1}`}
           >
-            {/* Here you can include content for each tab */}
-            {tabContent === "Description" && (
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Vestibulum sagittis orci ac odio dictum tincidunt. Donec ut
-                metus leo...
-              </p>
-            )}
+            {tabContent === "Description" && <p>asa</p>}
             {tabContent === "Additional information" && (
               <p>Additional information</p>
             )}
             {tabContent === "Size Guide" && <p>Size Guide</p>}
             {tabContent === "Review" && <p>Review</p>}
           </div>
-        ))}
+        ))} */}
+        {HTMLReactParser(checkContent())}
       </div>
     </>
   );

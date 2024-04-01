@@ -5,7 +5,7 @@ import SizeTutor from "../../sizetutor";
 
 export default function DetailProduct({ onAddToCart }) {
   const { slug } = useParams();
-  const [productDetail, setproductDetal] = useState([]);
+  const [productDetail, setproductDetail] = useState([]);
   const [productVariants, setproductVariants] = useState([]);
   const [selectedSize, setSelectedSize] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -19,7 +19,7 @@ export default function DetailProduct({ onAddToCart }) {
     fetch(`https://gyomade.vn/mvc/products/slug/${slug}`)
       .then((response) => response.json())
       .then((data) => {
-        setproductDetal(data);
+        setproductDetail(data);
       });
 
     fetch(`https://gyomade.vn/mvc/products/variants/${slug}`)
@@ -30,10 +30,8 @@ export default function DetailProduct({ onAddToCart }) {
   }, [slug]);
 
   const name = productDetail.name;
-  const product_category = productDetail.product_category;
   const inventory = productDetail.inventory;
   const price = [...new Set(productVariants.map((item) => item.price))];
-  const sizes = [...new Set(productVariants.map((item) => item.size))];
   const color = [...new Set(productVariants.map((item) => item.color))];
 
   const isSizeDisabled = (size) => {
@@ -44,6 +42,7 @@ export default function DetailProduct({ onAddToCart }) {
 
   const stringColor = color[0];
 
+  productVariants.map((item,index) => console.log(item))
 
   const clickSize = (size) => {
     setSelectedSize((prevSize) => (prevSize === size ? null : size));
@@ -66,7 +65,7 @@ export default function DetailProduct({ onAddToCart }) {
           price: selectedItem.price,
           images: selectedItem.images,
           size: selectedItem.size,
-          name: productDetail.name,
+          name: productVariants.name,
           color: stringColor,
         };
 
@@ -164,8 +163,8 @@ export default function DetailProduct({ onAddToCart }) {
         <div className="cs_single_product_color ">
           <h4 className="cs_fs_16 cs_medium">Color</h4>
           <ul className="cs_color_filter_list cs_type_1 cs_mp0">
-            {color.map((item) => (
-              <li>
+            {color.map((item,index) => (
+              <li key={index}>
                 <div className="cs_color_filter">
                   <input type="checkbox" name="color" />
                   <span className="cs_color_filter_circle cs_accent_bg" />
