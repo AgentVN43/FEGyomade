@@ -29,7 +29,7 @@ export default function Modals({
         <Modal.Title>Gyomade</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <p style={{ fontSize: "30px" }}>{contentSuccess}</p>
+        <p style={{ fontSize: "20px" }}>{contentSuccess}</p>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={() => setShowModalSuccess(false)}>
