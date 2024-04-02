@@ -23,7 +23,7 @@ export default function RelatedProducts() {
           <div className="cs_section_heading cs_style_1">
             <div className="cs_section_heading_in">
               <h2 className="cs_section_title cs_fs_50 cs_bold cs_fs_48 cs_semibold mb-0">
-                Related Products
+                Có thể bạn sẽ thích!
               </h2>
             </div>
             {/* <div className="cs_slider_arrows cs_style_2">
