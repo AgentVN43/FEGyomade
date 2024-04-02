@@ -2,16 +2,11 @@ import React from "react";
 import "./index.scss";
 import { Link } from "react-router-dom";
 export default function Product({
-  id,
   imageUrl,
   price,
   name,
   slug,
-  inventory,
   display_id,
-  product_id,
-  color,
-  size,
 }) {
  
   const formattedPrice = price.toLocaleString();
@@ -21,9 +16,9 @@ export default function Product({
       <div className="cs_product cs_style_1">
         <div className="cs_product_thumb position-relative">
           <div className="product-image-container">
-            <a href={`/san-pham/${slug}`}>
+            <Link to={`/san-pham/${slug}`}>
               <img className="product-image" src={imageUrl} alt="Product" />
-            </a>
+            </Link>
           </div>{" "}
           {display_id && (
             <div className="cs_discount_badge cs_white_bg cs_fs_14 cs_primary_color position-absolute">
@@ -57,10 +52,10 @@ export default function Product({
         </div>
         <div className="cs_product_info text-center">
           <h3 className="cs_product_title cs_fs_21 cs_medium">
-            <Link to="product_details.html">{name}</Link>
+            <Link to={`/san-pham/${slug}`}>{name}</Link>
           </h3>
           <p className="cs_product_price cs_fs_18 cs_accent_color mb-0 cs_medium">
-            {formattedPrice} - {color} - {size}
+            {formattedPrice}
           </p>
         </div>
       </div>

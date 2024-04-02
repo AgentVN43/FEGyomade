@@ -40,8 +40,8 @@ export default function ListProduct() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-
         setlistProduct(data.products);
+        setlistOrderProduct(data.products);
         setPageSize(data.page_size);
         setTotalPages(data.total_pages);
         setTotalItems(data.total_entries);
@@ -53,9 +53,9 @@ export default function ListProduct() {
   };
 
   const sortedProducts = () => {
-    if (sortBy === 'lowPrice') {
+    if (sortBy === "lowPrice") {
       return listOrderProduct.slice().sort((a, b) => a.price - b.price);
-    } else if (sortBy === 'highPrice') {
+    } else if (sortBy === "highPrice") {
       return listOrderProduct.slice().sort((a, b) => b.price - a.price);
     } else {
       return listProduct;
@@ -65,10 +65,10 @@ export default function ListProduct() {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-
+  console.log(listProduct);
   return (
     <section>
-      <div className="cs_height_140 cs_height_lg_80" />
+      <div className="cs_height_30 cs_height_lg_20" />
       <div className="container-fluid">
         {/* <div className={`cs_shop_filter ${showFilter ? "active" : ""}`}>
           <div className="cs_filter_overlay" />
@@ -119,7 +119,6 @@ export default function ListProduct() {
           </div>
           <div className="cs_sort_section">
             <div className="cs_sort_number">
-              {/* <p className="cs_medium mb-0">Showing 1–12 of {totalItems} results</p> */}
               <p className="cs_medium mb-0">
                 {" "}
                 Showing {currentPage > 1 ? (currentPage - 1) * pageSize + 1 : 1}
@@ -205,15 +204,12 @@ export default function ListProduct() {
             <Product
               key={index}
               id={product.id}
-              imageUrl={product.images}
+              imageUrl={product.image}
               price={product.price}
               name={product.name}
               slug={product.slug}
-              inventory={product.inventory}
-              display_id={product.display_id}
+              display_id={product.custom_id}
               product_id={product.id}
-              color={product.color}
-              size={product.size}
             />
           ))}
         </div>

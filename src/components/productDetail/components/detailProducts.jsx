@@ -33,6 +33,7 @@ export default function DetailProduct({ onAddToCart }) {
   const inventory = productDetail.inventory;
   const price = [...new Set(productVariants.map((item) => item.price))];
   const color = [...new Set(productVariants.map((item) => item.color))];
+  const hex_code = [...new Set(productVariants.map((item) => item.hex_code))];
 
   const isSizeDisabled = (size) => {
     return productVariants.some(
@@ -42,14 +43,11 @@ export default function DetailProduct({ onAddToCart }) {
 
   const stringColor = color[0];
 
-  productVariants.map((item,index) => console.log(item))
-
   const clickSize = (size) => {
     setSelectedSize((prevSize) => (prevSize === size ? null : size));
-    //setQuantity(1);
+    // setQuantity(1);
     setErrorMessage("");
   };
-
   const handleAddToCart = () => {
     if (!selectedSize) {
       setErrorMessage("Please select a size");
@@ -98,7 +96,7 @@ export default function DetailProduct({ onAddToCart }) {
           </span>
         </div>
         <h4 className="cs_single_product_price cs_fs_21 cs_primary_color cs_semibold">
-          Price: {price}
+          {price}
         </h4>
         <hr />
         <div className="cs_single_product_details_text">
@@ -119,7 +117,7 @@ export default function DetailProduct({ onAddToCart }) {
           </ul>
         </div>
         <div className="cs_single_product_size">
-          <h4 className="cs_fs_16 cs_medium">Size</h4>
+          <h4 className="cs_fs_16 cs_medium">Size:</h4>
           <ul
             className="cs_size_filter_list cs_mp0"
             onMouseLeave={handleMouseLeave}
@@ -150,24 +148,28 @@ export default function DetailProduct({ onAddToCart }) {
           </ul>
           {hoveredSize && (
             <p>
-              Remaining Quantity for {hoveredSize}:{" "}
+              Size {hoveredSize} còn:{" "}
               {
                 productVariants.find((item) => item.size === hoveredSize)
                   ?.remain_quantity
-              }
+              }{" "}
+              cái
             </p>
           )}
           {errorMessage && <span>{errorMessage}</span>}
           <SizeTutor />
         </div>
         <div className="cs_single_product_color ">
-          <h4 className="cs_fs_16 cs_medium">Color</h4>
+          <h4 className="cs_fs_16 cs_medium">Màu:</h4>
           <ul className="cs_color_filter_list cs_type_1 cs_mp0">
-            {color.map((item,index) => (
+            {color.map((item, index) => (
               <li key={index}>
                 <div className="cs_color_filter">
                   <input type="checkbox" name="color" />
-                  <span className="cs_color_filter_circle cs_accent_bg" />
+                  <span
+                    className="cs_color_filter_circle cs_accent_bg"
+                    style={{ backgroundColor: hex_code }}
+                  />
                   <span className="cs_color_text">{item}</span>
                 </div>
               </li>
@@ -190,13 +192,13 @@ export default function DetailProduct({ onAddToCart }) {
               <i className="fa-solid fa-angle-down" />
             </button>
           </div>
-          <a
-            href="#"
+
+          <button
             className="cs_btn cs_style_1 cs_fs_16 cs_medium"
             onClick={handleAddToCart}
           >
             Add to Cart
-          </a>
+          </button>
         </div>
       </div>
     </>

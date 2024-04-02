@@ -56,7 +56,7 @@ export default function SlideProduct({ categoryId }) {
                         <Product
                           key={index}
                           id={product.id}
-                          imageUrl={product.images}
+                          imageUrl={product.image}
                           price={product.price}
                           name={product.name}
                           slug={product.slug}
