@@ -65,7 +65,7 @@ export default function ListProduct() {
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
-  console.log(listProduct);
+  
   return (
     <section>
       <div className="cs_height_30 cs_height_lg_20" />

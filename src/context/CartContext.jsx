@@ -54,7 +54,6 @@ export const CartProvider = ({ children }) => {
   // };
 
   const addToCart = (product, quantity) => {
-    
     // Check if the product already exists in the cart
     const existingProductIndex = cartItems.findIndex(
       (item) =>
@@ -71,20 +70,17 @@ export const CartProvider = ({ children }) => {
         updatedCartItems[existingProductIndex].quantity = quantity;
       }
       setCartItems(updatedCartItems);
-      
     } else {
       // If the product doesn't exist, add it to the cart with the given quantity
       setCartItems([...cartItems, { ...product, quantity }]);
     }
   };
 
-
- const removeFromCart = (itemIndex) => {
+  const removeFromCart = (itemIndex) => {
     const updatedCartItems = [...cartItems];
     updatedCartItems.splice(itemIndex, 1);
     setCartItems(updatedCartItems);
   };
-
 
   const incrementQuantity = (index) => {
     if (index !== undefined) {
@@ -109,7 +105,11 @@ export const CartProvider = ({ children }) => {
       }
     }
   };
-  
+
+  const clearCartItems = () => {
+    setCartItems([]);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -120,6 +120,7 @@ export const CartProvider = ({ children }) => {
         incrementQuantity,
         decrementQuantity,
         quantity,
+        clearCartItems,
       }}
     >
       {children}

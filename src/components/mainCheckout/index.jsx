@@ -11,7 +11,7 @@ import CartContext from "../../context/CartContext";
 import "./index.scss";
 import Modals from "../modals";
 function MaincheckOut() {
-  const { cartItems } = useContext(CartContext);
+  const { cartItems,  clearCartItems } = useContext(CartContext);
   const [city, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [communes, setCommunes] = useState([]);
@@ -279,6 +279,8 @@ function MaincheckOut() {
       setShowModal(true);
     }
     formRef.current.reset();
+    localStorage.removeItem("order")
+    clearCartItems();
   };
 
   const copyToClipboard = (content) => {
@@ -300,7 +302,7 @@ function MaincheckOut() {
                         Have a coupon? <a href="">Click here to enter your code</a>
                     </p> */}
             <div className="cs_height_40 cs_height_lg_40" />
-            <h2 className="cs_checkout-title">Billing Details</h2>
+            <h2 className="cs_checkout-title">Thông tin đơn hàng</h2>
             <div className="cs_height_45 cs_height_lg_40" />
             <div className="row">
               <Form
@@ -313,7 +315,7 @@ function MaincheckOut() {
                   <Form.Label>Họ và tên *</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter first name"
+                    placeholder="Họ và tên"
                     name="bill_full_name"
                     // value={orderData.full_name || ""}
                     required
@@ -325,7 +327,7 @@ function MaincheckOut() {
                   <Form.Label>Số điện thoại *</Form.Label>
                   <Form.Control
                     type="number"
-                    placeholder="Enter phone number"
+                    placeholder="Số điện thoại"
                     name="bill_phone_number"
                     // value={orderData.phone_number || ""}
                     required
@@ -334,7 +336,7 @@ function MaincheckOut() {
                 </Form.Group>
 
                 <div className="cs_height_45 cs_height_lg_45" />
-                <h2 className="cs_checkout-title">Shipping information</h2>
+                <h2 className="cs_checkout-title">Thông tin giao hàng</h2>
                 <div className="cs_height_25 cs_height_lg_25" />
 
                 <Form.Group className="mb-3">
@@ -346,7 +348,7 @@ function MaincheckOut() {
                     onChange={(e) => ChangesProvince(e.target.value)}
                   >
                     {/* Initial "Select city" option */}
-                    {[{ id: "", name: "Select city" }, ...city].map(
+                    {[{ id: "", name: "Chọn tỉnh" }, ...city].map(
                       (item, index) => (
                         <option key={index} value={item.id}>
                           {item.name}
@@ -363,7 +365,7 @@ function MaincheckOut() {
                     required
                     onChange={(e) => ChangesDistrict(e.target.value)}
                   >
-                    {[{ id: "", name: "Select city" }, ...districts].map(
+                    {[{ id: "", name: "Chọn quận/huyện" }, ...districts].map(
                       (item, index) => (
                         <option key={index} value={item.id}>
                           {item.name}
@@ -380,7 +382,7 @@ function MaincheckOut() {
                     required
                     onChange={(e) => ChangesCommune(e.target.value)}
                   >
-                    {[{ id: "", name: "Select city" }, ...communes].map(
+                    {[{ id: "", name: "Chọn phường/xã" }, ...communes].map(
                       (item, index) => (
                         <option key={item.id} value={item.id}>
                           {item.name}
@@ -394,7 +396,7 @@ function MaincheckOut() {
                   <Form.Label>Số nhà, tên đường *</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter street address"
+                    placeholder="Số nhà, tên đường"
                     name="address"
                     // value={orderData.full_address || ""}
                     required
@@ -405,18 +407,18 @@ function MaincheckOut() {
                   className="cs_btn cs_style_1 cs_fs_16 cs_medium w-100"
                   type="submit"
                 >
-                  Place Order
+                  Đặt hàng
                 </Button>
               </Form>
               <Modals
                 showModal={showModal}
                 setShowModal={setShowModal}
-                content="Please add item to cart"
+                content="Vui lòng thêm sản phẩm vào giỏ hàng"
               />
               <Modals
                 showModalSuccess={showModalSuccess}
                 setShowModalSuccess={setShowModalSuccess}
-                contentSuccess="Your order is successful, we will contact you to confirm the order. Thank you!"
+                contentSuccess="Đơn hàng thành công và chúng tôi sẽ sớm liên hệ để xác nhận, xin cảm ơn đã chọn chúng tôi!"
               />
             </div>
             <div className="cs_height_45 cs_height_lg_45" />
@@ -434,12 +436,12 @@ function MaincheckOut() {
           <div className="col-xl-5">
             <div className="cs_shop-side-spacing">
               <div className="cs_shop-card">
-                <h2 className="cs_fs_21">Your order</h2>
+                <h2 className="cs_fs_21">Chi tiết</h2>
                 <table>
                   <tbody>
                     <tr className="cs_semi_bold">
-                      <td>Products</td>
-                      <td className="text-end">Amount</td>
+                      <td>Sản phẩm</td>
+                      <td className="text-end">Số lượng</td>
                     </tr>
 
                     {cartItems.map((item, index) => (
@@ -454,7 +456,7 @@ function MaincheckOut() {
                       </tr>
                     ))}
                     <tr className="cs_semi_bold">
-                      <td>Total</td>
+                      <td>Tổng tiền</td>
                       <td className="text-end">
                         {totalPrice.toLocaleString()}
                       </td>
@@ -478,7 +480,7 @@ function MaincheckOut() {
               </div>
               <div className="cs_height_50 cs_height_lg_30" />
               <div className="cs_shop-card">
-                <h2 className="cs_fs_21">Payment</h2>
+                <h2 className="cs_fs_21">Thanh toán</h2>
                 <table>
                   <tbody>
                     <tr>

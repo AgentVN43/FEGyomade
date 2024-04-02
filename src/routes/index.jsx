@@ -8,7 +8,6 @@ import Order from "../pages/Checkout";
 import DetailProduct from "../pages/DetailProduct";
 import Home from "../pages/Home";
 import Product from "../pages/Product";
-import Checkout from "../components/mainCheckout/test";
 
 const Router = () => (
   <>

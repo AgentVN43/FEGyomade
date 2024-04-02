@@ -45,7 +45,7 @@ export default function MainCart() {
     localStorage.removeItem("cartData")
   };
   
-
+console.log(cartItems)
   return (
     <div className="container">
       <div className="row">
@@ -54,10 +54,10 @@ export default function MainCart() {
             <table className="cs_cart_table">
               <thead>
                 <tr>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Subtotal</th>
+                  <th>Sản phẩm</th>
+                  <th>Giá</th>
+                  <th>Số lượng</th>
+                  <th>Giá</th>
                   <th />
                 </tr>
               </thead>
@@ -121,7 +121,7 @@ export default function MainCart() {
                     <td>
                       <div className="cs_cart_table_media">
                         <img src={item.images} alt="Thumb" />
-                        <h3>{item.name}</h3>
+                        <h3>{item.name} - Size:{" "}{item.size}</h3>
                       </div>
                     </td>
                     <td>{item.price.toLocaleString()}</td>
@@ -172,7 +172,7 @@ export default function MainCart() {
                                 </button>
                             </form> */}
               <div className="cs_height_30 cs_height_lg_30" />
-              <h2 className="cs_fs_21 cs_medium">Cart Totals</h2>
+              <h2 className="cs_fs_21 cs_medium">Thông tin đơn hàng</h2>
               <table className="cs_medium">
                 <tbody>
                   {cartItems.map((item, index) => (
@@ -186,7 +186,7 @@ export default function MainCart() {
                     </tr>
                   ))}
                   <tr>
-                    <td>Total</td>
+                    <td>Tổng</td>
                     <td className="text-end">{totalPrice.toLocaleString()}</td>
                   </tr>
                 </tbody>
@@ -196,7 +196,7 @@ export default function MainCart() {
                 className="cs_btn cs_style_1 cs_fs_16 cs_medium w-100"
                 onClick={() => generateOrder(cartItems)}
               >
-                Procced To Checkout
+                Thanh toán
               </Link>
             </div>
             <div className="cs_height_30 cs_height_lg_30" />

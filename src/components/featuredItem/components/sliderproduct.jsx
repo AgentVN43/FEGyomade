@@ -42,6 +42,10 @@ export default function SlideProduct({ categoryId }) {
     ],
   };
 
+  const handleImageClick = (event) => {
+    event.stopPropagation();
+  };
+
   return (
     <>
       <div className="container-fluid">
@@ -53,19 +57,21 @@ export default function SlideProduct({ categoryId }) {
                   <div className="slick_slide_in">
                     <Slider {...settings}>
                       {productCategory.map((product, index) => (
-                        <Product
-                          key={index}
-                          id={product.id}
-                          imageUrl={product.image}
-                          price={product.price}
-                          name={product.name}
-                          slug={product.slug}
-                          inventory={product.inventory}
-                          display_id={product.display_id}
-                          product_id={product.id}
-                          color={product.color}
-                          size={product.size}
-                        />
+                        <div key={index} onClick={handleImageClick}>
+                          <Product
+                            key={index}
+                            id={product.id}
+                            imageUrl={product.image}
+                            price={product.price}
+                            name={product.name}
+                            slug={product.slug}
+                            inventory={product.inventory}
+                            display_id={product.display_id}
+                            product_id={product.id}
+                            color={product.color}
+                            size={product.size}
+                          />
+                        </div>
                       ))}
                     </Slider>
                   </div>
