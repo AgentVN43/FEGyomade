@@ -5,6 +5,7 @@ import FeaturedItem from "../../components/featuredItem";
 import IconBox from "../../components/iconbox";
 import MovingSlider from "../../components/movingSlider";
 import SimpleSlider from "../../components/slider";
+import Contact from "../../components/contact";
 
 export default function Home() {
   return (
@@ -15,6 +16,7 @@ export default function Home() {
       <FeaturedItem />
       <MovingSlider />
       <Collection />
+      <Contact/>
     </>
   );
 }

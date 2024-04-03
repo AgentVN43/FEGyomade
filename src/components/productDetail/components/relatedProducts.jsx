@@ -26,14 +26,6 @@ export default function RelatedProducts() {
                 Có thể bạn sẽ thích!
               </h2>
             </div>
-            {/* <div className="cs_slider_arrows cs_style_2">
-              <div className="cs_left_arrow cs_slider_arrow cs_accent_color">
-                <i className="fa-solid fa-chevron-left" />
-              </div>
-              <div className="cs_right_arrow cs_slider_arrow cs_accent_color">
-                <i className="fa-solid fa-chevron-right" />
-              </div>
-            </div> */}
           </div>
           <div className="cs_height_63 cs_height_lg_35" />
         </div>

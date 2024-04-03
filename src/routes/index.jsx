@@ -8,6 +8,7 @@ import Order from "../pages/Checkout";
 import DetailProduct from "../pages/DetailProduct";
 import Home from "../pages/Home";
 import Product from "../pages/Product";
+import SlideProduct from "../components/featuredItem/components/sliderproduct";
 
 const Router = () => (
   <>
@@ -20,6 +21,7 @@ const Router = () => (
         <Route path="/san-pham/:slug" element={<DetailProduct />} />
         <Route path="/gio-hang" element={<Cart />} />
          <Route path="/don-hang" element={<Order />} />
+         {/* <Route path="/slide" element={<SlideProduct />} /> */}
         {/*<Route path="/xac-nhan" element={<MainCheckout />} />
         <Route path="/thanh-toan-thanh-cong" element={<OrderSuccess />} /> */}
       </Routes>
