@@ -25,6 +25,13 @@ export default function SlideImageProduct() {
 
   const images = productVariants.map((item) => item.images);
   const countImg = images.length
+
+  /*gen keyword*/
+
+  const name = [...new Set(productVariants.map((item) => item.images))];
+
+  console.log(name)
+
   useEffect(() => {
     setNav1(sliderRef1);
     setNav2(sliderRef2);

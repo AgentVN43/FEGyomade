@@ -8,6 +8,7 @@ import "./assets/css/style.css";
 import "./assets/sass/style.scss";
 import "./index.css";
 import { CartProvider } from "./context/CartContext";
+import { HelmetProvider } from "react-helmet-async";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,6 +16,8 @@ root.render(
   //   <App />
   // </React.StrictMode>
   <CartProvider>
-    <App />
+    <HelmetProvider>
+      <App />
+    </HelmetProvider>
   </CartProvider>
 );

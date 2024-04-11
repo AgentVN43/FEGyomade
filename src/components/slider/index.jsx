@@ -9,7 +9,7 @@ export default function SimpleSlider() {
     centerMode: false,
     slidesToShow: 1,
     fade: false,
-    dots: true,
+    dots: false,
   };
 
   return (

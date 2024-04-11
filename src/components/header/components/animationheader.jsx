@@ -3,19 +3,19 @@ import React, { useState, useEffect } from "react";
 const AnimatedContent = () => {
   const contentList = [
     {
-      text: "100% Happy return policy",
-      link: "about.html",
+      text: "Chính sách đổi trả",
+      link: "chinh-sach.html",
       buttonText: "Learn More"
     },
     {
-      text: "Big sale offer with 50%",
-      link: "shop.html",
-      buttonText: "Learn More"
+      text: "Ưu đãi khi mua hàng trên website",
+      link: "uu-dai-website.html",
+      buttonText: "Shopping"
     },
     {
-      text: "New arrival item for you",
-      link: "shop.html",
-      buttonText: "Learn More"
+      text: "Mua hàng trên shopee",
+      link: "https://shopee.vn/gyomade",
+      buttonText: "Shopping"
     }
   ];
 

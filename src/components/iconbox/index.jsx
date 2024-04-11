@@ -35,10 +35,10 @@ export default function IconBox() {
               </div>
               <div className="cs_iconbox_text">
                 <h4 className="cs_iconbox_title cs_fs_21 cs_semibold">
-                  Free Shipping
+                  GIAO HÀNG
                 </h4>
                 <p className="cs_iconbox_subtitle mb-0">
-                  No need to worry about cost
+                  Giao hàng toàn quốc, thoải mái kiểm tra
                 </p>
               </div>
             </div>
@@ -76,10 +76,10 @@ export default function IconBox() {
               </div>
               <div className="cs_iconbox_text">
                 <h4 className="cs_iconbox_title cs_fs_21 cs_semibold">
-                  Payment Method
+                  THANH TOÁN
                 </h4>
                 <p className="cs_iconbox_subtitle mb-0">
-                  Easy and hassle free online transaction
+                  Thanh toán khi nhận hàng an toàn, uy tín
                 </p>
               </div>
             </div>
@@ -117,10 +117,10 @@ export default function IconBox() {
               </div>
               <div className="cs_iconbox_text">
                 <h4 className="cs_iconbox_title cs_fs_21 cs_semibold">
-                  Online Support
+                  HỖ TRỢ ĐỔI TRẢ
                 </h4>
                 <p className="cs_iconbox_subtitle mb-0">
-                  N24 hours a day, 7 days a week
+                  Đổi trả sản phẩm trong 2 ngày
                 </p>
               </div>
             </div>
@@ -150,10 +150,10 @@ export default function IconBox() {
               </div>
               <div className="cs_iconbox_text">
                 <h4 className="cs_iconbox_title cs_fs_21 cs_semibold">
-                  Secure Packaging
+                  ĐÓNG GÓI KỸ CÀNG
                 </h4>
                 <p className="cs_iconbox_subtitle mb-0">
-                  Every order packaging securely place
+                  Sản phẩm được kiểm tra cẩn thận trước khi đóng gói
                 </p>
               </div>
             </div>

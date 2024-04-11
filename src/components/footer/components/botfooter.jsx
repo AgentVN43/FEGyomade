@@ -7,10 +7,10 @@ export default function BotFooter() {
       <div className="cs_footer_bottom">
         <div>
           <p className="cs_copywrite_text mb-0">
-            Copyright &amp; 2023, All rights reserved.
+            Copyright &amp; 2024, All rights reserved.
           </p>
         </div>
-        <div>
+        {/* <div>
           <ul className="cs_footer_menu_widget_2">
             <li>
               <Link to="#">Privacy Policy</Link>
@@ -22,20 +22,17 @@ export default function BotFooter() {
             <Link to="#">Legal</Link>
             </li>
           </ul>
-        </div>
+        </div> */}
         <div>
           <div className="cs_social_links">
-            <Link to="https://www.instagram.com/" target="_blank">
+            <Link to="https://www.instagram.com/gyomade.vn" target="_blank">
               <i className="fa-brands fa-instagram" />
             </Link>
-            <Link to="https://www.facebook.com/" target="_blank">
+            <Link to="https://www.facebook.com/GyoMade.vn" target="_blank">
               <i className="fa-brands fa-facebook" />
             </Link>
-            <Link to="https://twitter.com/" target="_blank">
-              <i className="fa-brands fa-x-twitter" />
-            </Link>
-            <Link to="https://www.youtube.com/" target="_blank">
-              <i className="fa-brands fa-youtube" />
+            <Link to="https://www.tiktok.com/@gyomade" target="_blank">
+              <i class="fa-brands fa-tiktok"></i>
             </Link>
           </div>
         </div>

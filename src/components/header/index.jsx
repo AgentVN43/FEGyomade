@@ -46,7 +46,7 @@ export default function Header() {
           <div className="container-fluid">
             <div className="cs_top_header_in">
               <div className="cs_top_header_left">
-                <p className="cs_medium mb-0">Support : gyomade@gmail.com</p>
+                <p className="cs_medium mb-0">Hotline : 035 9088 664</p>
               </div>
               <div className="cs_top_header_center">
                 <div className="cd-headline slide">
@@ -56,7 +56,7 @@ export default function Header() {
                 </div>
               </div>
               <div className="cs_top_header_right">
-                <p className="cs_medium mb-0">Mon-Fri Open : 11:00 - 19:00</p>
+                <p className="cs_medium mb-0">Hoạt động cả tuần: 8:00 - 22:00</p>
               </div>
             </div>
           </div>

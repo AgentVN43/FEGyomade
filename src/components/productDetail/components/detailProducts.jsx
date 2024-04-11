@@ -4,6 +4,7 @@ import CartContext, { useCart } from "../../../context/CartContext";
 import SizeTutor from "../../sizetutor";
 import { render } from "@testing-library/react";
 import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
+import SEO from "../../seo";
 
 export default function DetailProduct({ onAddToCart }) {
   const { slug } = useParams();
@@ -43,11 +44,15 @@ export default function DetailProduct({ onAddToCart }) {
       });
   }, [slug]);
 
+
   const name = productDetail.name;
   const inventory = productDetail.inventory;
   const price = [...new Set(filteredData.flat().map((item) => item.price))];
   // const color = [...new Set(productVariants.map((item) => item.color))];
   // const hex_code = [...new Set(productVariants.map((item) => item.hex_code))];
+  const img = [...new Set(productVariants.map((item) => item[0].images))];
+  
+  console.log(img)
 
   // const isSizeDisabled = (selectedColor) => {
   //   return productVariants.some(
@@ -152,6 +157,15 @@ export default function DetailProduct({ onAddToCart }) {
   // {price.toLocaleString()}
   return (
     <>
+      <SEO
+        title={name + " " + "- GYO MADE"}
+        description="Phụ kiện trong thời trang chính là món đồ hoàn thiện bản phối, thể hiện cá tính cũng như gu thẩm mỹ tinh tế của người mặc."
+        keyword={name}
+        name="GYOMADE"
+        type="article"
+        ogimage={img}
+        ogurl={"/san-pham/" + slug}
+      />
       <div className="cs_single_product_details">
         <h2 className="cs_fs_37 cs_semibold">{name}</h2>
         <div className="cs_single_product_review">
@@ -181,11 +195,12 @@ export default function DetailProduct({ onAddToCart }) {
               trước khi gói hàng giao cho Quý Khách
             </li>
             <li>
-              Hàng có sẵn, giao hàng ngay khi nhận được đơn Giao hàng
-              trên toàn quốc, nhận hàng, đồng kiểm và thanh toán.
+              Hàng có sẵn, giao hàng ngay khi nhận được đơn Giao hàng trên toàn
+              quốc, nhận hàng, đồng kiểm và thanh toán.
             </li>
             <li>
-              Những sản phẩm có nhiều hơn 1 màu, vui lòng chọn màu trước để hiển thị giá
+              Những sản phẩm có nhiều hơn 1 màu, vui lòng chọn màu trước để hiển
+              thị giá
             </li>
           </ul>
         </div>

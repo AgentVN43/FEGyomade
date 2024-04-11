@@ -1,13 +1,14 @@
 import React from "react";
-import './index.scss'
+import "./index.scss";
 export default function Contact() {
   return (
     <div class="echbay-sms-messenger style-for-position-br">
       <div class="phonering-alo-alo">
         <a
-          href="tel:0918869237"
-          rel="nofollow"
+          href="https://m.me/gyomade.vn"
+          rel="nofollow noreferrer"
           class="echbay-phonering-alo-event"
+          target="_blank"
         >
           .
         </a>
@@ -15,7 +16,7 @@ export default function Contact() {
 
       <div class="phonering-alo-messenger">
         <a
-          href="https://www.messenger.com/t/webantam43"
+          href="tel:0359088664"
           target="_blank"
           rel="nofollow noreferrer"
           class="echbay-phonering-messenger-event"
@@ -25,7 +26,7 @@ export default function Contact() {
       </div>
       <div class="phonering-alo-zalo">
         <a
-          href="https://zalo.me/0918869237"
+          href="https://zalo.me/0359088664"
           target="_blank"
           rel="nofollow noreferrer"
           class="echbay-phonering-zalo-event"

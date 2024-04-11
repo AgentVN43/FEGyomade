@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
+import CardPost from "./components/CardPost";
 
 export default function Blogcategory() {
-    const [listArticle, setlistArticle] = useState([])
+  const [listArticle, setlistArticle] = useState([]);
 
-    useEffect(() => {
-        fetch(`https://gyomade.vn/mvc/products/slug/${slug}`)
-          .then((response) => response.json())
-          .then((data) => {
-            setlistArticle(data);
-          });
-    
-      }, []);
+  useEffect(() => {
+    fetch(`https://gyomade.vn/mvc/blog/`)
+      .then((response) => response.json())
+      .then((data) => {
+        setlistArticle(data.contents);
+      });
+  }, []);
+
   return (
     <section>
       <div className="cs_height_140 cs_height_lg_80" />
@@ -55,192 +56,9 @@ export default function Blogcategory() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="cs_post cs_style_1">
-                  <a href="blog_details.html" className="cs_post_thumb cs_zoom">
-                    <img
-                      src="assets/img/post2.jpg"
-                      alt="Post Image"
-                      className="cs_zoom_in w-100"
-                    />
-                  </a>
-                  <div className="cs_post_meta">
-                    <p className="cs_post_meta_info mb-0 cs_fs_14">
-                      MARCH 18, 2023
-                    </p>
-                  </div>
-                  <div className="cs_post_info">
-                    <h3 className="cs_post_title cs_fs_28 cs_semibold">
-                      <a href="blog_details.html">
-                        Redefining style with eco-friendly choices
-                      </a>
-                    </h3>
-                    <p className="cs_post_subtitle">
-                      Dive into the world of sustainable fashion and explore how
-                      your choices can have a positive impact on the planet.
-                      From eco-friendly fabrics to ethical brands...
-                    </p>
-                    <a
-                      href="blog_details.html"
-                      className="cs_post_btn cs_fs_16 cs_medium cs_primary_color"
-                    >
-                      <span>Read More</span>
-                      <span className="cs_btn_arrow cs_accent_color">
-                        <i className="fa-solid fa-arrow-right" />
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="cs_post cs_style_1">
-                  <a href="blog_details.html" className="cs_post_thumb cs_zoom">
-                    <img
-                      src="assets/img/post3.jpg"
-                      alt="Post Image"
-                      className="cs_zoom_in w-100"
-                    />
-                  </a>
-                  <div className="cs_post_meta">
-                    <p className="cs_post_meta_info mb-0 cs_fs_14">
-                      JANUARY 13, 2023
-                    </p>
-                  </div>
-                  <div className="cs_post_info">
-                    <h3 className="cs_post_title cs_fs_28 cs_semibold">
-                      <a href="blog_details.html">
-                        Tips for mixing and matching patterns
-                      </a>
-                    </h3>
-                    <p className="cs_post_subtitle">
-                      Pattern mixing can be a style statement, but it can also
-                      be intimidating. Learn the art of combining different
-                      patterns and prints to create unique and eye-catching
-                      outfits....
-                    </p>
-                    <a
-                      href="blog_details.html"
-                      className="cs_post_btn cs_fs_16 cs_medium cs_primary_color"
-                    >
-                      <span>Read More</span>
-                      <span className="cs_btn_arrow cs_accent_color">
-                        <i className="fa-solid fa-arrow-right" />
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="cs_post cs_style_1">
-                  <a href="blog_details.html" className="cs_post_thumb cs_zoom">
-                    <img
-                      src="assets/img/post5.jpg"
-                      alt="Post Image"
-                      className="cs_zoom_in w-100"
-                    />
-                  </a>
-                  <div className="cs_post_meta">
-                    <p className="cs_post_meta_info mb-0 cs_fs_14">
-                      MARCH 18, 2023
-                    </p>
-                  </div>
-                  <div className="cs_post_info">
-                    <h3 className="cs_post_title cs_fs_28 cs_semibold">
-                      <a href="blog_details.html">
-                        From workwear to wardrobe staple
-                      </a>
-                    </h3>
-                    <p className="cs_post_subtitle">
-                      Take a journey through the history of denim and discover
-                      how it transformed from workwear into a fashion icon.
-                      Explore the latest denim trends...
-                    </p>
-                    <a
-                      href="blog_details.html"
-                      className="cs_post_btn cs_fs_16 cs_medium cs_primary_color"
-                    >
-                      <span>Read More</span>
-                      <span className="cs_btn_arrow cs_accent_color">
-                        <i className="fa-solid fa-arrow-right" />
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="cs_post cs_style_1">
-                  <a href="blog_details.html" className="cs_post_thumb cs_zoom">
-                    <img
-                      src="assets/img/post6.jpg"
-                      alt="Post Image"
-                      className="cs_zoom_in w-100"
-                    />
-                  </a>
-                  <div className="cs_post_meta">
-                    <p className="cs_post_meta_info mb-0 cs_fs_14">
-                      JANUARY 13, 2023
-                    </p>
-                  </div>
-                  <div className="cs_post_info">
-                    <h3 className="cs_post_title cs_fs_28 cs_semibold">
-                      <a href="blog_details.html">
-                        Exploring the World of Little Black Dresses
-                      </a>
-                    </h3>
-                    <p className="cs_post_subtitle">
-                      The Little Black Dress (LBD) has been a fashion staple for
-                      decades. Discover the history, versatility, and the magic
-                      of the LBD in this timeless fashion piece...
-                    </p>
-                    <a
-                      href="blog_details.html"
-                      className="cs_post_btn cs_fs_16 cs_medium cs_primary_color"
-                    >
-                      <span>Read More</span>
-                      <span className="cs_btn_arrow cs_accent_color">
-                        <i className="fa-solid fa-arrow-right" />
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="cs_post cs_style_1">
-                  <a href="blog_details.html" className="cs_post_thumb cs_zoom">
-                    <img
-                      src="assets/img/post7.jpg"
-                      alt="Post Image"
-                      className="cs_zoom_in w-100"
-                    />
-                  </a>
-                  <div className="cs_post_meta">
-                    <p className="cs_post_meta_info mb-0 cs_fs_14">
-                      MARCH 18, 2023
-                    </p>
-                  </div>
-                  <div className="cs_post_info">
-                    <h3 className="cs_post_title cs_fs_28 cs_semibold">
-                      <a href="blog_details.html">
-                        Elevate your fashion game with statement jewelry
-                      </a>
-                    </h3>
-                    <p className="cs_post_subtitle">
-                      Learn how to choose, style, and wear bold accessories that
-                      express your unique personality and complete your
-                      look.accessorize Your Way to...
-                    </p>
-                    <a
-                      href="blog_details.html"
-                      className="cs_post_btn cs_fs_16 cs_medium cs_primary_color"
-                    >
-                      <span>Read More</span>
-                      <span className="cs_btn_arrow cs_accent_color">
-                        <i className="fa-solid fa-arrow-right" />
-                      </span>
-                    </a>
-                  </div>
-                </div>
-              </div>
+              {listArticle.map((item, index) => (
+                <CardPost title={item.title}/>
+              ))}
             </div>
           </div>
           <div className="col-lg-4">
