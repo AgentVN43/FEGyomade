@@ -1,0 +1,40 @@
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Gyo Made",
+  "image": "https://lh3.googleusercontent.com/p/AF1QipNtxHwMp-CzqrYycD5Kl8kY2gGoytJCfVz6PdiC=s1360-w1360-h1020",
+  "@id": "https://gyomade.vn",
+  "url": "https://gyomade.vn",
+  "telephone": "0359088664",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "93/12 Trần Khắc Chân, Tân Định, Quận 1",
+    "addressLocality": "Hồ Chí Minh",
+    "postalCode": "70000",
+    "addressCountry": "Việt Nam",
+    "addressRegion": "Hồ Chi Minh"
+  },
+  "priceRange": "300000-500000",
+  "sameAs": [
+    "https://www.facebook.com/GyoMade.vn",
+    "https://www.tiktok.com/@gyomade",
+    "https://www.instagram.com/gyomade.vn/",
+    "https://shopee.vn/gyomade"
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+        "Sunday"
+      ],
+      "opens": "08:00",
+      "closes": "22:00"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "HỘ KINH DOANH GYO MADE",
+  "url": "https://gyomade.vn",
+  "logo": "https://gyomade.vn/assets/img/logogyomade.png",
+  "alternateName": "HỘ KINH DOANH GYO MADE",
+  "sameAs": [
+    "https://www.facebook.com/GyoMade.vn",
+    "https://www.tiktok.com/@gyomade",
+    "https://www.instagram.com/gyomade.vn/",
+    "https://shopee.vn/gyomade"
+  ],
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "0359088664",
+      "contactType": "sales",
+      "email": "gyomade.vn@gmail.com",
+      "areaServed": "VN",
+      "availableLanguage": "vi"
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "0359088664",
+      "contactType": "customer service",
+      "email": "gyomade.vn@gmail.com",
+      "areaServed": "VN",
+      "availableLanguage": "vi"
+    },
+    {
+      "@type": "ContactPoint",
+      "telephone": "0767531990",
+      "contactType": "technical support",
+      "email": "annk.sale@gmail.com",
+      "areaServed": "VN",
+      "availableLanguage": "vi"
+    }
+  ]
+}

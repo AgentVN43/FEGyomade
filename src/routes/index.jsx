@@ -9,7 +9,7 @@ import Order from "../pages/Checkout";
 import DetailProduct from "../pages/DetailProduct";
 import Home from "../pages/Home";
 import Product from "../pages/Product";
-import Translate from "../components/translate";
+import SchemaOrg from "../assets/schema";
 
 const Router = () => (
   <>
@@ -21,12 +21,14 @@ const Router = () => (
         <Route path="/danh-muc/:slug" element={<Product />} />
         <Route path="/san-pham/:slug" element={<DetailProduct />} />
         <Route path="/gio-hang" element={<Cart />} />
-         <Route path="/don-hang" element={<Order />} />
-         <Route path="/blog" element={<Blogcategory />} />
-        {/*<Route path="/thanh-toan-thanh-cong" element={<OrderSuccess />} /> */}
+        <Route path="/don-hang" element={<Order />} />
+        <Route path="/blog" element={<Blogcategory />} />
+        {/* <Route path="/schema" element={<SchemaOrg />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>
+
+    
   </>
 );
 

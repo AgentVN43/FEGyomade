@@ -1,10 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import CartContext, { useCart } from "../../../context/CartContext";
-import SizeTutor from "../../sizetutor";
-import { render } from "@testing-library/react";
-import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import SEO from "../../seo";
+import SizeTutor from "../../sizetutor";
 
 export default function DetailProduct({ onAddToCart }) {
   const { slug } = useParams();
@@ -44,21 +43,18 @@ export default function DetailProduct({ onAddToCart }) {
       });
   }, [slug]);
 
-
   const name = productDetail.name;
   const inventory = productDetail.inventory;
   const price = [...new Set(filteredData.flat().map((item) => item.price))];
-  // const color = [...new Set(productVariants.map((item) => item.color))];
-  // const hex_code = [...new Set(productVariants.map((item) => item.hex_code))];
   const img = [...new Set(productVariants.map((item) => item[0].images))];
-  
-  console.log(img)
 
-  // const isSizeDisabled = (selectedColor) => {
-  //   return productVariants.some(
-  //     (item) => item[0].color === selectedColor && item.remain_quantity <= 0
-  //   );
-  // };
+  const description = (productDetail.content || "").substring(0, 100);
+  const description2 =
+    `Hãy đến với Gyo Made khám phá mẫu mới: ${name} của chúng tôi.
+     Thời trang nữ GYO MADE chuyên về đầm váy, áo nữ, thời trang công sở. 
+     `
+
+  console.log(description);
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
@@ -70,14 +66,6 @@ export default function DetailProduct({ onAddToCart }) {
     setFilteredData(filtered);
     setSelectedSize("");
   };
-
-  console.log(filteredData);
-  console.log(price);
-  // const handleSizeSelect = (size) => {
-  //   setSelectedSize(size);
-  // };
-
-  // const stringColor = color[0];
 
   const clickSize = (size) => {
     setSelectedSize((prevSize) => (prevSize === size ? null : size));
@@ -158,8 +146,8 @@ export default function DetailProduct({ onAddToCart }) {
   return (
     <>
       <SEO
-        title={name + " " + "- GYO MADE"}
-        description="Phụ kiện trong thời trang chính là món đồ hoàn thiện bản phối, thể hiện cá tính cũng như gu thẩm mỹ tinh tế của người mặc."
+        title={name + " " + "- Thời trang công sở Gyo Made"}
+        description={description2}
         keyword={name}
         name="GYOMADE"
         type="article"
@@ -167,7 +155,7 @@ export default function DetailProduct({ onAddToCart }) {
         ogurl={"/san-pham/" + slug}
       />
       <div className="cs_single_product_details">
-        <h2 className="cs_fs_37 cs_semibold">{name}</h2>
+        <h1 className="cs_fs_37 cs_semibold">{name}</h1>
         <div className="cs_single_product_review">
           <div className="cs_rating_container">
             <div className="cs_rating cs_size_sm" data-rating={5}>
@@ -243,7 +231,7 @@ export default function DetailProduct({ onAddToCart }) {
           <h4 className="cs_fs_16 cs_medium">Size:</h4>
           <ul
             className="cs_size_filter_list cs_mp0"
-            onMouseLeave={handleMouseLeave}
+            onChange={handleMouseLeave}
           >
             {selectedColor && (
               <>
@@ -278,20 +266,29 @@ export default function DetailProduct({ onAddToCart }) {
               </>
             )}
             {hoveredSize && (
-              <OverlayTrigger placement="top" overlay={tooltip}>
-                <p>
-                  Size {hoveredSize} còn:{" "}
-                  {
-                    filteredData
-                      .flat()
-                      .find((item) => item.size === hoveredSize)
-                      ?.remain_quantity
-                  }{" "}
-                  cái
-                </p>
-              </OverlayTrigger>
+              // <OverlayTrigger placement="top" overlay={tooltip}>
+              //   <p>
+              //     Size {hoveredSize} còn:{" "}
+              //     {
+              //       filteredData
+              //         .flat()
+              //         .find((item) => item.size === hoveredSize)
+              //         ?.remain_quantity
+              //     }{" "}
+              //     cái
+              //   </p>
+              // </OverlayTrigger>
+              <p>
+                Size {hoveredSize} còn:{" "}
+                {
+                  filteredData.flat().find((item) => item.size === hoveredSize)
+                    ?.remain_quantity
+                }{" "}
+                cái
+              </p>
             )}
           </ul>
+
           {errorMessage && <span>{errorMessage}</span>}
           <SizeTutor />
         </div>

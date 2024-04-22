@@ -14,14 +14,12 @@ export default function TopFooter() {
                   src="../../../../assets/img/logogyomade_dark.png"
                   alt="Logo"
                 />
-                <p>BE YOURSELF & BE HAPPY</p>
-                {/* <img src="../../../../assets/img/payment_method.svg" alt="Payment" /> */}
                 <p>
                   Được thành lập từ năm 2010, kể từ ngày xuất hiện trên thị
-                  trường, GYOMADE đã trở thành một thương hiệu thời trang
-                  công sở được các quý cô văn phòng trên toàn quốc ưa chuộng,
-                  bởi những thiết kế mang tính ứng dụng cao, vừa lịch sự nơi
-                  công sở vừa đáng yêu để dạo phố.
+                  trường, GYOMADE đã trở thành một thương hiệu thời trang công
+                  sở được các quý cô văn phòng trên toàn quốc ưa chuộng, bởi
+                  những thiết kế mang tính ứng dụng cao, vừa lịch sự nơi công sở
+                  vừa đáng yêu để dạo phố.
                 </p>
               </div>
             </div>

@@ -17,17 +17,26 @@ export default function ContentProducts() {
       });
   }, [slug]);
 
+  const convertUnicodeToEmoji = (input) => {
+    const unicodeRegex = /\\u([a-fA-F0-9]{4})\\u([a-fA-F0-9]{4})/g;
+    const processedHtml = input.replace(unicodeRegex, (match, p1, p2) => {
+      const codePoint = parseInt(p1, 16) * 0x400 + parseInt(p2, 16) - 0x35fdc00;
+      return String.fromCodePoint(codePoint);
+    });
+
+    return processedHtml;
+  };
+
   const checkContent = () => {
     if (productDetail.content === null || productDetail.content === undefined) {
       return "Content updating";
     }
-  
+
     const contentString = productDetail.content.toString();
-  
-    return contentString;
+    const processedContent = convertUnicodeToEmoji(contentString);
+
+    return processedContent;
   };
-  
-  console.log(checkContent());
 
   const handleTabClick = (index) => {
     setActiveTab(index);

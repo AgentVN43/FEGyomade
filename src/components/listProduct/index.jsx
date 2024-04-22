@@ -17,6 +17,7 @@ export default function ListProduct() {
   const [totalItems, setTotalItems] = useState(0); // Total number of items
   const [totalPages, setTotalPages] = useState(0); // Total number of pages
   const [listOrderProduct, setlistOrderProduct] = useState([]);
+ 
   useEffect(() => {
     if (!slug) return; // Prevent fetching if slug is undefined
 
