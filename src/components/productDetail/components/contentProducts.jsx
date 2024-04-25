@@ -49,7 +49,7 @@ export default function ContentProducts() {
     "Review",
   ];
 
-  console.log(slug);
+  //console.log(slug);
   return (
     <>
       {/* <ul className="cs_tab_links cs_style_2 cs_product_tab cs_fs_21 cs_primary_color cs_semibold cs_mp0">

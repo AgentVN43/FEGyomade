@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import CartContext, { useCart } from "../../../context/CartContext";
 import SEO from "../../seo";
 import SizeTutor from "../../sizetutor";
+import { Helmet } from "react-helmet-async";
 
 export default function DetailProduct({ onAddToCart }) {
   const { slug } = useParams();
@@ -47,14 +48,14 @@ export default function DetailProduct({ onAddToCart }) {
   const inventory = productDetail.inventory;
   const price = [...new Set(filteredData.flat().map((item) => item.price))];
   const img = [...new Set(productVariants.map((item) => item[0].images))];
+  const display_id = productDetail.display_id;
 
   const description = (productDetail.content || "").substring(0, 100);
-  const description2 =
-    `Hãy đến với Gyo Made khám phá mẫu mới: ${name} của chúng tôi.
-     Thời trang nữ GYO MADE chuyên về đầm váy, áo nữ, thời trang công sở. 
-     `
+  const description2 = `Hãy đến với Gyo Made khám phá mẫu: ${name} sản phẩm mới nhất của chúng tôi.
+     Thời trang nữ GYO MADE chuyên về váy công sở, áo thun nữ, áo sơ mi nữ,....thời trang công sở. 
+     `;
 
-  console.log(description);
+  //console.log(description);
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
@@ -143,6 +144,25 @@ export default function DetailProduct({ onAddToCart }) {
     </Tooltip>
   );
   // {price.toLocaleString()}
+
+  const jsonLD = {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": name ,
+    "image": img,
+    description:
+    "Thời trang nữ GYO MADE chuyên về váy công sở, áo thun nữ công sở. Liên tục cập nhật mẫu mới, thiết kế độc quyền. Quần tây, váy nữ đẹp kiểu Hàn Quốc với giá cả thích hợp với mọi đối tượng, giao hàng toàn quốc.",
+    "brand": "GYO MADE",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "bestRating": "5",
+      "worstRating": "4",
+      "ratingCount": "515",
+    },
+    "sku":  display_id ,
+  };
+
   return (
     <>
       <SEO
@@ -154,6 +174,9 @@ export default function DetailProduct({ onAddToCart }) {
         ogimage={img}
         ogurl={"/san-pham/" + slug}
       />
+      <Helmet>
+        <script type="application/ld+json">{JSON.stringify(jsonLD)}</script>
+      </Helmet>
       <div className="cs_single_product_details">
         <h1 className="cs_fs_37 cs_semibold">{name}</h1>
         <div className="cs_single_product_review">

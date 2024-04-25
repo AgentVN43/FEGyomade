@@ -13,9 +13,8 @@ export default function Home() {
     <>
       <SEO
         title="Thời Trang Công Sở Nữ Đẹp - Thương Hiệu  GYOMADE.VN"
-        description="Thời trang nữ GYO MADE chuyên về đầm váy, áo nữ, thời trang công sở. 
-        Liên tục cập nhật mẫu mới, thiết kế trẻ trung, sáng tạo. 
-        Áo sơ mi, áo vest, áo thun, blazer,..quần tay, váy nữ đẹp kiểu Hàn Quốc với giá cả thích hợp với mọi đối tượng, giao hàng toàn quốc."
+        description="Thời trang nữ GYO MADE chuyên về quần tây, áo sơ mi, áo kiểu , váy công cở, thời trang công sở. 
+        Liên tục cập nhật mẫu mới, thiết kế trẻ trung, sáng tạo."
         keyword="thời trang công sở, đồ công sở, áo sơ mi công sở, đồ đi làm, váy công sở, blazer"
         name="GYOMADE"
         type="article"

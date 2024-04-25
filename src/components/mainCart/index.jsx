@@ -45,7 +45,7 @@ export default function MainCart() {
     localStorage.removeItem("cartData")
   };
   
-console.log(cartItems)
+//console.log(cartItems)
   return (
     <div className="container">
       <div className="row">

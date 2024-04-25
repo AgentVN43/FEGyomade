@@ -5,7 +5,7 @@ import { Helmet } from "react-helmet-async";
 
 export default function SchemaOrg() {
   const dataSchema = JSON.stringify(dataOrg);
-  console.log(dataSchema);
+  //console.log(dataSchema);
   return (
     <>
       <Helmet>

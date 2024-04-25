@@ -41,7 +41,7 @@ export default function ListProduct() {
     )
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        //console.log(data);
         setlistProduct(data.products);
         setlistOrderProduct(data.products);
         setPageSize(data.page_size);

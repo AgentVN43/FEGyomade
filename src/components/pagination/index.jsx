@@ -5,8 +5,8 @@ export default function Pagination({ totalPages, currentPage, onPageChange }) {
 
 
     const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-    console.log("total page:",totalPages)
-    console.log("current page:",currentPage)
+   // console.log("total page:",totalPages)
+    //console.log("current page:",currentPage)
     return (
     <ul className="cs_pagination cs_fs_21 cs_semibold cs_mp0">
       {/* Render previous page arrow if currentPage is not the first page */}

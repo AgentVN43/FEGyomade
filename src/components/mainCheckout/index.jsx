@@ -227,12 +227,12 @@ function MaincheckOut() {
       })
       .then((data) => {
         setShowModalSuccess(true);
-        console.log("Posting order data ok");
+        //console.log("Posting order data ok");
       })
       .catch((error) => {
         console.error("Error posting order data:", error);
       });
-    console.log(orderData);
+    //console.log(orderData);
   }, []);
 
   // const updateLocalStorage = (data) => {

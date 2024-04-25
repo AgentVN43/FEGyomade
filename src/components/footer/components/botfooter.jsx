@@ -34,6 +34,15 @@ export default function BotFooter() {
             <Link to="https://www.tiktok.com/@gyomade" target="_blank">
               <i class="fa-brands fa-tiktok"></i>
             </Link>
+            <Link to="https://twitter.com/gyomadeofficial" target="_blank">
+              <i class="fa-brands fa-twitter"></i>
+            </Link>
+            <Link to="https://www.youtube.com/@GyoMade" target="_blank">
+              <i class="fa-brands fa-youtube"></i>
+            </Link>
+            <Link to="https://www.youtube.com/@GyoMade" target="_blank">
+              <i class="fa-brands fa-google"></i>
+            </Link>
           </div>
         </div>
       </div>

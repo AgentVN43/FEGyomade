@@ -28,14 +28,15 @@ export default function SlideImageProduct() {
 
   /*gen keyword*/
 
-  const name = [...new Set(productVariants.map((item) => item.images))];
+  const name = [...new Set(productVariants.map((item) => item.name))];
 
-  console.log(name)
+  //console.log(name)
 
   useEffect(() => {
     setNav1(sliderRef1);
     setNav2(sliderRef2);
   }, []);
+
 
   return (
     <div className="row">
@@ -52,7 +53,7 @@ export default function SlideImageProduct() {
           >
             {images.map((item, index) => (
               <div key={index} className="cs_single_product_thumb_mini product-image-container">
-                <img src={item} alt="fuck" className="product-image" />
+                <img src={item} alt={`${name} Gyo Made`} className="product-image" />
               </div>
             ))}
           </Slider>
@@ -69,7 +70,7 @@ export default function SlideImageProduct() {
               <div key={index} className="cs_single_product_thumb_item">
                 <img
                   src={item}
-                  alt="fuck"
+                  alt={`${name} Gyo Made`}
                 />
               </div>
             ))}
