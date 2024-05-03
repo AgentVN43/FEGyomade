@@ -21,6 +21,12 @@ export default function DetailProduct({ onAddToCart }) {
   const { incrementQuantity, decrementQuantity, quantity } = useCart();
   const groupedData = {};
 
+  let name;
+  let inventory;
+  let price;
+  let img;
+  let display_id;
+
   useEffect(() => {
     fetch(`https://gyomade.vn/mvc/products/slug/${slug}`)
       .then((response) => response.json())
@@ -44,18 +50,15 @@ export default function DetailProduct({ onAddToCart }) {
       });
   }, [slug]);
 
-  const name = productDetail.name;
-  const inventory = productDetail.inventory;
-  const price = [...new Set(filteredData.flat().map((item) => item.price))];
-  const img = [...new Set(productVariants.map((item) => item[0].images))];
-  const display_id = productDetail.display_id;
+  name = productDetail.name;
+  inventory = productDetail.inventory;
+  price = [...new Set(filteredData.flat().map((item) => item.price))];
+  img = [...new Set(productVariants.map((item) => item[0].images))];
+  display_id = productDetail.display_id;
 
-  const description = (productDetail.content || "").substring(0, 100);
-  const description2 = `Hãy đến với Gyo Made khám phá mẫu: ${name} sản phẩm mới nhất của chúng tôi.
-     Thời trang nữ GYO MADE chuyên về váy công sở, áo thun nữ, áo sơ mi nữ,....thời trang công sở. 
-     `;
+  const description2 = `Hãy đến với Gyo Made khám phá mẫu ${name} của chúng tôi. Thời trang công sở Gyo Made chuyên về váy công sở, áo thun, áo kiểu, áo sơ mi nữ, chân váy,....`
 
-  //console.log(description);
+  //console.log(img);
 
   const handleColorSelect = (color) => {
     setSelectedColor(color);
@@ -148,25 +151,27 @@ export default function DetailProduct({ onAddToCart }) {
   const jsonLD = {
     "@context": "https://schema.org/",
     "@type": "Product",
-    "name": name ,
-    "image": img,
+    name: name,
+    image: img,
     description:
-    "Thời trang nữ GYO MADE chuyên về váy công sở, áo thun nữ công sở. Liên tục cập nhật mẫu mới, thiết kế độc quyền. Quần tây, váy nữ đẹp kiểu Hàn Quốc với giá cả thích hợp với mọi đối tượng, giao hàng toàn quốc.",
-    "brand": "GYO MADE",
-    "aggregateRating": {
+      "Thời trang nữ GYO MADE chuyên về váy công sở, áo thun nữ công sở. Liên tục cập nhật mẫu mới, thiết kế độc quyền. Quần tây, váy nữ đẹp kiểu Hàn Quốc với giá cả thích hợp với mọi đối tượng, giao hàng toàn quốc.",
+    brand: "GYO MADE",
+    aggregateRating: {
       "@type": "AggregateRating",
-      "ratingValue": "5",
-      "bestRating": "5",
-      "worstRating": "4",
-      "ratingCount": "515",
+      ratingValue: "5",
+      bestRating: "5",
+      worstRating: "4",
+      ratingCount: "515",
     },
-    "sku":  display_id ,
+    sku: display_id,
   };
+
+  console.log(description2);
 
   return (
     <>
       <SEO
-        title={name + " " + "- Thời trang công sở Gyo Made"}
+        title={name + "- Thời trang công sở Gyo Made"}
         description={description2}
         keyword={name}
         name="GYOMADE"

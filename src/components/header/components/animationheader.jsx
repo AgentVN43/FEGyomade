@@ -4,12 +4,12 @@ const AnimatedContent = () => {
   const contentList = [
     {
       text: "Chính sách đổi trả",
-      link: "chinh-sach.html",
+      link: "#",
       buttonText: "Learn More"
     },
     {
       text: "Ưu đãi khi mua hàng trên website",
-      link: "uu-dai-website.html",
+      link: "#",
       buttonText: "Shopping"
     },
     {
