@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import CartContext from "../../../context/CartContext";
-import { useParams } from "react-router-dom";
 import HTMLReactParser from "html-react-parser";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function ContentProducts() {
   const { slug } = useParams();

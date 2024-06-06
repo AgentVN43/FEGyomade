@@ -15,7 +15,7 @@ export default function TopFooter() {
                   alt="Logo"
                 />
                 <p>
-                  Được thành lập từ năm 2010, kể từ ngày xuất hiện trên thị
+                  Được thành lập từ năm 2022, kể từ ngày xuất hiện trên thị
                   trường, GYOMADE đã trở thành một thương hiệu thời trang công
                   sở được các quý cô văn phòng trên toàn quốc ưa chuộng, bởi
                   những thiết kế mang tính ứng dụng cao, vừa lịch sự nơi công sở
@@ -32,10 +32,10 @@ export default function TopFooter() {
                     </h3>
                     <ul>
                       <li>
-                        <Link to="about.html">Giới thiệu Gyomade</Link>
+                        <Link to="/blog/gioi-thieu">Giới thiệu Gyomade</Link>
                       </li>
                       <li>
-                        <Link to="shop.html">Chính sách bảo mật</Link>
+                        <Link to="/blog/tuyen-dung">Tuyển dụng</Link>
                       </li>
                     </ul>
                   </div>
@@ -47,16 +47,16 @@ export default function TopFooter() {
                     </h3>
                     <ul>
                       <li>
-                        <Link to="#">Giao hàng - thanh toán</Link>
+                        <a href="/blog/giao-hang-thanh-toan">Giao hàng - thanh toán</a>
                       </li>
                       <li>
-                        <Link to="#">Hướng dẫn chọn size</Link>
+                        <a href="/blog/huong-dan-chon-size">Hướng dẫn chọn size</a>
                       </li>
                       <li>
-                        <Link to="#">Hướng dẫn mua hàng</Link>
+                        <a href="/blog/huong-dan-mua-hang">Hướng dẫn mua hàng</a>
                       </li>
                       <li>
-                        <Link to="#">Chính sách đổi/trả hàng</Link>
+                        <a href="/blog/chinh-sach-doi-tra">Chính sách đổi/trả hàng</a>
                       </li>
                     </ul>
                   </div>

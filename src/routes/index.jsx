@@ -10,6 +10,7 @@ import DetailProduct from "../pages/DetailProduct";
 import Home from "../pages/Home";
 import Product from "../pages/Product";
 import SchemaOrg from "../assets/schema";
+import BlogDetails from "../pages/Blog/BlogDetail";
 
 const Router = () => (
   <>
@@ -23,6 +24,7 @@ const Router = () => (
         <Route path="/gio-hang" element={<Cart />} />
         <Route path="/don-hang" element={<Order />} />
         <Route path="/blog" element={<Blogcategory />} />
+        <Route path="/blog/:slug" element={<BlogDetails />} />
         {/* <Route path="/schema" element={<SchemaOrg />} /> */}
       </Routes>
       <Footer />

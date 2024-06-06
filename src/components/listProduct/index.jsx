@@ -73,10 +73,9 @@ export default function ListProduct() {
   if (slug === "quan") {
     renderSEO = (
       <SEO
-        title="Danh Mục Sản Phẩm Quần Dài Nữ - GYOMADE.VN"
-        description="Quần dài nữ một trong những iteam basic không thể thiếu trong tủ đồ của bất cứ cô nàng nào. 
-        Không chỉ là món đồ thời trang, mà còn là biểu tượng của phonng cách."
-        keyword="quần nữ, thời trang nữ, quần dài nữ"
+        title="quần tây nữ giá tốt Tháng 5, 2024 | Mua ngay | GYO MADE"
+        description="Mua quần tây nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
+        keyword="quần tây nữ đẹp, quần jean nữ đẹp, quần xếp ly đẹp"
         name="GYOMADE"
         type="article"
         ogurl={"/danh-muc/"+ slug}
@@ -85,9 +84,9 @@ export default function ListProduct() {
   } else if (slug === "vay") {
     renderSEO = (
       <SEO
-        title="Danh Mục Sản Phẩm Váy - GYOMADE.VN"
-        description="Chuyên váy công sở thiết kế năng động, trẻ trung, hàng đẹp giá tốt giúp chị em nổi bật sang trọng hơn tại nơi làm việc."
-        keyword="đầm công sở, váy công sở, váy đi tiệc"
+        title="chân váy nữ giá tốt Tháng 5, 2024 | Mua ngay | GYO MADE"
+        description="Mua chân váy nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
+        keyword="chân váy đẹp, chân váy dài xẻ tà đẹp, chân váy dài xếp ly đẹp"
         name="GYOMADE"
         type="article"
         ogurl={"/danh-muc/"+ slug}
@@ -96,10 +95,9 @@ export default function ListProduct() {
   } else if (slug === "ao") {
     renderSEO = (
       <SEO
-        title="Danh Mục Sản Phẩm Áo - GYOMADE.VN"
-        description="Chuyên áo nữ đẹp bao gồm áo sơ mi nữ, áo màu trắng, áo sọc nữ, áo công sở nữ, áo voan, 
-        áo kiểu cực đẹp hợp thời trang."
-        keyword="áo nữ, sơ mi nữ, áo sơ mi, sơ mi tay dài"
+        title="áo thun nữ, áo kiểu nữ giá tốt Tháng 5, 2024 | Mua ngay | GYO MADE"
+        description="Mua áo thun, áo kiểu nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
+        keyword="áo thun nữ đẹp, áo thu nữ kiểu đẹp, áo thun nữ công sở"
         name="GYOMADE"
         type="article"
         ogurl={"/danh-muc/"+ slug}
@@ -108,9 +106,9 @@ export default function ListProduct() {
   } else if (slug === "phu-kien") {
     renderSEO = (
       <SEO
-        title="Danh Mục Sản Phẩm Phụ Kiện - GYOMADE.VN"
-        description="Phụ kiện trong thời trang chính là món đồ hoàn thiện bản phối, thể hiện cá tính cũng như gu thẩm mỹ tinh tế của người mặc."
-        keyword="dây belt, khăn quàng cổ"
+        title="phụ kiện nữ giá tốt Tháng 5, 2024 | Mua ngay | GYO MADE"
+        description="Mua phụ kiện thời trang nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
+        keyword="dây belt đẹp, khăn quàng cổ đẹp"
         name="GYOMADE"
         type="article"
         ogurl={"/danh-muc/"+ slug}

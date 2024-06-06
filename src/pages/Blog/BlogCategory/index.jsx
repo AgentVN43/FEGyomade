@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardPost from "./components/CardPost";
+import SEO from "../../../components/seo";
 
 export default function Blogcategory() {
   const [listArticle, setlistArticle] = useState([]);
@@ -12,14 +13,31 @@ export default function Blogcategory() {
       });
   }, []);
 
+  //console.log(listArticle);
+
+  
+
+
   return (
-    <section>
-      <div className="cs_height_140 cs_height_lg_80" />
-      <div className="container">
-        <div className="row cs_gap_y_70">
-          <div className="col-lg-8">
-            <div className="row cs_gap_y_80">
-              <div className="col-md-6">
+    <>
+      <SEO
+        title={"Blog- Thời trang công sở Gyo Made"}
+        description={
+          "Thời trang công sở không ngừng thay đổi, vì vậy hãy cùng với thời trang công sở gyo made cập nhật xu hướng mới và thử nghiệm những phong cách sáng tạo."
+        }
+        keyword={"thời trang công sở, thời trang gyo, áo sơ mi nữ đẹp, chân váy nữ đẹp, váy bút chì đẹp, quần tây nữ đẹp"}
+        name="GYOMADE"
+        type="article"
+        ogimage={"https://gyomade.vn/assets/img/logogyomade_dark.png"}
+        
+      />
+      <section>
+        <div className="cs_height_140 cs_height_lg_80" />
+        <div className="container">
+          <div className="row cs_gap_y_70">
+            <div className="col-lg-12">
+              <div className="row cs_gap_y_80">
+                {/* <div className="col-md-6">
                 <div className="cs_post cs_style_1">
                   <a href="blog_details.html" className="cs_post_thumb cs_zoom">
                     <img
@@ -55,13 +73,17 @@ export default function Blogcategory() {
                     </a>
                   </div>
                 </div>
+              </div> */}
+                {listArticle.map((item, index) => (
+                  <CardPost
+                    title={item.title}
+                    excerpt={item.excerpt}
+                    slug={item.slug}
+                  />
+                ))}
               </div>
-              {listArticle.map((item, index) => (
-                <CardPost title={item.title}/>
-              ))}
             </div>
-          </div>
-          <div className="col-lg-4">
+            {/* <div className="col-lg-4">
             <div className="cs_blog_sidebar">
               <div className="cs_sidebar_widget cs_search">
                 <h3 className="cs_sidebar_widget_title cs_fs_21 cs_semibold">
@@ -168,10 +190,11 @@ export default function Blogcategory() {
                 </div>
               </div>
             </div>
+          </div> */}
           </div>
         </div>
-      </div>
-      <div className="cs_height_135 cs_height_lg_80" />
-    </section>
+        <div className="cs_height_135 cs_height_lg_80" />
+      </section>
+    </>
   );
 }
