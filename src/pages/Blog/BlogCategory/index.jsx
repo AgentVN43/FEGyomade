@@ -9,14 +9,15 @@ export default function Blogcategory() {
     fetch(`https://gyomade.vn/mvc/blog/`)
       .then((response) => response.json())
       .then((data) => {
-        setlistArticle(data.contents);
+        const sortedPost = data.contents.sort(
+          (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+        );
+
+        setlistArticle(sortedPost);
       });
   }, []);
 
   //console.log(listArticle);
-
-  
-
 
   return (
     <>
@@ -25,11 +26,12 @@ export default function Blogcategory() {
         description={
           "Thời trang công sở không ngừng thay đổi, vì vậy hãy cùng với thời trang công sở gyo made cập nhật xu hướng mới và thử nghiệm những phong cách sáng tạo."
         }
-        keyword={"thời trang công sở, thời trang gyo, áo sơ mi nữ đẹp, chân váy nữ đẹp, váy bút chì đẹp, quần tây nữ đẹp"}
+        keyword={
+          "thời trang công sở, thời trang gyo, áo sơ mi nữ đẹp, chân váy nữ đẹp, váy bút chì đẹp, quần tây nữ đẹp"
+        }
         name="GYOMADE"
         type="article"
         ogimage={"https://gyomade.vn/assets/img/logogyomade_dark.png"}
-        
       />
       <section>
         <div className="cs_height_140 cs_height_lg_80" />

@@ -17,7 +17,7 @@ export default function ListProduct() {
   const [totalItems, setTotalItems] = useState(0); // Total number of items
   const [totalPages, setTotalPages] = useState(0); // Total number of pages
   const [listOrderProduct, setlistOrderProduct] = useState([]);
- 
+
   useEffect(() => {
     if (!slug) return; // Prevent fetching if slug is undefined
 
@@ -41,8 +41,11 @@ export default function ListProduct() {
     )
       .then((response) => response.json())
       .then((data) => {
-        //console.log(data);
-        setlistProduct(data.products);
+        console.log(data.products);
+        const sortedProducts = data.products.sort(
+          (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+        );
+        setlistProduct(sortedProducts);
         setlistOrderProduct(data.products);
         setPageSize(data.page_size);
         setTotalPages(data.total_pages);
@@ -68,50 +71,65 @@ export default function ListProduct() {
     setCurrentPage(pageNumber);
   };
 
+  const vietnameseMonths = [
+    "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", 
+    "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+  ];
+
+  function* getCurrentMonth() {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    yield vietnameseMonths[currentMonth];
+  }
+
+  const monthGenerator = getCurrentMonth();
+  const currentMonth = monthGenerator.next().value;
+  
+
   let renderSEO = null;
 
   if (slug === "quan") {
     renderSEO = (
       <SEO
-        title="quần tây nữ giá tốt Tháng 5, 2024 | Mua ngay | GYO MADE"
+        title={`quần tây nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
         description="Mua quần tây nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
         keyword="quần tây nữ đẹp, quần jean nữ đẹp, quần xếp ly đẹp"
         name="GYOMADE"
         type="article"
-        ogurl={"/danh-muc/"+ slug}
+        ogurl={"/danh-muc/" + slug}
       />
     );
   } else if (slug === "vay") {
     renderSEO = (
       <SEO
-        title="chân váy nữ giá tốt Tháng 5, 2024 | Mua ngay | GYO MADE"
+        title={`chân váy nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
         description="Mua chân váy nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
         keyword="chân váy đẹp, chân váy dài xẻ tà đẹp, chân váy dài xếp ly đẹp"
         name="GYOMADE"
         type="article"
-        ogurl={"/danh-muc/"+ slug}
+        ogurl={"/danh-muc/" + slug}
       />
     );
   } else if (slug === "ao") {
     renderSEO = (
       <SEO
-        title="áo thun nữ, áo kiểu nữ giá tốt Tháng 5, 2024 | Mua ngay | GYO MADE"
+        title={`áo thun nữ, áo kiểu nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
         description="Mua áo thun, áo kiểu nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
         keyword="áo thun nữ đẹp, áo thu nữ kiểu đẹp, áo thun nữ công sở"
         name="GYOMADE"
         type="article"
-        ogurl={"/danh-muc/"+ slug}
+        ogurl={"/danh-muc/" + slug}
       />
     );
   } else if (slug === "phu-kien") {
     renderSEO = (
       <SEO
-        title="phụ kiện nữ giá tốt Tháng 5, 2024 | Mua ngay | GYO MADE"
+        title={`phụ kiện nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
         description="Mua phụ kiện thời trang nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
         keyword="dây belt đẹp, khăn quàng cổ đẹp"
         name="GYOMADE"
         type="article"
-        ogurl={"/danh-muc/"+ slug}
+        ogurl={"/danh-muc/" + slug}
       />
     );
   } else {

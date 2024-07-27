@@ -18,6 +18,11 @@ export default function SEO({
       <meta name="keywords" content={keyword} />
       {/* <link rel="canonical" href={ogurl}/> */}
       {/* End standard metadata tags */}
+
+      <meta itemprop="name" content={title} />
+      <meta itemprop="description" content={description} />
+      <meta itemprop="image" content={ogimage} />
+
       {/* Facebook tags */}
       <meta property="og:type" content={type} />
       <meta property="og:title" content={title} />
