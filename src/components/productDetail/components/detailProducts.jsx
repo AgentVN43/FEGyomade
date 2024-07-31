@@ -341,6 +341,7 @@
 // }
 import React, { useContext, useEffect, useState } from "react";
 import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Tooltip as ReactTooltip } from "react-tooltip";
 import { useParams } from "react-router-dom";
 import CartContext, { useCart } from "../../../context/CartContext";
 import SEO from "../../seo";
@@ -356,6 +357,7 @@ export default function DetailProduct({ onAddToCart }) {
   const [hoveredSize, setHoveredSize] = useState(null);
   const [selectedColor, setSelectedColor] = useState(null);
   const [filteredData, setFilteredData] = useState([]);
+  console.log("🚀 ~ DetailProduct ~ filteredData:", filteredData)
 
   const { addToCart } = useContext(CartContext);
   const { incrementQuantity, decrementQuantity, quantity } = useCart();
@@ -554,7 +556,8 @@ export default function DetailProduct({ onAddToCart }) {
                 {filteredData.flat().map((item) => (
                   <li
                     key={item.id}
-                    onMouseEnter={() => handleMouseEnter(item.size)}
+                    data-tooltip-id={`tooltip-size-${item.id}`}
+                  // onMouseEnter={() => handleMouseEnter(item.size)}
                   >
                     <input
                       type="radio"
@@ -577,21 +580,19 @@ export default function DetailProduct({ onAddToCart }) {
                     >
                       {item.size}
                     </span>{" "}
+                    <ReactTooltip
+                      id={`tooltip-size-${item.id}`}
+                      place="top"
+                      variant="info"
+                      content={
+                        ` Size ${item.size} còn:${" "} ${item.remain_quantity}${" "} cái`
+                      }
+                    />
                   </li>
                 ))}
               </>
             )}
           </ul>
-          {hoveredSize && (
-            <p>
-              Size {hoveredSize} còn:{" "}
-              {
-                filteredData.flat().find((item) => item.size === hoveredSize)
-                  ?.remain_quantity
-              }{" "}
-              cái
-            </p>
-          )}
           {errorMessage && <span>{errorMessage}</span>}
           <SizeTutor />
         </div>
