@@ -1,13 +1,13 @@
 import React from "react";
+import SchemaOrg from "../../assets/schema";
 import Category from "../../components/category";
 import Collection from "../../components/collection";
 import Contact from "../../components/contact";
 import FeaturedItem from "../../components/featuredItem";
 import IconBox from "../../components/iconbox";
 import MovingSlider from "../../components/movingSlider";
+import Quotes from "../../components/Quotes";
 import SEO from "../../components/seo";
-import SimpleSlider from "../../components/slider";
-import SchemaOrg from "../../assets/schema";
 export default function Home() {
   return (
     <>
@@ -21,7 +21,7 @@ export default function Home() {
         ogurl={"/"}
       />
       <SchemaOrg />
-      <SimpleSlider />
+      <Quotes/>
       <IconBox />
       <Category />
       <FeaturedItem />
