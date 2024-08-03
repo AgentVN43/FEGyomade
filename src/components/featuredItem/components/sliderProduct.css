@@ -1,0 +1,33 @@
+.carousel-slide {
+    height: 1200px;
+  }
+    
+  @media (max-width: 1240px) {
+    .carousel-slide {
+      height: 900px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .carousel-slide {
+      height: 1600px; 
+    }
+  }
+
+  @media (max-width: 767px) {
+    .carousel-slide {
+      height: 1400px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .carousel-slide {
+      height: 800px;
+    }
+  }
+
+  @media (max-width: 300px) {
+    .carousel-slide {
+      height: initial
+    }
+  }

@@ -19,3 +19,38 @@
 .product-image:hover {
   transform: scale(0.9); /* Zoom in on hover */
 }
+
+.item-slide {
+  height: 600px;
+}
+
+@media (max-width: 1240px) {
+  .item-slide {
+    height: 450px;
+  }
+}
+
+@media (max-width: 768px) {
+  .item-slide {
+    height: 800px;
+  }
+}
+
+@media (max-width: 767px) {
+  .item-slide {
+    height: 700px;
+  }
+}
+
+@media (max-width: 480px) {
+  .item-slide {
+    height: 400px;
+  }
+}
+
+@media (max-width: 300px) {
+  .item-slide {
+    height: initial
+  }
+}
+
