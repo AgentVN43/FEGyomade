@@ -156,7 +156,7 @@ export default function ListProduct() {
         <Filter />
       </div> */}
           <div className="cs_filter_sort">
-            <div className="cs_filter_sidebar_heading cs_medium">
+            {/* <div className="cs_filter_sidebar_heading cs_medium">
               <div className="cs_filter_sidebar_heading_in cs_filter_btn">
                 <svg
                   width={20}
@@ -189,23 +189,23 @@ export default function ListProduct() {
                   Filter
                 </span>
               </div>
-            </div>
+            </div> */}
             <div className="cs_sort_section">
               <div className="cs_sort_number">
                 <p className="cs_medium mb-0">
                   {" "}
-                  Showing{" "}
+                  Hiển thị{" "}
                   {currentPage > 1 ? (currentPage - 1) * pageSize + 1 : 1}-
-                  {Math.min(currentPage * pageSize, totalItems)} of {totalItems}{" "}
-                  results
+                  {Math.min(currentPage * pageSize, totalItems)} của {totalItems}{" "}
+                  sản phẩm
                 </p>
               </div>
               <div className="cs_sort_wrap">
                 <div className="cs_sort">
                   <select value={sortBy} onChange={handleSortChange}>
-                    <option value="latest">Sort By Latest</option>
-                    <option value="lowPrice">Sort By Low Price</option>
-                    <option value="highPrice">Sort By High Price</option>
+                    <option value="latest">Mới nhất</option>
+                    <option value="lowPrice">Thứ tự hiển thị: giá tăng dần</option>
+                    <option value="highPrice">Thứ tự hiển thị: giá giảm dần</option>
                   </select>
                 </div>
                 {/* <div className="cs_view">

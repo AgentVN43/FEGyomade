@@ -474,7 +474,7 @@ export default function DetailProduct({ onAddToCart }) {
       </Helmet>
       <div className="cs_single_product_details">
         <h1 className="cs_fs_37 cs_semibold">{name}</h1>
-        <div className="cs_single_product_review">
+        {/* <div className="cs_single_product_review">
           <div className="cs_rating_container">
             <div className="cs_rating cs_size_sm" data-rating={5}>
               <div className="cs_rating_percentage" />
@@ -484,7 +484,7 @@ export default function DetailProduct({ onAddToCart }) {
           <span>
             Stock: <span className="cs_accent_color">{inventory}</span>
           </span>
-        </div>
+        </div> */}
         <h4 className="cs_single_product_price cs_fs_21 cs_primary_color cs_semibold">
           {price.map((item) => item.toLocaleString())}
         </h4>
@@ -616,7 +616,7 @@ export default function DetailProduct({ onAddToCart }) {
             className="cs_btn cs_style_1 cs_fs_16 cs_medium"
             onClick={handleAddToCart}
           >
-            Add to Cart
+            Thêm vào giỏ hàng
           </button>
         </div>
       </div>

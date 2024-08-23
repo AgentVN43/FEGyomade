@@ -514,7 +514,7 @@ End Review
     grid-template-columns: repeat(1, 1fr);
   }
   .cs_sort_section {
-    grid-column: span 3;
+    grid-column: span 4;
   }
 }
 .cs_sort_number {
@@ -530,6 +530,7 @@ End Review
 }
 .cs_sort {
   flex: 1;
+  text-align: right;
   select {
     border: none;
     padding: 6px 25px 6px 0;

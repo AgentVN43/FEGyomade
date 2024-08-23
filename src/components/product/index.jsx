@@ -13,10 +13,10 @@ export default function Product({
  
 
   return (
-    <div className="slick_slide_in item-slide">
-      <div  style={{ height: '100%' }}>
-        {/* <div className="cs_product_thumb position-relative"> */}
-          <div className="product-image-container"  style={{ height: '80%' }}>
+    <div className="slick_slide_in">
+      <div  className="cs_product cs_style_1" >
+        <div className="cs_product_thumb position-relative">
+          <div className="product-image-container"  style={{ height: '350px' }}>
             <a href={`/san-pham/${slug}`}>
               <img className="product-image" src={imageUrl} alt="Product" />
             </a>
@@ -50,7 +50,7 @@ export default function Product({
           >
             Add To Cart
           </a> */}
-        {/* </div> */}
+        </div>
         <div className="cs_product_info text-center">
           <h3 className="cs_product_title cs_fs_21 cs_medium">
             <a href={`/san-pham/${slug}`}>{name}</a>

@@ -29,7 +29,7 @@ export default function Product({
             href="/gio-hang"
             className="cs_cart_btn cs_accent_bg cs_fs_16 cs_white_color cs_medium position-absolute"
           >
-            Add To Cart
+            Thêm vào giỏ hàng
           </a>
         </div>
         <div className="cs_product_info text-center">
@@ -60,7 +60,7 @@ export default function Product({
               href="#"
               className="cs_btn cs_style_1 cs_fs_16 cs_medium cs_accent_btn"
             >
-              Add to Cart
+              Thêm vào giỏ hàng
             </a>
             <button className="cs_heart_btn">
               <i className="fa-regular fa-heart" />
