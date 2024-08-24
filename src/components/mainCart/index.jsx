@@ -2,6 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import CartContext, { useCart } from "../../context/CartContext";
 import { Link } from "react-router-dom";
 
+import './index.css'
+import CartItem from "../cartDrawer/components/cartItem";
+
 export default function MainCart() {
   const { cartItems, removeFromCart } = useContext(CartContext);
   const { incrementQuantity, decrementQuantity } = useCart();
@@ -24,34 +27,34 @@ export default function MainCart() {
       items: items,
       warehouse_id: "0dc07b57-6115-42c3-ad2d-2cae523f687a",
       shipping_address: {
-        address: "", 
-        commune_name: "", 
-        commune_id: "", 
+        address: "",
+        commune_name: "",
+        commune_id: "",
         country_code: null,
         district_id: "",
-        district_name: "", 
-        full_address: "", 
-        full_name: "", 
-        phone_number: "", 
-        post_code: null, 
+        district_name: "",
+        full_address: "",
+        full_name: "",
+        phone_number: "",
+        post_code: null,
         province_id: "",
-        province_name: "" 
+        province_name: ""
       },
-      shop_id: 4426911 
+      shop_id: 4426911
     };
-  
+
     // setOrder(newOrder);
     localStorage.setItem("order", JSON.stringify(newOrder));
     localStorage.removeItem("cartData")
   };
-  
-//console.log(cartItems)
+
+  //console.log(cartItems)
   return (
     <div className="container">
       <div className="row">
         <div className="col-xl-8">
           <div className="table-responsive">
-            <table className="cs_cart_table">
+            <table className="cs_cart_table cart-item-row">
               <thead>
                 <tr>
                   <th>Sản phẩm</th>
@@ -117,7 +120,7 @@ export default function MainCart() {
               </tbody> */}
               <tbody>
                 {cartItems.map((item, index) => (
-                  <tr key={index}>
+                  <tr key={index} className="cart-item-row">
                     <td>
                       <div className="cs_cart_table_media">
                         <img src={item.images} alt="Thumb" />
@@ -160,6 +163,15 @@ export default function MainCart() {
             </table>
           </div>
           <div className="cs_height_30 cs_height_lg_30" />
+        </div>
+        <div className='modal-body' style={{ paddingLeft: '20px', paddingRight: '20px' }}>
+          {
+            cartItems.map((item, index) => (
+              <div key={index} style={{ borderBottom: '1px solid', borderColor: '#f1f1f1' }}>
+                <CartItem item={item} index={index} />
+              </div>
+            ))
+          }
         </div>
         <div className="col-xl-4">
           <div className="cs_shop-side-spacing">

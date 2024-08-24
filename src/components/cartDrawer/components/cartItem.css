@@ -1,0 +1,69 @@
+.cs_quantity1 {
+    -webkit-box-flex: 0;
+    -ms-flex: none;
+    flex: none;
+    position: relative;
+    width: 60px;
+    height: 40px;
+    -webkit-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 991px) {
+    .cs_quantity1 {
+        height: 44px;
+        width: 90px;
+    }
+}
+
+.cs_quantity1 .cs_quantity_input1 {
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgba(94, 94, 94, 0.2);
+    background-color: transparent;
+    padding: 4px 10px;
+    outline: none;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+@media (max-width: 991px) {
+    .cs_quantity1 .cs_quantity_input1 {
+        padding: 10px 15px;
+    }
+}
+
+.cs_quantity1 .cs_quantity_input1:focus {
+    border-color: #fff;
+}
+
+.cs_quantity1 .cs_quantity_btn1 {
+    padding: 0;
+    border: none;
+    background-color: transparent;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 2px 9px;
+    cursor: pointer;
+    font-size: 14px;
+    position: absolute;
+    right: 11px;
+}
+
+.cs_quantity1 .cs_quantity_btn1.cs_increment1 {
+    top: 7px;
+}
+
+.cs_quantity1 .cs_quantity_btn1.cs_decrement1 {
+    bottom: 7px;
+}
+
+.cs_quantity1 .cs_quantity_btn1:hover {
+    color: #fc5f49;
+    border-color: #fc5f49;
+}

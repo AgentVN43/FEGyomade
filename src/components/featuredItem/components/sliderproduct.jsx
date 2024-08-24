@@ -23,7 +23,7 @@ export default function SlideProduct({ categoryId }) {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    // autoplay: true,
+    autoplay: true,
     autoplaySpeed: 1000,
     rows: 2,
     slidesPerRow: 1,

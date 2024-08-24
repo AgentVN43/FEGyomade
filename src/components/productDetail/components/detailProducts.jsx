@@ -347,27 +347,27 @@ import CartContext, { useCart } from "../../../context/CartContext";
 import SEO from "../../seo";
 import SizeTutor from "../../sizetutor";
 import { Helmet } from "react-helmet-async";
+import CartDrawer from "../../cartDrawer";
 
 export default function DetailProduct({ onAddToCart }) {
   const { slug } = useParams();
   const [productDetail, setProductDetail] = useState({});
+  console.log("🚀 ~ DetailProduct ~ productDetail:", productDetail)
   const [productVariants, setProductVariants] = useState([]);
+  console.log("🚀 ~ DetailProduct ~ productVariants:", productVariants)
   const [selectedSize, setSelectedSize] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
   const [hoveredSize, setHoveredSize] = useState(null);
-  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedColor, setSelectedColor] = useState();
   const [filteredData, setFilteredData] = useState([]);
   console.log("🚀 ~ DetailProduct ~ filteredData:", filteredData)
+
+  const [open, setOpen] = useState(false)
 
   const { addToCart } = useContext(CartContext);
   const { incrementQuantity, decrementQuantity, quantity } = useCart();
 
   useEffect(() => {
-    fetch(`https://gyomade.vn/mvc/products/slug/${slug}`)
-      .then((response) => response.json())
-      .then((data) => setProductDetail(data))
-      .catch((error) => console.error("Error fetching product detail:", error));
-
     fetch(`https://gyomade.vn/mvc/products/variants/${slug}`)
       .then((response) => response.json())
       .then((data) => {
@@ -383,7 +383,15 @@ export default function DetailProduct({ onAddToCart }) {
         setProductVariants(groupedArray);
       })
       .catch((error) => console.error("Error fetching product variants:", error));
+    fetch(`https://gyomade.vn/mvc/products/slug/${slug}`)
+      .then((response) => response.json())
+      .then((data) => setProductDetail(data))
+      .catch((error) => console.error("Error fetching product detail:", error));
   }, [slug]);
+
+  useEffect(() => {
+    handleColorSelect(productDetail.color)
+  }, [productDetail, productVariants])
 
   const name = productDetail.name || '';
   const inventory = productDetail.inventory || 0;
@@ -394,11 +402,21 @@ export default function DetailProduct({ onAddToCart }) {
   const description2 = `Hãy đến với Gyo Made khám phá mẫu ${name} của chúng tôi. thời trang công sở Gyo Made chuyên về váy công sở, áo thun, áo kiểu, áo sơ mi nữ, chân váy,....`;
 
   const handleColorSelect = (color) => {
+    console.log("🚀 ~ handleColorSelect ~ color:", color)
+    const order = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];
+
     setSelectedColor(color);
     const filtered = productVariants.map((array) =>
       array.filter((item) => item.color === color)
     );
-    setFilteredData(filtered);
+    console.log("🚀 ~ handleColorSelect ~ productVariants:", productVariants)
+
+    const filtered1 = productVariants.flat().filter((item) => item.color === color);
+    console.log("🚀 ~ handleColorSelect ~ filtered1:", filtered1)
+    console.log("🚀 ~ handleColorSelect ~ filtered:", filtered)
+    const sorted = filtered1.sort((a, b) => order.indexOf(a.size) - order.indexOf(b.size));
+    setFilteredData(sorted);
+    // setFilteredData(filtered);
     setSelectedSize(null);
   };
 
@@ -526,13 +544,14 @@ export default function DetailProduct({ onAddToCart }) {
                   (value, index, self) =>
                     self.findIndex((v) => v.color === value.color) === index
                 )
-                .map(({ color, hexCode }) => (
+                .map(({ color, hexCode }, index) => (
                   <li key={color}>
                     <div className="cs_color_filter">
                       <input
                         type="radio"
                         name="color"
                         onClick={() => handleColorSelect(color, hexCode)}
+                        defaultChecked={index === 0}
                       />
                       <span
                         className="cs_color_filter_circle cs_accent_bg"
@@ -614,11 +633,17 @@ export default function DetailProduct({ onAddToCart }) {
           </div>
           <button
             className="cs_btn cs_style_1 cs_fs_16 cs_medium"
-            onClick={handleAddToCart}
+            onClick={() => {
+              setOpen(true)
+              handleAddToCart()
+            }}
           >
             Thêm vào giỏ hàng
           </button>
         </div>
+
+
+        <CartDrawer open={open} setOpen={setOpen} />
       </div>
     </>
   );

@@ -1,0 +1,20 @@
+@media (min-width: 540px) {
+    .cart-item-row {
+        display: table-row;
+    }
+
+    .mobile-cart-item-row {
+        display: none;
+    }
+}
+
+/* Display the alternative view when the screen width is less than 897px */
+@media (max-width: 540px) {
+    .cart-item-row {
+        display: none;
+    }
+
+    .mobile-cart-item-row {
+        display: table-row;
+    }
+}
