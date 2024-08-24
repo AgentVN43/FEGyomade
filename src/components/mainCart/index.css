@@ -8,7 +8,6 @@
     }
 }
 
-/* Display the alternative view when the screen width is less than 897px */
 @media (max-width: 540px) {
     .cart-item-row {
         display: none;

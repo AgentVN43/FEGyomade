@@ -366,6 +366,7 @@ export default function DetailProduct({ onAddToCart }) {
 
   const { addToCart } = useContext(CartContext);
   const { incrementQuantity, decrementQuantity, quantity } = useCart();
+  console.log("🚀 ~ DetailProduct ~ quantity:", quantity)
 
   useEffect(() => {
     fetch(`https://gyomade.vn/mvc/products/variants/${slug}`)
@@ -444,6 +445,7 @@ export default function DetailProduct({ onAddToCart }) {
           color: selectedColor,
         };
         addToCart(newItem, quantity);
+        setOpen(true)
       } else {
         setErrorMessage("Không tìm thấy sản phẩm phù hợp.");
       }
@@ -612,21 +614,21 @@ export default function DetailProduct({ onAddToCart }) {
               </>
             )}
           </ul>
-          {errorMessage && <span>{errorMessage}</span>}
+          {errorMessage && <span style={{ color: 'red', fontSize: '13px' }}>{errorMessage}</span>}
           <SizeTutor />
         </div>
         <div className="cs_action_btns">
           <div className="cs_quantity">
             <button
               className="cs_quantity_btn cs_increment"
-              onClick={incrementQuantity}
+              onClick={() => incrementQuantity()}
             >
               <i className="fa-solid fa-angle-up" />
             </button>
             <span className="cs_quantity_input">{quantity}</span>
             <button
               className="cs_quantity_btn cs_decrement"
-              onClick={decrementQuantity}
+              onClick={() => decrementQuantity()}
             >
               <i className="fa-solid fa-angle-down" />
             </button>
@@ -634,7 +636,6 @@ export default function DetailProduct({ onAddToCart }) {
           <button
             className="cs_btn cs_style_1 cs_fs_16 cs_medium"
             onClick={() => {
-              setOpen(true)
               handleAddToCart()
             }}
           >

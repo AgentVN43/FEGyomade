@@ -164,7 +164,7 @@ export default function MainCart() {
           </div>
           <div className="cs_height_30 cs_height_lg_30" />
         </div>
-        <div className='modal-body' style={{ paddingLeft: '20px', paddingRight: '20px' }}>
+        <div className='modal-body mobile-cart-item-row' style={{ paddingLeft: '20px', paddingRight: '20px' }}>
           {
             cartItems.map((item, index) => (
               <div key={index} style={{ borderBottom: '1px solid', borderColor: '#f1f1f1' }}>

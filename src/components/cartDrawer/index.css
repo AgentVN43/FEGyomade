@@ -4,6 +4,14 @@
     /* Độ rộng của thanh cuộn */
 }
 
+@media (max-width: 540px) {
+    .modal-body::-webkit-scrollbar {
+        width: 4px;
+        height: 4px;
+        /* Độ rộng của thanh cuộn */
+    }
+}
+
 .modal-body::-webkit-scrollbar-track {
     background: #e3e3e3;
     /* Màu nền của thanh cuộn */

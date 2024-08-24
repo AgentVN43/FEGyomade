@@ -6,6 +6,7 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
   const [totalItems, setTotalItems] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  console.log("🚀 ~ CartProvider ~ quantity:", quantity)
 
   useEffect(() => {
     const cartData = JSON.parse(localStorage.getItem("cartData"));
@@ -83,6 +84,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const incrementQuantity = (index) => {
+    console.log("🚀 ~ incrementQuantity ~ index:", index)
     if (index !== undefined) {
       const updatedCartItems = [...cartItems];
       updatedCartItems[index].quantity += 1;

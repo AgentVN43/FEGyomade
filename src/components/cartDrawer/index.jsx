@@ -25,7 +25,7 @@ function CartDrawer({ open, setOpen }) {
         <>
             <Drawer title="Giỏ hàng" onClose={onClose} open={open}>
                 <div>
-                    <div className='modal-body' style={{ overflowY: 'auto', height: '65vh', paddingLeft: '4px', paddingRight: '4px' }}>
+                    <div className='modal-body' style={{ overflowY: 'auto', height: '65vh', paddingLeft: '6px', paddingRight: '8px' }}>
                         {
                             cartItems.map((item, index) => (
                                 <div key={index} style={{ borderBottom: '1px solid', borderColor: '#f1f1f1' }}>
