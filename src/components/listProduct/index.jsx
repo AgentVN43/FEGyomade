@@ -278,7 +278,7 @@ export default function ListProduct() {
               <Product
                 key={index}
                 id={product.id}
-                imageUrl={product.image}
+                imageUrl={product.url_image ? product.url_image : product.image}
                 price={product.price}
                 name={product.name}
                 slug={product.slug}
