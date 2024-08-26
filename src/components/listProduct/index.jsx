@@ -273,7 +273,7 @@ export default function ListProduct() {
               </div>
             </div>
           </div>
-          <div className="cs_product_grid cs_product_grid_4 cs_grid_view">
+          <div className="cs_product_grid cs_product_grid_3 cs_grid_view">
             {sortedProducts().map((product, index) => (
               <Product
                 key={index}

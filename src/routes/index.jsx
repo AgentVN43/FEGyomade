@@ -25,7 +25,7 @@ const Router = () => (
         <Route path="/don-hang" element={<Order />} />
         <Route path="/blog" element={<Blogcategory />} />
         <Route path="/blog/:slug" element={<BlogDetails />} />
-        {/* <Route path="/schema" element={<SchemaOrg />} /> */}
+        <Route path="/schema" element={<SchemaOrg />} />
       </Routes>
       <Footer />
     </BrowserRouter>

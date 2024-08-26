@@ -39,7 +39,7 @@ export default function Menu() {
             </ul>
           </li>
           <li>
-            <Link to="/blog">Blog</Link>
+            <Link to="/blog">Tin tức</Link>
           </li>
           {/* <li className="menu-item-has-children">
             <Link to="">Pages</a>
@@ -150,7 +150,7 @@ export default function Menu() {
             </ul>
           </li> */}
           <li>
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact">Liên hệ mua hàng</Link>
           </li>
         </ul>
       </div>

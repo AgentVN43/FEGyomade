@@ -1,6 +1,5 @@
 import React from "react";
 import "./index.scss";
-import { Link } from "react-router-dom";
 export default function Product({
   imageUrl,
   price,
@@ -16,7 +15,7 @@ export default function Product({
     <div className="slick_slide_in">
       <div  className="cs_product cs_style_1" >
         <div className="cs_product_thumb position-relative">
-          <div className="product-image-container"  style={{ height: '350px' }}>
+          <div className="product-image-container"  style={{ height: '480px' }}>
             <a href={`/san-pham/${slug}`}>
               <img className="product-image" src={imageUrl} alt="Product" />
             </a>

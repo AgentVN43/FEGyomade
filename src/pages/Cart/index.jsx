@@ -5,7 +5,7 @@ import MainCart from "../../components/mainCart";
 export default function Cart() {
   return (
     <>
-      <HeadingCart title={"Shopping Cart"} currentPage={"Cart"} />
+      <HeadingCart title={"Giỏ hàng"} currentPage={"Giỏ hàng"} />
       <MainCart />
     </>
   );
