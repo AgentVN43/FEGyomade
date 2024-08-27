@@ -242,7 +242,7 @@ export default function DetailProduct({ onAddToCart }) {
                   <li
                     key={item.id}
                     data-tooltip-id={`tooltip-size-${item.id}`}
-                    // onMouseEnter={() => handleMouseEnter(item.size)}
+                  // onMouseEnter={() => handleMouseEnter(item.size)}
                   >
                     <input
                       type="radio"
@@ -261,6 +261,9 @@ export default function DetailProduct({ onAddToCart }) {
                           backgroundColor: "#fc5f49",
                           color: "#fff",
                         }),
+                        ...(item.remain_quantity <= 0 && {
+                          border: "none"
+                        }),
                       }}
                     >
                       {item.size}
@@ -269,9 +272,8 @@ export default function DetailProduct({ onAddToCart }) {
                       id={`tooltip-size-${item.id}`}
                       place="top"
                       variant="info"
-                      content={` Size ${item.size} còn:${" "} ${
-                        item.remain_quantity
-                      }${" "} cái`}
+                      content={` Size ${item.size} còn:${" "} ${item.remain_quantity
+                        }${" "} cái`}
                     />
                   </li>
                 ))}

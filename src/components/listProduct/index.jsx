@@ -4,10 +4,12 @@ import { useParams } from "react-router-dom";
 import Product from "../product";
 import Pagination from "../pagination";
 import SEO from "../seo";
+import './index.css'
 
 export default function ListProduct() {
   const { slug } = useParams();
 
+  const [imageURL, setImageURL] = useState('https://down-vn.img.susercontent.com/file/vn-11134208-7r98o-lyrf4ykv0t5t28');
   const [showFilter, setShowFilter] = useState(false);
   const [listCategory, setlistCategory] = useState([]);
   const [listProduct, setlistProduct] = useState([]);
@@ -17,7 +19,34 @@ export default function ListProduct() {
   const [totalItems, setTotalItems] = useState(0); // Total number of items
   const [totalPages, setTotalPages] = useState(0); // Total number of pages
   const [listOrderProduct, setlistOrderProduct] = useState([]);
+  const [isFixed, setIsFixed] = useState(false);
+  const [isHidden, setIsHidden] = useState(false);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      const remainingHeight = documentHeight - (scrollTop + windowHeight);
+
+      if (scrollTop >= 400) {
+        setIsFixed(true);
+      } else {
+        setIsFixed(false);
+      }
+
+      if (remainingHeight <= 200) {
+        setIsHidden(true);
+      } else {
+        setIsHidden(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   useEffect(() => {
     if (!slug) return; // Prevent fetching if slug is undefined
 
@@ -72,7 +101,7 @@ export default function ListProduct() {
   };
 
   const vietnameseMonths = [
-    "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6", 
+    "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
     "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
   ];
 
@@ -84,7 +113,7 @@ export default function ListProduct() {
 
   const monthGenerator = getCurrentMonth();
   const currentMonth = monthGenerator.next().value;
-  
+
 
   let renderSEO = null;
 
@@ -275,20 +304,35 @@ export default function ListProduct() {
               </div>
             </div>
           </div>
-          <div className="cs_product_grid cs_product_grid_3 cs_grid_view">
-            {sortedProducts().map((product, index) => (
-              <Product
-                key={index}
-                id={product.id}
-                imageUrl={product.url_image ? product.url_image : product.image}
-                price={product.price}
-                name={product.name}
-                slug={product.slug}
-                display_id={product.custom_id}
-                product_id={product.id}
-              />
-            ))}
+          <div className='category'>
+            <div className="list-product cs_product_grid cs_product_grid_3 cs_grid_view">
+              {sortedProducts().map((product, index) => (
+                <Product
+                  key={index}
+                  id={product.id}
+                  imageUrl={product.url_image ? product.url_image : product.image}
+                  price={product.price}
+                  name={product.name}
+                  slug={product.slug}
+                  display_id={product.custom_id}
+                  product_id={product.id}
+                />
+              ))}
+            </div>
+            <div className='sidebar'>
+              <div className={`banner ${isFixed ? 'fixed' : ''} ${isHidden ? 'hidden' : ''}`}>
+                <div style={{ marginBottom: '16px', borderWidth: '1px' }} className="mb-4 border">
+                  <img src={imageURL} alt="Banner" className="image" />
+                </div>
+              </div>
+            </div>
+            <div className='sidebar2'>
+              <div className="mb-4 border">
+                <img src={imageURL} alt="Banner" style={{ height: '500px', backgroundColor: '#f1f5f9' }} />
+              </div>
+            </div>
           </div>
+
           <div className="cs_height_75 cs_height_lg_50" />
           <Pagination
             totalPages={totalPages}
