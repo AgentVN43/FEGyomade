@@ -137,6 +137,8 @@ export default function ListProduct() {
     renderSEO = <div>Invalid category</div>;
   }
 
+
+
   return (
     <>
       {renderSEO}
