@@ -496,10 +496,10 @@ function MaincheckOut() {
                               />
                             </div>
                             <div style={{ marginLeft: 10 }}>
-                              <div className="font-size-12 font-weight-500">
+                              <div className="font-size-14 font-weight-500">
                                 Techcombank (MS04T01693203016588)
                               </div>
-                              <div className="font-size-12">
+                              <div className="font-size-14">
                                 Ngân hàng TMCP Kỹ thương Việt Nam
                               </div>
                             </div>

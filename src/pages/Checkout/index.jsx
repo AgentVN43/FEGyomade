@@ -5,7 +5,7 @@ import MaincheckOut from '../../components/mainCheckout'
 export default function Order() {
     return (
         <div>
-            <HeadingCart title={"Checkout"} currentPage={"Checkout"} />
+            <HeadingCart title={"Thanh toán"} currentPage={"Thanh toán"} />
             <MaincheckOut/>
         </div>
     )
