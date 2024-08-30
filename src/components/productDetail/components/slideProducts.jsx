@@ -2,13 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import Slider from "react-slick";
 import "./index.scss";
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { useParams } from "react-router-dom";
-import ColumnGroup from "antd/es/table/ColumnGroup";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 export default function SlideImageProduct() {
-  const { slug, id } = useParams();
+  const { slug } = useParams();
   const [productVariants, setproductVariants] = useState([]);
 
   const [productImg, setProductImg] = useState([]);
@@ -70,32 +69,32 @@ export default function SlideImageProduct() {
     }
   }, [data]);
 
-  const groupedProductVariants = productVariants.reduce((acc, product) => {
-    const existingProduct = acc.find(
-      (item) => item.product_id === product.product_id
-    );
+  // const groupedProductVariants = productVariants.reduce((acc, product) => {
+  //   const existingProduct = acc.find(
+  //     (item) => item.product_id === product.product_id
+  //   );
 
-    if (!existingProduct) {
-      acc.push({
-        ...product,
-        images: product.images,
-      });
-    } else {
-      if (product.images && !existingProduct.images) {
-        existingProduct.images = product.images;
-      }
-    }
+  //   if (!existingProduct) {
+  //     acc.push({
+  //       ...product,
+  //       images: product.images,
+  //     });
+  //   } else {
+  //     if (product.images && !existingProduct.images) {
+  //       existingProduct.images = product.images;
+  //     }
+  //   }
 
-    return acc;
-  }, []);
+  //   return acc;
+  // }, []);
 
-  const imagesAndUrlImages = groupedProductVariants.map((item) => ({
-    images: item.images,
-  }));
+  // const imagesAndUrlImages = groupedProductVariants.map((item) => ({
+  //   images: item.images,
+  // }));
 
-  const allImages = imagesAndUrlImages.flatMap((item) =>
-    [item.images].filter(Boolean)
-  );
+  // const allImages = imagesAndUrlImages.flatMap((item) =>
+  //   [item.images].filter(Boolean)
+  // );
 
   // productImg.map((item, index) => console.log(item));
 
@@ -103,7 +102,6 @@ export default function SlideImageProduct() {
 
   /*gen keyword*/
 
-  const name = [...new Set(productVariants.map((item) => item.name))];
 
   useEffect(() => {
     setNav1(sliderRef1);
@@ -130,7 +128,7 @@ export default function SlideImageProduct() {
               >
                 <img
                   src={item}
-                  alt={`${name} Gyo Made`}
+                  alt={`${slug} Gyo Made`}
                   className="product-image"
                   onLoad={() => console.log(`Loaded image ${item}`)}
                 />
@@ -148,7 +146,7 @@ export default function SlideImageProduct() {
           >
             {data.map((item, index) => (
               <div key={index} className="cs_single_product_thumb_item">
-                <img src={item} alt={`${name} Gyo Made`} />
+                <img src={item} alt={`${slug} Gyo Made`} loading="lazy"/>
               </div>
             ))}
           </Slider>

@@ -42,6 +42,7 @@ export default function Category() {
                 src={category.image}
                 alt="Category"
                 className="w-100"
+                loading="lazy"
               />
               <span className="cs_category_btn">
                 <span>{formatCategoryName(category.name)}</span>

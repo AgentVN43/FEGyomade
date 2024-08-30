@@ -508,7 +508,7 @@ function MaincheckOut() {
                         <div className="form-check cs_fs_16">
                           <div className="qr-center">
                             <div className="qr-image">
-                              <img src="/assets/img/qr.png" alt="QR Code" />
+                              <img src="/assets/img/qr.png" alt="QR Code" loading="lazy"/>
                             </div>
                           </div>
                         </div>

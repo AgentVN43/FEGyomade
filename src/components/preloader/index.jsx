@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 export default function Preloader() {
   const [showPreloader, setShowPreloader] = useState(true);
@@ -8,17 +8,19 @@ export default function Preloader() {
       setShowPreloader(false);
     };
 
-    const timeout = setTimeout(hidePreloader, 1500); // Adjust the delay as needed
+    const timeout = setTimeout(hidePreloader, 1500);
 
     return () => clearTimeout(timeout);
   }, []);
 
-  // You can use CSS transitions or animations to control the fade out effect
-  const preloaderStyle = {
-    opacity: showPreloader ? 1 : 0,
-    transition: "opacity 0.5s ease",
-    display: showPreloader ? "flex" : "none",
-  };
+  const preloaderStyle = useMemo(
+    () => ({
+      opacity: showPreloader ? 1 : 0,
+      transition: "opacity 0.5s ease",
+      display: showPreloader ? "flex" : "none",
+    }),
+    [showPreloader]
+  );
 
   return (
     <div className="cs_perloader" style={preloaderStyle}>

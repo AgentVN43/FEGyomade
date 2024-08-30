@@ -5,7 +5,7 @@ export default function Logo(props) {
     <>
       <div className="cs_main_header_left">
         <a className="cs_site_branding" href="/">
-          <img src="../../../../assets/img/logogyomade.png" alt="gyo made logo" />
+          <img src="../../../../assets/img/logogyomade.png" alt="gyo made logo" loading="lazy"/>
         </a>
       </div>
     </>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Filter from "./components/filter";
 import { useParams } from "react-router-dom";
 import Product from "../product";
@@ -58,39 +58,38 @@ export default function ListProduct() {
       .then((data) => {
         const category = data.find((item) => item.slug === slug);
         setlistCategory(category);
+        setCurrentPage(1);
       });
   }, [slug]);
 
   useEffect(() => {
+    const fetchData = () => {
+      if (!listCategory?.id) return;
+
+      fetch(
+        `https://gyomade.vn/mvc/products/category/${listCategory.id}?page_number=${currentPage}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data.products);
+          const sortedProducts = data.products.sort(
+            (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+          );
+          setlistProduct(sortedProducts);
+          setlistOrderProduct(data.products);
+          setPageSize(data.page_size);
+          setTotalPages(data.total_pages);
+          setTotalItems(data.total_entries);
+        });
+    };
     fetchData();
-  }, [listCategory.id, currentPage, sortBy]);
+  }, [listCategory, currentPage, sortBy]);
 
-  const fetchData = () => {
-    if (!listCategory.id) return;
-
-    fetch(
-      `https://gyomade.vn/mvc/products/category/${listCategory.id}?page_number=${currentPage}`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.products);
-        const sortedProducts = data.products.sort(
-          (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
-        );
-        setlistProduct(sortedProducts);
-        setlistOrderProduct(data.products);
-        setPageSize(data.page_size);
-        setTotalPages(data.total_pages);
-        setTotalItems(data.total_entries);
-      });
-  };
-
- 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
   };
 
-  const sortedProducts = () => {
+  const sortedProducts = useMemo(() => {
     if (sortBy === "lowPrice") {
       return listOrderProduct.slice().sort((a, b) => a.price - b.price);
     } else if (sortBy === "highPrice") {
@@ -98,7 +97,7 @@ export default function ListProduct() {
     } else {
       return listProduct;
     }
-  };
+  }, [listOrderProduct, listProduct, sortBy]);
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -119,65 +118,62 @@ export default function ListProduct() {
     "Tháng 12",
   ];
 
-  function* getCurrentMonth() {
+  const currentMonth = useMemo(() => {
     const currentDate = new Date();
-    const currentMonth = currentDate.getMonth();
-    yield vietnameseMonths[currentMonth];
-  }
+    const currentMonthIndex = currentDate.getMonth();
+    return vietnameseMonths[currentMonthIndex];
+  }, []);
 
-  const monthGenerator = getCurrentMonth();
-  const currentMonth = monthGenerator.next().value;
-
-  let renderSEO = null;
-
-  if (slug === "quan") {
-    renderSEO = (
-      <SEO
-        title={`quần tây nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
-        description="Mua quần tây nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
-        keyword="quần tây nữ đẹp, quần jean nữ đẹp, quần xếp ly đẹp"
-        name="GYOMADE"
-        type="article"
-        ogurl={"/danh-muc/" + slug}
-      />
-    );
-  } else if (slug === "vay") {
-    renderSEO = (
-      <SEO
-        title={`chân váy nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
-        description="Mua chân váy nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
-        keyword="chân váy đẹp, chân váy dài xẻ tà đẹp, chân váy dài xếp ly đẹp"
-        name="GYOMADE"
-        type="article"
-        ogurl={"/danh-muc/" + slug}
-      />
-    );
-  } else if (slug === "ao") {
-    renderSEO = (
-      <SEO
-        title={`áo thun nữ, áo kiểu nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
-        description="Mua áo thun, áo kiểu nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
-        keyword="áo thun nữ đẹp, áo thu nữ kiểu đẹp, áo thun nữ công sở"
-        name="GYOMADE"
-        type="article"
-        ogurl={"/danh-muc/" + slug}
-      />
-    );
-  } else if (slug === "phu-kien") {
-    renderSEO = (
-      <SEO
-        title={`phụ kiện nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
-        description="Mua phụ kiện thời trang nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
-        keyword="dây belt đẹp, khăn quàng cổ đẹp"
-        name="GYOMADE"
-        type="article"
-        ogurl={"/danh-muc/" + slug}
-      />
-    );
-  } else {
-    // Handle unknown slugs or default case here
-    renderSEO = <div>Invalid category</div>;
-  }
+  const renderSEO = useMemo(() => {
+    if (slug === "quan") {
+      return (
+        <SEO
+          title={`quần tây nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
+          description="Mua quần tây nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
+          keyword="quần tây nữ đẹp, quần jean nữ đẹp, quần xếp ly đẹp"
+          name="GYOMADE"
+          type="article"
+          ogurl={"/danh-muc/" + slug}
+        />
+      );
+    } else if (slug === "vay") {
+      return (
+        <SEO
+          title={`chân váy nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
+          description="Mua chân váy nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
+          keyword="chân váy đẹp, chân váy dài xẻ tà đẹp, chân váy dài xếp ly đẹp"
+          name="GYOMADE"
+          type="article"
+          ogurl={"/danh-muc/" + slug}
+        />
+      );
+    } else if (slug === "ao") {
+      return (
+        <SEO
+          title={`áo thun nữ, áo kiểu nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
+          description="Mua áo thun, áo kiểu nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
+          keyword="áo thun nữ đẹp, áo thu nữ kiểu đẹp, áo thun nữ công sở"
+          name="GYOMADE"
+          type="article"
+          ogurl={"/danh-muc/" + slug}
+        />
+      );
+    } else if (slug === "phu-kien") {
+      return (
+        <SEO
+          title={`phụ kiện nữ giá tốt ${currentMonth}, 2024 | Mua ngay | GYO MADE`}
+          description="Mua phụ kiện thời trang nữ giao tận nơi và tham khảo thêm nhiều sản phẩm khác tại Gyo Made. Vận chuyển toàn quốc. Đổi trả dễ dàng. Thanh toán COD"
+          keyword="dây belt đẹp, khăn quàng cổ đẹp"
+          name="GYOMADE"
+          type="article"
+          ogurl={"/danh-muc/" + slug}
+        />
+      );
+    } else {
+      // Handle unknown slugs or default case here
+      return <div>Invalid category</div>;
+    }
+  }, [slug, currentMonth]);
 
   return (
     <>
@@ -321,12 +317,14 @@ export default function ListProduct() {
           </div>
           <div className="category">
             <div className="list-product cs_product_grid cs_product_grid_3 cs_grid_view">
-              {sortedProducts().map((product, index) => (
+              {sortedProducts.map((product, index) => (
                 <Product
                   key={index}
                   id={product.id}
                   imageUrl={
-                    product.thumbnail_url ? product.thumbnail_url : product.image
+                    product.thumbnail_url
+                      ? product.thumbnail_url
+                      : product.image
                   }
                   // imageUrl={product.thumbnail_url}
                   price={product.price}
@@ -347,7 +345,12 @@ export default function ListProduct() {
                   style={{ marginBottom: "16px", borderWidth: "1px" }}
                   className="mb-4 border"
                 >
-                  <img src={imageURL} alt="Banner" className="image" />
+                  <img
+                    src={imageURL}
+                    alt="Banner"
+                    className="image"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>

@@ -9,7 +9,7 @@ function CartItem({ item, index }) {
     const { incrementQuantity, decrementQuantity } = useCart();
     return (
         <div style={{ display: 'flex', marginTop: '8px', marginBottom: '8px' }}>
-            <img src={item.images} alt="" style={{ height: '80px', width: '20%' }} />
+            <img src={item.images} alt="" style={{ height: '80px', width: '20%' }} loading="lazy"/>
             <div style={{ paddingLeft: '20px', width: '80%' }}>
                 <span style={{ fontWeight: 'bold' }}>{item.name} - {item.color} - {item.size}</span>
                 <div style={{ fontSize: '10px', marginTop: '-8px' }}>Giá: {item.price.toLocaleString()}<sup>đ</sup></div>

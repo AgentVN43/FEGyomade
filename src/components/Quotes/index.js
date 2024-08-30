@@ -1,20 +1,11 @@
 import React from "react";
-import "./styles.scss"
-
+import "./styles.scss";
 export default function Quotes() {
   return (
     <div className="quotes">
-      <div className="item">
-        <div className="quote">
-        
-        </div>
-      </div>
-      <div className="item">
-        
-      </div>
-      <div className="item">
-      
-      </div>
+      <div className="item"></div>
+      <div className="item"></div>
+      <div className="item"></div>
       {/* <div className="item">
         <div className="quote">
           <p>

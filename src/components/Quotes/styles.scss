@@ -56,16 +56,19 @@
 .item:nth-child(1) {
   background-image: url("/assets/img/slide/2.png");
   background-position: 72% 35%;
+  background-size: cover;
 }
 
 .item:nth-child(2) {
   background-image: url("/assets/img/slide/1.png");
   background-position: 60% 8%;
+  background-size: cover;
 }
 
 .item:nth-child(3) {
   background-image: url("/assets/img/slide/3.png");
   background-position: 52% 8%;
+  background-size: cover;
 }
 
 // .item:nth-child(4) {
@@ -155,3 +158,4 @@
   25%, 75% { border-color: rgba(204, 204, 255, 0.9); }
   50% { border-color: rgba(204, 204, 255, 0.5); }
 }
+

@@ -24,7 +24,7 @@ export default function Collection() {
               </div>
             </div>
             <div className="col-lg-6">
-              <img src={data.image} alt="Gyomade khuyến mãi" className="w-100" />
+              <img src={data.image} alt="Gyomade khuyến mãi" className="w-100" loading="lazy"/>
             </div>
           </div>
         </div>
