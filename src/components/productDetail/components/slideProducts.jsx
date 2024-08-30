@@ -8,43 +8,81 @@ import { useParams } from "react-router-dom";
 import ColumnGroup from "antd/es/table/ColumnGroup";
 
 export default function SlideImageProduct() {
-  const { slug } = useParams();
+  const { slug, id } = useParams();
   const [productVariants, setproductVariants] = useState([]);
+
+  const [productImg, setProductImg] = useState([]);
+
+  const [data, setData] = useState([]);
+  const [error, setError] = useState(null);
 
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   let sliderRef1 = useRef(null);
   let sliderRef2 = useRef(null);
 
+  // useEffect(() => {
+  //   fetch(`https://gyomade.vn/mvc/products/variants/${slug}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       setproductVariants(data);
+  //     });
+  // }, [slug]);
+
   useEffect(() => {
-    fetch(`https://gyomade.vn/mvc/products/variants/${slug}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setproductVariants(data);
-      });
+    const fetchData = async () => {
+      const api1 = `https://gyomade.vn/mvc/products/variantsimg/${slug}`;
+      const api2 = `https://gyomade.vn/mvc/products/variants/${slug}`;
+
+      try {
+        // Try to fetch from API 1
+        const response = await fetch(api1);
+        if (!response.ok) {
+          throw new Error("API 1 failed");
+        }
+        const result = await response.json();
+        setData(result.url_images);
+      } catch (error) {
+        // If API 1 fails, fetch from API 2
+        try {
+          const response = await fetch(api2);
+          if (!response.ok) {
+            throw new Error("API 2 failed");
+          }
+          const result = await response.json();
+
+          // Extract unique images from API 2
+          const images = result.map(item => item.images);
+          const uniqueImages = [...new Set(images)];
+          setData(uniqueImages);
+        } catch (error) {
+          setError(error);
+        }
+      }
+    };
+
+    fetchData();
   }, [slug]);
 
+  useEffect(() => {
+    if (data) {
+      console.log("Data updated:", data); // Log data when updated
+    }
+  }, [data]);
+
   const groupedProductVariants = productVariants.reduce((acc, product) => {
-    // Check if this product_id has already been added
     const existingProduct = acc.find(
       (item) => item.product_id === product.product_id
     );
 
-    // If it hasn't been added yet, add it to the accumulator
     if (!existingProduct) {
       acc.push({
         ...product,
-        // Use images and url_image from the first occurrence
         images: product.images,
-        url_image: product.url_image,
       });
     } else {
-      // If the product_id is already in the accumulator, ensure both images and url_image are added
       if (product.images && !existingProduct.images) {
         existingProduct.images = product.images;
-      }
-      if (product.url_image && !existingProduct.url_image) {
-        existingProduct.url_image = product.url_image;
       }
     }
 
@@ -53,22 +91,19 @@ export default function SlideImageProduct() {
 
   const imagesAndUrlImages = groupedProductVariants.map((item) => ({
     images: item.images,
-    url_image: item.url_image,
   }));
 
   const allImages = imagesAndUrlImages.flatMap((item) =>
-    [item.images, item.url_image].filter(Boolean)
+    [item.images].filter(Boolean)
   );
 
-  console.log(allImages);
+  // productImg.map((item, index) => console.log(item));
 
-  const countImg = allImages.length;
+  const countImg = data.length;
 
   /*gen keyword*/
 
   const name = [...new Set(productVariants.map((item) => item.name))];
-
-  //console.log(name)
 
   useEffect(() => {
     setNav1(sliderRef1);
@@ -88,7 +123,7 @@ export default function SlideImageProduct() {
             focusOnSelect={true}
             vertical={true}
           >
-            {allImages.map((item, index) => (
+            {data.map((item, index) => (
               <div
                 key={index}
                 className="cs_single_product_thumb_mini product-image-container"
@@ -111,42 +146,11 @@ export default function SlideImageProduct() {
             vertical={true}
             ref={(slider) => (sliderRef1 = slider)}
           >
-            {allImages.map((item, index) => (
+            {data.map((item, index) => (
               <div key={index} className="cs_single_product_thumb_item">
                 <img src={item} alt={`${name} Gyo Made`} />
               </div>
             ))}
-
-            {/* <div className="cs_single_product_thumb_item">
-              <img
-                src="https://cdn.annk.info/uploads/170324_68.jpg"
-                alt="fuck"
-              />
-            </div>
-            <div className="cs_single_product_thumb_item">
-              <img
-                src="https://cdn.annk.info/uploads/170324_68.jpg"
-                alt="fuck"
-              />
-            </div>
-            <div className="cs_single_product_thumb_item">
-              <img
-                src="https://cdn.annk.info/uploads/170324_68.jpg"
-                alt="fuck"
-              />
-            </div>
-            <div className="cs_single_product_thumb_item">
-              <img
-                src="https://cdn.annk.info/uploads/170324_68.jpg"
-                alt="fuck"
-              />
-            </div>
-            <div className="cs_single_product_thumb_item">
-              <img
-                src="https://cdn.annk.info/uploads/170324_68.jpg"
-                alt="fuck"
-              />
-            </div> */}
           </Slider>
         </div>
       </div>

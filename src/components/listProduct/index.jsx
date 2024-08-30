@@ -4,12 +4,14 @@ import { useParams } from "react-router-dom";
 import Product from "../product";
 import Pagination from "../pagination";
 import SEO from "../seo";
-import './index.css'
+import "./index.css";
 
 export default function ListProduct() {
   const { slug } = useParams();
 
-  const [imageURL, setImageURL] = useState('https://down-vn.img.susercontent.com/file/vn-11134208-7r98o-lyrf4ykv0t5t28');
+  const [imageURL, setImageURL] = useState(
+    "https://down-vn.img.susercontent.com/file/vn-11134208-7r98o-lyrf4ykv0t5t28"
+  );
   const [showFilter, setShowFilter] = useState(false);
   const [listCategory, setlistCategory] = useState([]);
   const [listProduct, setlistProduct] = useState([]);
@@ -21,7 +23,7 @@ export default function ListProduct() {
   const [listOrderProduct, setlistOrderProduct] = useState([]);
   const [isFixed, setIsFixed] = useState(false);
   const [isHidden, setIsHidden] = useState(false);
-
+  const [thumbnail, setThumbnail] = useState([]);
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop;
@@ -42,11 +44,12 @@ export default function ListProduct() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
   useEffect(() => {
     if (!slug) return; // Prevent fetching if slug is undefined
 
@@ -82,6 +85,7 @@ export default function ListProduct() {
       });
   };
 
+ 
   const handleSortChange = (e) => {
     setSortBy(e.target.value);
   };
@@ -101,8 +105,18 @@ export default function ListProduct() {
   };
 
   const vietnameseMonths = [
-    "Tháng 1", "Tháng 2", "Tháng 3", "Tháng 4", "Tháng 5", "Tháng 6",
-    "Tháng 7", "Tháng 8", "Tháng 9", "Tháng 10", "Tháng 11", "Tháng 12"
+    "Tháng 1",
+    "Tháng 2",
+    "Tháng 3",
+    "Tháng 4",
+    "Tháng 5",
+    "Tháng 6",
+    "Tháng 7",
+    "Tháng 8",
+    "Tháng 9",
+    "Tháng 10",
+    "Tháng 11",
+    "Tháng 12",
   ];
 
   function* getCurrentMonth() {
@@ -113,7 +127,6 @@ export default function ListProduct() {
 
   const monthGenerator = getCurrentMonth();
   const currentMonth = monthGenerator.next().value;
-
 
   let renderSEO = null;
 
@@ -165,8 +178,6 @@ export default function ListProduct() {
     // Handle unknown slugs or default case here
     renderSEO = <div>Invalid category</div>;
   }
-
-
 
   return (
     <>
@@ -227,16 +238,20 @@ export default function ListProduct() {
                   {" "}
                   Hiển thị{" "}
                   {currentPage > 1 ? (currentPage - 1) * pageSize + 1 : 1}-
-                  {Math.min(currentPage * pageSize, totalItems)} của {totalItems}{" "}
-                  sản phẩm
+                  {Math.min(currentPage * pageSize, totalItems)} của{" "}
+                  {totalItems} sản phẩm
                 </p>
               </div>
               <div className="cs_sort_wrap">
                 <div className="cs_sort">
                   <select value={sortBy} onChange={handleSortChange}>
                     <option value="latest">Mới nhất</option>
-                    <option value="lowPrice">Thứ tự hiển thị: giá tăng dần</option>
-                    <option value="highPrice">Thứ tự hiển thị: giá giảm dần</option>
+                    <option value="lowPrice">
+                      Thứ tự hiển thị: giá tăng dần
+                    </option>
+                    <option value="highPrice">
+                      Thứ tự hiển thị: giá giảm dần
+                    </option>
                   </select>
                 </div>
                 {/* <div className="cs_view">
@@ -304,13 +319,16 @@ export default function ListProduct() {
               </div>
             </div>
           </div>
-          <div className='category'>
+          <div className="category">
             <div className="list-product cs_product_grid cs_product_grid_3 cs_grid_view">
               {sortedProducts().map((product, index) => (
                 <Product
                   key={index}
                   id={product.id}
-                  imageUrl={product.url_image ? product.url_image : product.image}
+                  imageUrl={
+                    product.thumbnail_url ? product.thumbnail_url : product.image
+                  }
+                  // imageUrl={product.thumbnail_url}
                   price={product.price}
                   name={product.name}
                   slug={product.slug}
@@ -319,16 +337,27 @@ export default function ListProduct() {
                 />
               ))}
             </div>
-            <div className='sidebar'>
-              <div className={`banner ${isFixed ? 'fixed' : ''} ${isHidden ? 'hidden' : ''}`}>
-                <div style={{ marginBottom: '16px', borderWidth: '1px' }} className="mb-4 border">
+            <div className="sidebar">
+              <div
+                className={`banner ${isFixed ? "fixed" : ""} ${
+                  isHidden ? "hidden" : ""
+                }`}
+              >
+                <div
+                  style={{ marginBottom: "16px", borderWidth: "1px" }}
+                  className="mb-4 border"
+                >
                   <img src={imageURL} alt="Banner" className="image" />
                 </div>
               </div>
             </div>
-            <div className='sidebar2'>
+            <div className="sidebar2">
               <div className="mb-4 border">
-                <img src={imageURL} alt="Banner" style={{ height: '500px', backgroundColor: '#f1f5f9' }} />
+                <img
+                  src={imageURL}
+                  alt="Banner"
+                  style={{ height: "500px", backgroundColor: "#f1f5f9" }}
+                />
               </div>
             </div>
           </div>

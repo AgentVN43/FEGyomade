@@ -31,7 +31,7 @@ export default function Blogcategory() {
         }
         name="GYOMADE"
         type="article"
-        ogimage={"https://gyomade.vn/assets/img/logogyomade_dark.png"}
+        ogimage={`https://gyomade.vn/assets/img/logogyomade_dark.png`}
       />
       <section>
         <div className="cs_height_140 cs_height_lg_80" />

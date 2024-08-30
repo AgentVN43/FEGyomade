@@ -18,7 +18,7 @@ export default function Home() {
         keyword="thời trang công sở, đồ công sở, áo sơ mi công sở, đồ đi làm, váy công sở, blazer"
         name="GYOMADE"
         type="article"
-        ogurl={"/"}
+        ogurl="https://gyomade.vn"
       />
       <SchemaOrg />
       <Quotes/>

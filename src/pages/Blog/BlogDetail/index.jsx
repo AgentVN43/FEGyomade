@@ -26,7 +26,7 @@ export default function BlogDetails() {
         }
         name="GYOMADE"
         type="article"
-        ogimage={"https://gyomade.vn/assets/img/logogyomade_dark.png"}
+        ogimage={`https://gyomade.vn/assets/img/logogyomade_dark.png`}
       />
       <section>
         <div className="cs_height_140 cs_height_lg_80" />
@@ -148,28 +148,43 @@ export default function BlogDetails() {
                     <Link
                       to="https://www.instagram.com/gyomade.vn"
                       target="_blank"
+                      aria-label="follow me on instagram"
                     >
                       <i className="fa-brands fa-instagram" />
                     </Link>
                     <Link
                       to="https://www.facebook.com/GyoMade.vn"
                       target="_blank"
+                      aria-label="follow me on facebook"
                     >
                       <i className="fa-brands fa-facebook" />
                     </Link>
-                    <Link to="https://www.tiktok.com/@gyomade" target="_blank">
+                    <Link
+                      to="https://www.tiktok.com/@gyomade"
+                      target="_blank"
+                      aria-label="follow me on tiktok"
+                    >
                       <i class="fa-brands fa-tiktok"></i>
                     </Link>
                     <Link
                       to="https://twitter.com/gyomadeofficial"
                       target="_blank"
+                      aria-label="follow me on x"
                     >
                       <i class="fa-brands fa-twitter"></i>
                     </Link>
-                    <Link to="https://www.youtube.com/@GyoMade" target="_blank">
+                    <Link
+                      to="https://www.youtube.com/@GyoMade"
+                      target="_blank"
+                      aria-label="follow me on youtube"
+                    >
                       <i class="fa-brands fa-youtube"></i>
                     </Link>
-                    <Link to="https://www.youtube.com/@GyoMade" target="_blank">
+                    <Link
+                      to="https://www.youtube.com/@GyoMade"
+                      target="_blank"
+                      aria-label="follow me on youtube"
+                    >
                       <i class="fa-brands fa-google"></i>
                     </Link>
                   </div>

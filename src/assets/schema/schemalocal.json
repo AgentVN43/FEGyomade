@@ -11,7 +11,7 @@
     "streetAddress": "93/12 Trần Khắc Chân, Tân Định, Quận 1",
     "addressLocality": "Hồ Chí Minh",
     "postalCode": "70000",
-    "addressCountry": "Việt Nam",
+    "addressCountry": "VN",
     "addressRegion": "Hồ Chi Minh"
   },
   "priceRange": "300000-500000",
@@ -24,6 +24,8 @@
   "openingHoursSpecification": [
     {
       "@type": "OpeningHoursSpecification",
+      "opens": "08:00",
+      "closes": "22:00",
       "dayOfWeek": [
         "Monday",
         "Tuesday",
@@ -32,9 +34,7 @@
         "Friday",
         "Saturday",
         "Sunday"
-      ],
-      "opens": "08:00",
-      "closes": "22:00"
+      ]
     }
   ]
 }

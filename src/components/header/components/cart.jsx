@@ -15,7 +15,7 @@ export default function Cart() {
         <a href="#" className="cs_action_icon cs_modal_btn">
           <i className="fa-regular fa-circle-user" />
         </a> */}
-        <Link to="/gio-hang" className="cs_action_icon">
+        <Link to="/gio-hang" className="cs_action_icon" aria-label="Giỏ hàng">
           <span>
             <svg
               width={18}
