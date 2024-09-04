@@ -1,16 +1,17 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import SchemaOrg from "../assets/schema";
 import Footer from "../components/footer";
 import Header from "../components/header";
 import Preloader from "../components/preloader";
 import Blogcategory from "../pages/Blog/BlogCategory";
+import BlogDetails from "../pages/Blog/BlogDetail";
 import Cart from "../pages/Cart";
 import Order from "../pages/Checkout";
+import Contact2 from "../pages/Contact";
 import DetailProduct from "../pages/DetailProduct";
 import Home from "../pages/Home";
 import Product from "../pages/Product";
-import SchemaOrg from "../assets/schema";
-import BlogDetails from "../pages/Blog/BlogDetail";
 
 const Router = () => (
   <>
@@ -26,11 +27,10 @@ const Router = () => (
         <Route path="/blog" element={<Blogcategory />} />
         <Route path="/blog/:slug" element={<BlogDetails />} />
         <Route path="/schema" element={<SchemaOrg />} />
+        <Route path="/contact" element={<Contact2 />} />
       </Routes>
       <Footer />
     </BrowserRouter>
-
-    
   </>
 );
 
