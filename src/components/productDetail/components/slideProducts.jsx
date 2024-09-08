@@ -17,8 +17,12 @@ export default function SlideImageProduct() {
 
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
+  const [nav3, setNav3] = useState(null);
+  const [nav4, setNav4] = useState(null);
   let sliderRef1 = useRef(null);
   let sliderRef2 = useRef(null);
+  let sliderRef3 = useRef(null);
+  let sliderRef4 = useRef(null);
 
   // useEffect(() => {
   //   fetch(`https://gyomade.vn/mvc/products/variants/${slug}`)
@@ -106,52 +110,89 @@ export default function SlideImageProduct() {
   useEffect(() => {
     setNav1(sliderRef1);
     setNav2(sliderRef2);
+    setNav3(sliderRef3);
+    setNav4(sliderRef4);
   }, []);
 
   return (
-    <div className="row">
-      <div className="col-3">
-        <div className="cs_single_product_nav">
-          <Slider
-            asNavFor={nav1}
-            ref={(slider) => (sliderRef2 = slider)}
-            slidesToShow={countImg}
-            slidesToScroll={1}
-            swipeToSlide={true}
-            focusOnSelect={true}
-            vertical={true}
-          >
-            {data.map((item, index) => (
-              <div
-                key={index}
-                className="cs_single_product_thumb_mini product-image-container"
+    <>
+      <div id="slider1">
+        <div className="row">
+          <div className="col-3">
+            <div className="cs_single_product_nav">
+              <Slider
+                asNavFor={nav1}
+                ref={(slider) => (sliderRef2 = slider)}
+                slidesToShow={countImg < 3 ? countImg : 3}
+                slidesToScroll={1}
+                swipeToSlide={true}
+                focusOnSelect={true}
+                vertical={true}
               >
-                <img
-                  src={item}
-                  alt={`${slug} Gyo Made`}
-                  className="product-image"
-                  onLoad={() => console.log(`Loaded image ${item}`)}
-                />
-              </div>
-            ))}
-          </Slider>
+                {data.map((item, index) => (
+                  <div
+                    key={index}
+                    className="cs_single_product_thumb_mini product-image-container"
+                  >
+                    <img
+                      src={item}
+                      alt={`${slug} Gyo Made`}
+                      className="product-image"
+                      onLoad={() => console.log(`Loaded image ${item}`)}
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
+          <div className="col-9">
+            <div className="cs_single_product_thumb">
+              <Slider
+                asNavFor={nav2}
+                vertical={true}
+                ref={(slider) => (sliderRef1 = slider)}
+              >
+                {data.map((item, index) => (
+                  <div key={index} className="cs_single_product_thumb_item">
+                    <img src={item} alt={`${slug} Gyo Made`} loading="lazy" />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+          </div>
         </div>
       </div>
-      <div className="col-9">
-        <div className="cs_single_product_thumb">
-          <Slider
-            asNavFor={nav2}
-            vertical={true}
-            ref={(slider) => (sliderRef1 = slider)}
-          >
-            {data.map((item, index) => (
-              <div key={index} className="cs_single_product_thumb_item">
-                <img src={item} alt={`${slug} Gyo Made`} loading="lazy"/>
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
-    </div>
+
+      <div id="slider2" className="slider-container">
+        <Slider asNavFor={nav4} ref={slider => (sliderRef3 = slider)}>
+          {data.map((item, index) => (
+            <div key={index} className="cs_single_product_thumb_item">
+              <img src={item} alt={`${slug} Gyo Made`} loading="lazy" />
+            </div>
+          ))}
+        </Slider>
+        <Slider
+          asNavFor={nav3}
+          ref={slider => (sliderRef4 = slider)}
+          slidesToShow={countImg < 3 ? countImg : 3}
+          swipeToSlide={true}
+          focusOnSelect={true}
+        >
+          {data.map((item, index) => (
+            <div
+              key={index}
+              className="cs_single_product_thumb_mini product-image-container"
+            >
+              <img
+                src={item}
+                alt={`${slug} Gyo Made`}
+                className="product-image"
+                onLoad={() => console.log(`Loaded image ${item}`)}
+              />
+            </div>
+          ))}
+        </Slider >
+      </div >
+    </>
   );
 }

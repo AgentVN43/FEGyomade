@@ -26,3 +26,30 @@
   background: #eee;
   /* Adjust the color as needed */
 }
+
+/* Mặc định ẩn slider 2 */
+#slider2 {
+  display: none;
+}
+
+/* Khi màn hình lớn hơn 400px, hiển thị slider 1, ẩn slider 2 */
+@media (min-width: 770px) {
+  #slider1 {
+    display: block;
+  }
+
+  #slider2 {
+    display: none;
+  }
+}
+
+/* Khi màn hình nhỏ hơn hoặc bằng 400px, hiển thị slider 2, ẩn slider 1 */
+@media (max-width: 769px) {
+  #slider1 {
+    display: none;
+  }
+
+  #slider2 {
+    display: block;
+  }
+}
