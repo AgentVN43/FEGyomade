@@ -81,6 +81,7 @@ export default function Blogcategory() {
                     title={item.title}
                     excerpt={item.excerpt}
                     slug={item.slug}
+                    featured_images={item.featured_images}
                   />
                 ))}
               </div>

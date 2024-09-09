@@ -1,13 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-export default function CardPost({ title, excerpt, slug }) {
+export default function CardPost({ title, excerpt, slug, featured_images }) {
   return (
     <div className="col-md-4">
       <div className="cs_post cs_style_1">
-        <Link to={`/blog/${slug}`} className="cs_post_thumb cs_zoom">
+        {/* <Link to={`/blog/${slug}`} className="cs_post_thumb cs_zoom">
           <img
             src="/assets/img/post1.jpg"
+            alt="Post Image"
+            className="cs_zoom_in w-100"
+          />
+        </Link> */}
+        <Link to={`/blog/${slug}`} className="cs_post_thumb cs_zoom">
+          <img
+            src={featured_images ? featured_images : "/assets/img/post1.jpg"}
             alt="Post Image"
             className="cs_zoom_in w-100"
           />
