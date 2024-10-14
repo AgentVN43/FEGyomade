@@ -555,15 +555,24 @@ End Review
   column-gap: 24px;
   row-gap: 45px;
 }
+
+.cs_product_grid_2 {
+  grid-template-columns: repeat(2, 1fr);
+  @media (max-width: 767px) { 
+    grid-template-columns: repeat(1, 1fr);
+  }
+} 
+
 .cs_product_grid_3 {
   grid-template-columns: repeat(3, 1fr);
   @media (max-width: 767px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   @media (max-width: 575px) {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
+
 .cs_product_grid_4 {
   grid-template-columns: repeat(4, 1fr);
   @media (max-width: 919px) {
@@ -576,6 +585,7 @@ End Review
     grid-template-columns: repeat(1, 1fr);
   }
 }
+
 .cs_product_grid {
   &.cs_grid_view {
     .cs_action_btns,

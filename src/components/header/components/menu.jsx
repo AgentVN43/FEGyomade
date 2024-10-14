@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 export default function Menu() {
+  const [menuActive, setMenuActive] = useState(false);
+  const [dropdownActive, setDropdownActive] = useState({});
+
+  // Toggle the main menu
+  const handleMenuToggle = () => {
+    setMenuActive(!menuActive);
+  };
+
+  // Toggle dropdown for individual items
+  const handleDropdownToggle = (index) => {
+    setDropdownActive((prev) => ({
+      ...prev,
+      [index]: !prev[index],
+    }));
+  };
+
   return (
     <div className="cs_main_header_center">
       <div className="cs_nav cs_medium">

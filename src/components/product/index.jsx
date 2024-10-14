@@ -36,7 +36,7 @@ export default function Product({ imageUrl, price, name, slug, display_id }) {
     // </div>
     <div className="cs_product cs_style_1">
       <div className="cs_product_thumb position-relative">
-        <div className="product-image-container" style={{ height: "400px" }}>
+        <div className="product-image-container" >
           <a href={`/san-pham/${slug}`}>
             <img className="product-image" src={imageUrl} alt={name} loading="lazy"/>
           </a>

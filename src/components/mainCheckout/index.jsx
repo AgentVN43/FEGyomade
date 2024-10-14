@@ -11,7 +11,7 @@ import CartContext from "../../context/CartContext";
 import "./index.scss";
 import Modals from "../modals";
 function MaincheckOut() {
-  const { cartItems,  clearCartItems } = useContext(CartContext);
+  const { cartItems, clearCartItems } = useContext(CartContext);
   const [city, setProvinces] = useState([]);
   const [districts, setDistricts] = useState([]);
   const [communes, setCommunes] = useState([]);
@@ -21,6 +21,7 @@ function MaincheckOut() {
   const [selectedCommune, setSelectedCommune] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [showModalSuccess, setShowModalSuccess] = useState(false);
+  const [shippingFee, setShippingFee] = useState(0);
 
   const [orderData, setOrderData] = useState({
     bill_full_name: "",
@@ -42,11 +43,32 @@ function MaincheckOut() {
       province_name: "",
     },
     shop_id: 4426911,
+    shipping_fee: shippingFee,
   });
+
   const totalPrice = cartItems.reduce(
     (acc, item) => acc + item.price * item.quantity,
     0
   );
+
+  const calculateShippingFee = (price) => {
+    setShippingFee(price < 500000 ? 30000 : 0);
+  };
+
+  useEffect(() => {
+    calculateShippingFee(totalPrice);
+
+    setOrderData((prevState) => ({
+      ...prevState, // Keep the previous state
+      shipping_fee: shippingFee, // Update only shipping_fee
+    }));
+  }, [shippingFee, totalPrice]);
+
+  // Function to update shipping fee in orderData
+
+  const totalCOD = () => {
+    return totalPrice + shippingFee; // Add totalPrice and the calculated shipping fee
+  };
 
   const fetchGeoData = useCallback((url, setter) => {
     fetch(url)
@@ -204,6 +226,8 @@ function MaincheckOut() {
     }
   }, [orderData.shipping_address]);
 
+  console.log(orderData);
+
   const PostData = useCallback((orderData) => {
     if (!orderData) {
       console.error("Error: orderData is null");
@@ -279,7 +303,7 @@ function MaincheckOut() {
       setShowModal(true);
     }
     formRef.current.reset();
-    localStorage.removeItem("order")
+    localStorage.removeItem("order");
     clearCartItems();
   };
 
@@ -456,13 +480,29 @@ function MaincheckOut() {
                       </tr>
                     ))}
                     <tr className="cs_semi_bold">
-                      <td>Tổng tiền</td>
+                      <td>Tiền hàng</td>
                       <td className="text-end">
                         {totalPrice.toLocaleString()}
                       </td>
                     </tr>
+                    <tr className="cs_semi_bold">
+                      <td>Phí vận chuyển</td>
+                      <td className="text-end">
+                        {shippingFee.toLocaleString()}
+                      </td>
+                    </tr>
+                    <tr className="cs_semi_bold">
+                      <td>Tổng thanh toán</td>
+                      <td className="text-end">
+                        {totalCOD().toLocaleString()}
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
+                <p className="m-0 cs_payment_text">
+                  * Gyomade xin phép thu 30k phí vận chuyển cho những đơn hàng
+                  dưới 500k và miễn phí vận chuyển cho đơn hàng từ 500k trở lên.
+                </p>
                 <div className="cs_height_30 cs_height_lg_30" />
                 {/* <a
                   href="#"
@@ -508,7 +548,11 @@ function MaincheckOut() {
                         <div className="form-check cs_fs_16">
                           <div className="qr-center">
                             <div className="qr-image">
-                              <img src="/assets/img/qr.png" alt="QR Code" loading="lazy"/>
+                              <img
+                                src="/assets/img/qr.png"
+                                alt="QR Code"
+                                loading="lazy"
+                              />
                             </div>
                           </div>
                         </div>
