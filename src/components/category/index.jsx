@@ -30,10 +30,10 @@ export default function Category() {
     return slug;
   };
   return (
-    <div className="container-fluid">
-      <div className="cs_grid_list">
+    <div className="container-fluid mb-32">
+      <div className="cs_grid_list md:space-y-0 space-y-28">
         {categories.map((category, index) => (
-          <div className="cs_category cs_style_1" key={index}>
+          <div className="card mx-auto cs_category cs_style_1" key={index}>
             <a
               href={`/danh-muc/${generateSlug(category.name)}`}
               className="cs_category_thumb position-relative"

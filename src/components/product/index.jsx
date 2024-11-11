@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import "./index.scss";
 export default function Product({ imageUrl, price, name, slug, display_id }) {
+  console.log("🚀 ~ Product ~ imageUrl:", imageUrl)
   const formattedPrice = price.toLocaleString();
 
   // useEffect(() => {
