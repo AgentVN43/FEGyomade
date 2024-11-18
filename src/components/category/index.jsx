@@ -31,7 +31,7 @@ export default function Category() {
   };
   return (
     <div className="container-fluid mb-32">
-      <div className="cs_grid_list md:space-y-0 space-y-28">
+      <div className="cs_grid_list">
         {categories.map((category, index) => (
           <div className="card mx-auto cs_category cs_style_1" key={index}>
             <a
@@ -41,11 +41,11 @@ export default function Category() {
               <img
                 src={category.image}
                 alt="Category"
-                className="w-100"
+                className="w-[90%] mx-auto"
                 loading="lazy"
               />
               <span className="cs_category_btn">
-                <span>{formatCategoryName(category.name)}</span>
+                <span className="xl:text-base md:text-sm text-xs">{formatCategoryName(category.name)}</span>
                 <span>
                   <i className="fa-solid fa-arrow-right" />
                 </span>

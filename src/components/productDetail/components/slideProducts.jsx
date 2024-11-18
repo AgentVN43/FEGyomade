@@ -103,96 +103,181 @@ export default function SlideImageProduct() {
   // productImg.map((item, index) => console.log(item));
 
   const countImg = data.length;
+  console.log("🚀 ~ SlideImageProduct ~ countImg:", countImg)
 
   /*gen keyword*/
 
 
   useEffect(() => {
-    setNav1(sliderRef1);
-    setNav2(sliderRef2);
-    setNav3(sliderRef3);
-    setNav4(sliderRef4);
+    setNav1(sliderRef1.current);
+    setNav2(sliderRef2.current);
+    setNav3(sliderRef3.current);
+    setNav4(sliderRef4.current);
   }, []);
 
   return (
+    // <>
+    //   <div id="slider1">
+    //     <div className="row">
+    //       <div className="col-3">
+    //         <div className="cs_single_product_nav">
+    //           <Slider
+    //             asNavFor={nav1}
+    //             ref={(slider) => (sliderRef2 = slider)}
+    //             slidesToShow={countImg < 3 ? countImg : 3}
+    //             slidesToScroll={1}
+    //             swipeToSlide={true}
+    //             focusOnSelect={true}
+    //             vertical={true}
+    //           >
+    //             {data.map((item, index) => (
+    //               <div
+    //                 key={index}
+    //                 className="cs_single_product_thumb_mini product-image-container"
+    //               >
+    //                 <img
+    //                   src={item}
+    //                   alt={`${slug} Gyo Made`}
+    //                   className="product-image"
+    //                   onLoad={() => console.log(`Loaded image ${item}`)}
+    //                 />
+    //               </div>
+    //             ))}
+    //           </Slider>
+    //         </div>
+    //       </div>
+    //       <div className="col-9">
+    //         <div className="cs_single_product_thumb">
+    //           <Slider
+    //             asNavFor={nav2}
+    //             vertical={true}
+    //             ref={(slider) => (sliderRef1 = slider)}
+    //           >
+    //             {data.map((item, index) => (
+    //               <div key={index} className="cs_single_product_thumb_item">
+    //                 <img src={item} alt={`${slug} Gyo Made`} loading="lazy" />
+    //               </div>
+    //             ))}
+    //           </Slider>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+
+    //   <div id="slider2" className="slider-container">
+    //     <Slider asNavFor={nav4} ref={slider => (sliderRef3 = slider)}>
+    //       {data.map((item, index) => (
+    //         <div key={index} className="cs_single_product_thumb_item">
+    //           <img src={item} alt={`${slug} Gyo Made`} loading="lazy" />
+    //         </div>
+    //       ))}
+    //     </Slider>
+    //     <Slider
+    //       asNavFor={nav3}
+    //       ref={slider => (sliderRef4 = slider)}
+    //       slidesToShow={countImg < 3 ? countImg : 3}
+    //       swipeToSlide={true}
+    //       focusOnSelect={true}
+    //     >
+    //       {data.map((item, index) => (
+    //         <div
+    //           key={index}
+    //           className="cs_single_product_thumb_mini product-image-container"
+    //         >
+    //           <img
+    //             src={item}
+    //             alt={`${slug} Gyo Made`}
+    //             className="product-image"
+    //             onLoad={() => console.log(`Loaded image ${item}`)}
+    //           />
+    //         </div>
+    //       ))}
+    //     </Slider >
+    //   </div >
+    // </>
+
     <>
-      <div id="slider1">
-        <div className="row">
-          <div className="col-3">
-            <div className="cs_single_product_nav">
-              <Slider
-                asNavFor={nav1}
-                ref={(slider) => (sliderRef2 = slider)}
-                slidesToShow={countImg < 3 ? countImg : 3}
-                slidesToScroll={1}
-                swipeToSlide={true}
-                focusOnSelect={true}
-                vertical={true}
-              >
-                {data.map((item, index) => (
-                  <div
-                    key={index}
-                    className="cs_single_product_thumb_mini product-image-container"
-                  >
-                    <img
-                      src={item}
-                      alt={`${slug} Gyo Made`}
-                      className="product-image"
-                      onLoad={() => console.log(`Loaded image ${item}`)}
-                    />
-                  </div>
-                ))}
-              </Slider>
-            </div>
+      <div id="slider1" className="slider-container lg:block hidden">
+        <div className="grid lg:grid-cols-[56px_1fr] grid-cols-[1fr] gap-1">
+          <div className="">
+            <Slider
+              asNavFor={nav1}
+              ref={sliderRef2}
+              slidesToShow={countImg < 6 ? countImg : 6}
+              vertical={true}
+              arrows={false}
+              focusOnSelect={true}
+            >
+              {data.map((item, index) => (
+                <div
+                  key={index}
+                  className="lg:w-14 w-20 lg:h-20 h-28 overflow-hidden cursor-pointer"
+                >
+                  <img
+                    src={item}
+                    alt="photo"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              ))}
+            </Slider>
           </div>
-          <div className="col-9">
-            <div className="cs_single_product_thumb">
-              <Slider
-                asNavFor={nav2}
-                vertical={true}
-                ref={(slider) => (sliderRef1 = slider)}
-              >
-                {data.map((item, index) => (
-                  <div key={index} className="cs_single_product_thumb_item">
-                    <img src={item} alt={`${slug} Gyo Made`} loading="lazy" />
-                  </div>
-                ))}
-              </Slider>
-            </div>
+          <div className="max-w-full overflow-hidden">
+            <Slider
+              asNavFor={nav2}
+              ref={sliderRef1}
+              vertical={true}
+              arrows={false}
+            >
+              {data.map((item, index) => (
+                <div
+                  key={index}
+                  className="lg:aspect-[8/10] min-h-[550px] outline-none"
+                >
+                  <img
+                    src={item}
+                    alt="photo"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+              ))}
+            </Slider>
           </div>
         </div>
       </div>
 
-      <div id="slider2" className="slider-container">
-        <Slider asNavFor={nav4} ref={slider => (sliderRef3 = slider)}>
+      <div id="slider2" className="slider-container lg:hidden block">
+        <Slider asNavFor={nav4} ref={sliderRef3} arrows={false}>
           {data.map((item, index) => (
-            <div key={index} className="cs_single_product_thumb_item">
-              <img src={item} alt={`${slug} Gyo Made`} loading="lazy" />
+            <div
+              key={index}
+              className="md:aspect-[8/10] aspect-[10/10] overflow-hidden"
+            >
+              <img src={item} alt="photo" />
             </div>
           ))}
         </Slider>
         <Slider
           asNavFor={nav3}
-          ref={slider => (sliderRef4 = slider)}
-          slidesToShow={countImg < 3 ? countImg : 3}
-          swipeToSlide={true}
+          ref={sliderRef4}
+          slidesToShow={countImg < 6 ? countImg : 6}
+          slidesToScroll={1}
           focusOnSelect={true}
         >
           {data.map((item, index) => (
             <div
               key={index}
-              className="cs_single_product_thumb_mini product-image-container"
+              className="aspect-[8/10] overflow-hidden cursor-pointer p-1"
             >
               <img
                 src={item}
-                alt={`${slug} Gyo Made`}
-                className="product-image"
-                onLoad={() => console.log(`Loaded image ${item}`)}
+                alt=""
+                className="w-full h-full object-cover"
               />
             </div>
           ))}
-        </Slider >
-      </div >
+        </Slider>
+      </div>
     </>
   );
 }
