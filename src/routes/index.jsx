@@ -12,6 +12,7 @@ import Contact2 from "../pages/Contact";
 import DetailProduct from "../pages/DetailProduct";
 import Home from "../pages/Home";
 import Product from "../pages/Product";
+import HomeTest from "../pages/HomeTest";
 
 const Router = () => (
   <>
@@ -28,6 +29,7 @@ const Router = () => (
         <Route path="/blog/:slug" element={<BlogDetails />} />
         <Route path="/schema" element={<SchemaOrg />} />
         <Route path="/contact" element={<Contact2 />} />
+        <Route path="/hometest" element={<HomeTest />} />
       </Routes>
       <Footer />
     </BrowserRouter>
