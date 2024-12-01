@@ -1,9 +1,8 @@
 import './listProduct.css'
 const ProductCard = ({ product }) => {
-  console.log("🚀 ~ ProductCard ~ product:", product)
   return (
     <div>
-      <a href={`/product/${product.id}`}>
+      <a href={`/san-pham/${product.slug}`}>
         <div>
           <img loading="lazy" src={product.thumbnail_url ? product.thumbnail_url : product.image} alt="" />
           <div className="pt-3 text-black">

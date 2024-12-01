@@ -7,7 +7,7 @@ export default function ProductHome() {
 
     const [products, setProducts] = useState([]);
     console.log("🚀 ~ ProductHome ~ products:", products)
-    const [selectedCategory, setSelectedCategory] = useState(1231641);
+    const [selectedCategory, setSelectedCategory] = useState(43613);
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
