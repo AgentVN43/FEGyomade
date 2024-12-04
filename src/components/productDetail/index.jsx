@@ -8,7 +8,7 @@ export default function ProductDetail() {
     <>
       <section>
         <div className="cs_height_35 cs_height_lg_35" />
-        <div className="container">
+        <div className="container-fluid max-w-7xl mx-auto">
           <nav aria-label="breadcrumb">
             <ol className="cs_single_product_breadcrumb breadcrumb">
               {/* <li className="breadcrumb-item">
@@ -24,10 +24,10 @@ export default function ProductDetail() {
             </ol>
           </nav>
           <div className="row">
-            <div className="col-xl-7">
+            <div className="col-xl-6">
               <SlideImageProduct />
             </div>
-            <div className="col-xl-5">
+            <div className="col-xl-6">
               <DetailProduct />
             </div>
           </div>
