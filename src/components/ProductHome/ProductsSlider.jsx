@@ -61,6 +61,7 @@ const ProductSlider = ({ listProduct }) => {
         ],
     };
 
+    console.log("🚀 ~ ProductSlider ~ listProduct:", listProduct);
     return (
         <div>
             <div className="slider-container">

@@ -27,7 +27,7 @@ export default function HomeTest() {
       <IconBox />
       <Category />
       <ProductHome />
-      <FeaturedItem />
+      {/* <FeaturedItem /> */}
       <MovingSlider />
       <Collection />
       <Contact />

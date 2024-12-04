@@ -10,7 +10,7 @@ export default function ListProduct() {
   const { slug } = useParams();
 
   const [imageURL, setImageURL] = useState(
-    "https://down-vn.img.susercontent.com/file/vn-11134208-7r98o-lyrf4ykv0t5t28"
+    "https://gyomade.vn/uploads/1733054058096_153.png"
   );
   const [showFilter, setShowFilter] = useState(false);
   const [listCategory, setlistCategory] = useState([]);

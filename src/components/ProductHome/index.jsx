@@ -42,6 +42,10 @@ export default function ProductHome() {
         }
     }, [selectedCategory]);
 
+
+
+    console.log(products)
+
     // Handle tab change
     const handleTabChange = (key) => {
         console.log("🚀 ~ handleTabChange ~ key:", key)
@@ -81,6 +85,7 @@ export default function ProductHome() {
                     centered={isCentered}
                     onChange={handleTabChange}
                     items={formattedCategories.map((category, i) => {
+                        console.log(category)
                         const id = String(i + 1);
                         return {
                             label: category.name,
@@ -90,10 +95,10 @@ export default function ProductHome() {
                                     <div>
                                         {/* <ListProduct listProduct={products} /> */}
                                         <ProductSlider listProduct={products} />
-                                        <div className='flex justify-center'>
+                                        <div className='flex justify-center marg mb-2.5'>
                                             {products.products.length > 0 && (
                                                 <a
-                                                    href={"/collection/" + category.id}
+                                                    href={"/danh-muc/" + category.slug}
                                                     className="container-fluid !max-w-96 text-black hover:text-gray-500 font-medium rounded-lg p-2 border border-gray-600 hover:border-gray-500 mt-5 text-center"
                                                     style={{ width: '100 %' }}
                                                 >

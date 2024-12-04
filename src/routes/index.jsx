@@ -20,7 +20,7 @@ const Router = () => (
       <Preloader />
       <Header />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomeTest />} />
         <Route path="/danh-muc/:slug" element={<Product />} />
         <Route path="/san-pham/:slug" element={<DetailProduct />} />
         <Route path="/gio-hang" element={<Cart />} />
@@ -29,7 +29,7 @@ const Router = () => (
         <Route path="/blog/:slug" element={<BlogDetails />} />
         <Route path="/schema" element={<SchemaOrg />} />
         <Route path="/contact" element={<Contact2 />} />
-        <Route path="/hometest" element={<HomeTest />} />
+        {/* <Route path="/hometest" element={<HomeTest />} /> */}
       </Routes>
       <Footer />
     </BrowserRouter>
