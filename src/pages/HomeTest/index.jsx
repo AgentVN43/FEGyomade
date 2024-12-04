@@ -9,38 +9,8 @@ import MovingSlider from "../../components/movingSlider";
 import Quotes from "../../components/Quotes";
 import SEO from "../../components/seo";
 import ProductHome from "../../components/ProductHome";
-// import { Tabs } from 'antd';
-// import { jacketProductsHome, jeansProductsHome } from '../../dummy-data/product.data';
-// import ListProduct from "../../components/ProductHome/listProduct1";
-export default function Home() {
-  // const categorys = [
-  //   {
-  //     id: 1,
-  //     name: "Áo Gió",
-  //     listProduct: jacketProductsHome,
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Jeans Flex",
-  //     listProduct: jeansProductsHome,
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Áo Polo",
-  //     listProduct: [],
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Quần Âu",
-  //     listProduct: [],
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "Sơ Mi",
-  //     listProduct: [],
-  //   },
-  // ];
 
+export default function HomeTest() {
   return (
     <>
       <SEO
@@ -53,10 +23,10 @@ export default function Home() {
         ogurl="https://gyomade.vn"
       />
       <SchemaOrg />
-      <Quotes/>
+      <Quotes />
       <IconBox />
       <Category />
-      {/* <ProductHome /> */}
+      <ProductHome />
       <FeaturedItem />
       <MovingSlider />
       <Collection />
